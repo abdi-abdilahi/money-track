@@ -23,9 +23,9 @@ import {
 } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import FilterListIcon from '@mui/icons-material/FilterList'
-import MoreVertIcon from '@mui/icons-material/MoreVert'
 import { visuallyHidden } from '@mui/utils'
 import AddTransactions from './AddTransactions'
+import LongMenu from './LongMenu'
 
 // ===================  DATA ====================================
 
@@ -344,9 +344,7 @@ export default function TransactionList() {
                         {new Date(row.dateCreated).toDateString()}
                       </TableCell>
                       <TableCell align="right">
-                        <IconButton aria-label="settings">
-                          <MoreVertIcon />
-                        </IconButton>
+                        <LongMenu transactionId={row.id} />
                       </TableCell>
                     </TableRow>
                   )
