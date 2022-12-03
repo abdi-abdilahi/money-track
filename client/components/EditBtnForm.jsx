@@ -11,7 +11,7 @@ import Button from '@mui/material/Button'
 import { useDispatch } from 'react-redux'
 import { patchExpense } from '../actions/expenses'
 
-export default function Form(expense, setUpdate) {
+export default function Form({ expense, setUpdate }) {
   const [data, setData] = useState(expense)
   const dispatch = useDispatch()
 
@@ -22,11 +22,7 @@ export default function Form(expense, setUpdate) {
 
   function handleUpdate(e) {
     e.preventDefault()
-    const updatedExpense = {
-      name: data.name,
-      amount: data.amount,
-    }
-    dispatch(patchExpense(data, updatedExpense))
+    dispatch(patchExpense(expense, data))
     setUpdate(false)
   }
 
@@ -38,8 +34,9 @@ export default function Form(expense, setUpdate) {
             <InputLabel htmlFor="outlined-adornment-amount">Expense</InputLabel>
             <OutlinedInput
               id="outlined-adornment-expense"
-              value={expense.name}
-              onChange={handleChange('amount')}
+              name="name"
+              value={data.name}
+              onChange={handleChange}
               label="Expense"
             />
             {/* <TextField
@@ -53,8 +50,9 @@ export default function Form(expense, setUpdate) {
             <InputLabel htmlFor="outlined-adornment-amount">Amount</InputLabel>
             <OutlinedInput
               id="outlined-adornment-amount"
-              value={expense.amount}
-              onChange={handleChange('amount')}
+              value={data.amount}
+              name="amount"
+              onChange={handleChange}
               startAdornment={
                 <InputAdornment position="start">$</InputAdornment>
               }
@@ -64,7 +62,7 @@ export default function Form(expense, setUpdate) {
         </div>
         <div>
           <Stack spacing={2} direction="row">
-            <Button variant="contained" onClick={() => setUpdate(true)}>
+            <Button variant="outlined" onClick={() => setUpdate(false)}>
               Cancel
             </Button>
             <Button variant="contained" onClick={handleUpdate}>

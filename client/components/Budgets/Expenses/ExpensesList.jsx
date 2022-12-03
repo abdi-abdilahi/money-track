@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { fetchExpenses } from '../../../actions/expenses'
 
 import ExpenseForm from './ExpenseForm'
 import ExpenseCard from './ExpensesCard'
-import Form from './Form'
 
 export default function ExpensesList() {
   const { budgetId } = useParams()
   const expenses = useSelector((state) => state.expenses)
-  const [update, setUpdate] = useState(false)
+
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -24,11 +23,11 @@ export default function ExpensesList() {
 
       <ul>
         {expenses.data?.map((expense, i) => {
-          return <ExpenseCard key={i} expense={expense} setUpdate={setUpdate} />
+          return <ExpenseCard key={i} expense={expense} />
         })}
       </ul>
 
-      {update ? <p>update text</p> : <ExpenseForm />}
+      <ExpenseForm />
     </div>
   )
 }
