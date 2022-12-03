@@ -1,9 +1,13 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+<<<<<<< HEAD:client/components/Budgets/Expenses/ExpensesList.jsx
 import { useParams } from 'react-router-dom'
 import { fetchExpenses } from '../../../actions/expenses'
+=======
+import { fetchExpenses } from '../actions/expenses'
+import AddExpense from './AddExpense'
+>>>>>>> c796929 (refactor form code and add btn code):client/components/ExpensesList.jsx
 
-import ExpenseForm from './ExpenseForm'
 import ExpenseCard from './ExpensesCard'
 
 export default function ExpensesList() {
@@ -27,7 +31,7 @@ export default function ExpensesList() {
         })}
       </ul>
 
-      <ExpenseForm />
+      <AddExpense />
     </div>
   )
 }
