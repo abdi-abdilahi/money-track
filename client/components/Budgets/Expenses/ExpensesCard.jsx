@@ -1,71 +1,32 @@
-import React, { useState } from 'react'
-import { delExpense, patchExpense } from '../../../actions/expenses'
-import { useDispatch } from 'react-redux'
+import React from 'react'
+import Box from '@mui/material/Box'
+import Card from '@mui/material/Card'
+import CardContent from '@mui/material/CardContent'
+import CardMedia from '@mui/material/CardMedia'
+import Typography from '@mui/material/Typography'
+import ExpenseStatus from './ExpenseStatus'
 
-export default function ExpensesCard({ expense }) {
-  const [update, setUpdate] = useState(false)
-  const dispatch = useDispatch()
-
-  return update ? (
-    <Form expense={expense} setUpdate={setUpdate} />
-  ) : (
-    <>
-      <li>
-        {expense.name} {expense.amount}
-        <button
-          onClick={() => {
-            dispatch(delExpense(expense.id))
-          }}
-        >
-          Delete
-        </button>
-        <button
-          onClick={() => {
-            setUpdate(true)
-          }}
-        >
-          Edit
-        </button>
-      </li>
-    </>
-  )
-}
-
-function Form({ expense, setUpdate }) {
-  const [data, setData] = useState(expense)
-  const dispatch = useDispatch()
-
-  function handleChange(e) {
-    e.preventDefault()
-    const { name, value } = e.target
-    setData({ ...data, [name]: value })
-  }
-
-  function handleUpdate(e) {
-    e.preventDefault()
-    const updatedExpense = {
-      name: data.name,
-      amount: data.amount,
-    }
-    dispatch(patchExpense(expense.id, updatedExpense))
-    setUpdate(false)
-  }
-
+export default function ExpenseCard({ expense }) {
   return (
-    <form onSubmit={handleUpdate}>
-      <input
-        type="text"
-        name="name"
-        value={data.name}
-        onChange={handleChange}
-      />
-      <input
-        type="text"
-        name="amount"
-        value={data.amount}
-        onChange={handleChange}
-      />
-      <button type="submit">Update</button>
-    </form>
+    <Card sx={{ display: 'flex' }}>
+      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+        <CardContent sx={{ flex: '1 0 auto' }}>
+          <Typography component="div" variant="h5">
+            {expense.name}
+          </Typography>
+          <Typography
+            variant="subtitle1"
+            color="text.secondary"
+            component="div"
+          >
+            {expense.amount}
+          </Typography>
+        </CardContent>
+        <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
+          <ExpenseStatus />
+        </Box>
+      </Box>
+      <CardMedia />
+    </Card>
   )
 }
