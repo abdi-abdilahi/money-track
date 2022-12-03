@@ -13,7 +13,7 @@ import { delExpense } from '../actions/expenses'
 
 const ITEM_HEIGHT = 48
 
-export default function ExpenseMenu({ expense }) {
+export default function ExpenseMenu({ expense, setUpdate }) {
   const [anchorEl, setAnchorEl] = useState(null)
   // const [update, setUpdate] = useState(false)
   const open = Boolean(anchorEl)
@@ -25,9 +25,10 @@ export default function ExpenseMenu({ expense }) {
     setAnchorEl(null)
     dispatch(delExpense(expense.id))
   }
-  // const handleEdit(){
-
-  // }
+  const handleEdit = () => {
+    setAnchorEl(null)
+    setUpdate(true)
+  }
   const handleClose = () => {
     setAnchorEl(null)
   }
@@ -60,7 +61,7 @@ export default function ExpenseMenu({ expense }) {
         }}
       >
         <MenuList>
-          <MenuItem onClick={handleClose}>
+          <MenuItem onClick={handleEdit}>
             <ListItemIcon>
               <EditIcon fontSize="small" />
             </ListItemIcon>

@@ -6,11 +6,11 @@ import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
 import ExpenseStatus from './ExpenseStatus'
 import ExpenseMenu from './ExpenseMenu'
-export default function ExpenseCard({ expense }) {
+export default function ExpenseCard({ expense, setUpdate }) {
   return (
     <Card sx={{ display: 'flex' }}>
       <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
-        <ExpenseMenu expense={expense} />
+        <ExpenseMenu expense={expense} setUpdate={setUpdate} />
       </Box>
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
         <CardContent sx={{ flex: '1 0 auto' }}>

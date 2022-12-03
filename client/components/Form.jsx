@@ -16,7 +16,6 @@ export default function Form(expense, setUpdate) {
   const dispatch = useDispatch()
 
   function handleChange(e) {
-    e.preventDefault()
     const { name, value } = e.target
     setData({ ...data, [name]: value })
   }
@@ -65,8 +64,10 @@ export default function Form(expense, setUpdate) {
         </div>
         <div>
           <Stack spacing={2} direction="row">
-            <Button variant="contained">Cancel</Button>
-            <Button variant="contained" onChange={handleUpdate}>
+            <Button variant="contained" onClick={() => setUpdate(true)}>
+              Cancel
+            </Button>
+            <Button variant="contained" onClick={handleUpdate}>
               Sumbit
             </Button>
           </Stack>
