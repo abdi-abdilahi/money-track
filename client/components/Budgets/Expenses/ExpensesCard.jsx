@@ -30,7 +30,6 @@ export default function ExpenseCard({ expense, setUpdate }) {
           <ExpenseStatus />
         </Box>
       </Box>
-      <CardMedia />
     </Card>
   )
 }
