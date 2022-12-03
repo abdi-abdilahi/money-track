@@ -15,7 +15,6 @@ const ITEM_HEIGHT = 48
 
 export default function ExpenseMenu({ expense, setUpdate }) {
   const [anchorEl, setAnchorEl] = useState(null)
-  // const [update, setUpdate] = useState(false)
   const open = Boolean(anchorEl)
   const dispatch = useDispatch()
   const handleClick = (event) => {

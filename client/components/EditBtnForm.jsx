@@ -11,7 +11,7 @@ import Button from '@mui/material/Button'
 import { useDispatch } from 'react-redux'
 import { patchExpense } from '../actions/expenses'
 
-export default function Form({ expense, setUpdate }) {
+export default function EditBtnForm({ expense, setUpdate }) {
   const [data, setData] = useState(expense)
   const dispatch = useDispatch()
 
@@ -39,11 +39,6 @@ export default function Form({ expense, setUpdate }) {
               onChange={handleChange}
               label="Expense"
             />
-            {/* <TextField
-            label="Expense"
-            id="outlined-start-adornment"
-            sx={{ m: 1, width: "25ch" }}
-          /> */}
           </FormControl>
 
           <FormControl fullWidth sx={{ m: 1 }}>
