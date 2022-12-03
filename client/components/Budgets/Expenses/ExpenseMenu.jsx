@@ -8,18 +8,26 @@ import ListItemText from '@mui/material/ListItemText'
 import EditIcon from '@mui/icons-material/Edit'
 import MenuList from '@mui/material/MenuList'
 import DeleteIcon from '@mui/icons-material/Delete'
-//import { useDispatch } from 'react-redux'
-//import { deleteExpense } from '../apis/expenses'
+import { useDispatch } from 'react-redux'
+import { delExpense } from '../actions/expenses'
 
 const ITEM_HEIGHT = 48
 
-export default function ExpenseMenu() {
+export default function ExpenseMenu({ expense }) {
   const [anchorEl, setAnchorEl] = useState(null)
+  // const [update, setUpdate] = useState(false)
   const open = Boolean(anchorEl)
-  //const dispatch = useDispatch()
+  const dispatch = useDispatch()
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget)
   }
+  const handleDelete = () => {
+    setAnchorEl(null)
+    dispatch(delExpense(expense.id))
+  }
+  // const handleEdit(){
+
+  // }
   const handleClose = () => {
     setAnchorEl(null)
   }
@@ -56,13 +64,13 @@ export default function ExpenseMenu() {
             <ListItemIcon>
               <EditIcon fontSize="small" />
             </ListItemIcon>
-            <ListItemText onClick={handleClick}>Edit</ListItemText>
+            <ListItemText>Edit</ListItemText>
           </MenuItem>
-          <MenuItem onClick={handleClose}>
+          <MenuItem onClick={handleDelete}>
             <ListItemIcon>
               <DeleteIcon fontSize="small" />
             </ListItemIcon>
-            <ListItemText onClick={handleClick}>Delete</ListItemText>
+            <ListItemText>Delete</ListItemText>
           </MenuItem>
         </MenuList>
       </Menu>

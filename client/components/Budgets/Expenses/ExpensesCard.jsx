@@ -10,7 +10,7 @@ export default function ExpenseCard({ expense }) {
   return (
     <Card sx={{ display: 'flex' }}>
       <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
-        <ExpenseMenu />
+        <ExpenseMenu expense={expense} />
       </Box>
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
         <CardContent sx={{ flex: '1 0 auto' }}>
