@@ -4,7 +4,7 @@ import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
 import ExpenseStatus from './ExpenseStatus'
-import ExpenseMenu from './ExpenseMenu'
+import SimpleMenu from './SimpleMenu'
 
 import EditBtnForm from './EditBtnForm'
 
@@ -15,7 +15,7 @@ export default function ExpenseCard({ expense }) {
     <>
       <Card sx={{ display: 'flex' }}>
         <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
-          <ExpenseMenu expense={expense} setUpdate={setUpdate} />
+          <SimpleMenu expense={expense} setUpdate={setUpdate} />
         </Box>
         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
           <CardContent sx={{ flex: '1 0 auto' }}>
