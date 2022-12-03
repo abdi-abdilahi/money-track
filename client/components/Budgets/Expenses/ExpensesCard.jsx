@@ -5,7 +5,6 @@ import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
 import ExpenseStatus from './ExpenseStatus'
 import SimpleMenu from './SimpleMenu'
-
 import EditBtnForm from './EditBtnForm'
 
 export default function ExpenseCard({ expense }) {
@@ -30,7 +29,6 @@ export default function ExpenseCard({ expense }) {
               {expense.amount}
             </Typography>
           </CardContent>
-
           <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
             <ExpenseStatus />
           </Box>

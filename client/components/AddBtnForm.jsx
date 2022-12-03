@@ -1,4 +1,3 @@
-//btn: when you click will --> popup form like the edit btn form
 import React, { useState } from 'react'
 import Box from '@mui/material/Box'
 import OutlinedInput from '@mui/material/OutlinedInput'
@@ -14,21 +13,16 @@ import { postExpenses } from '../actions/expenses'
 const formData = { name: '', amount: '', budget_id: 1 }
 
 export default function AddBtnForm({ setAdding }) {
-  //const [add, setAdd] = useState(true)
   const [form, setForm] = useState(formData)
   const dispatch = useDispatch()
-  console.log('formData', formData)
 
   function handleChange(e) {
     const { name, value } = e.target
-    console.log('e.target', e.target)
     setForm({ ...form, [name]: value })
   }
   function handleAdd(e) {
-    console.log('working')
     e.preventDefault()
     dispatch(postExpenses(1, form))
-
     setAdding(false)
     setForm(formData)
   }
@@ -47,7 +41,6 @@ export default function AddBtnForm({ setAdding }) {
               label="Expense"
             />
           </FormControl>
-
           <FormControl fullWidth sx={{ m: 1 }}>
             <InputLabel htmlFor="outlined-adornment-amount">Amount</InputLabel>
             <OutlinedInput

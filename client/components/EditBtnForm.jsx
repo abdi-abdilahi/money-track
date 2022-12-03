@@ -7,7 +7,6 @@ import FormControl from '@mui/material/FormControl'
 import Paper from '@mui/material/Paper'
 import Stack from '@mui/material/Stack'
 import Button from '@mui/material/Button'
-
 import { useDispatch } from 'react-redux'
 import { patchExpense } from '../actions/expenses'
 
@@ -40,7 +39,6 @@ export default function EditBtnForm({ expense, setUpdate }) {
               label="Expense"
             />
           </FormControl>
-
           <FormControl fullWidth sx={{ m: 1 }}>
             <InputLabel htmlFor="outlined-adornment-amount">Amount</InputLabel>
             <OutlinedInput
