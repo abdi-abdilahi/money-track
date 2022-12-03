@@ -5,10 +5,13 @@ import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
 import ExpenseStatus from './ExpenseStatus'
-
+import ExpenseMenu from './ExpenseMenu'
 export default function ExpenseCard({ expense }) {
   return (
     <Card sx={{ display: 'flex' }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
+        <ExpenseMenu />
+      </Box>
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
         <CardContent sx={{ flex: '1 0 auto' }}>
           <Typography component="div" variant="h5">
@@ -22,6 +25,7 @@ export default function ExpenseCard({ expense }) {
             {expense.amount}
           </Typography>
         </CardContent>
+
         <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
           <ExpenseStatus />
         </Box>
