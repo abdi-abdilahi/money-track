@@ -1,29 +1,32 @@
 import React, { useState } from 'react'
-import IconButton from '@mui/material/IconButton'
-import Menu from '@mui/material/Menu'
-import MenuItem from '@mui/material/MenuItem'
-import MoreVertIcon from '@mui/icons-material/MoreVert'
-import ListItemIcon from '@mui/material/ListItemIcon'
-import ListItemText from '@mui/material/ListItemText'
-import EditIcon from '@mui/icons-material/Edit'
-import MenuList from '@mui/material/MenuList'
-import DeleteIcon from '@mui/icons-material/Delete'
-import EditBtnForm from './EditBtnForm'
 import { useDispatch } from 'react-redux'
-import { delExpense } from '../../../actions/expenses'
+import { delExpense } from '../actions/expenses'
+import IconButton from '@mui/material/IconButton'
+import EditIcon from '@mui/icons-material/Edit'
+import DeleteIcon from '@mui/icons-material/Delete'
+import MoreVertIcon from '@mui/icons-material/MoreVert'
+import {
+  ListItemIcon,
+  ListItemText,
+  Menu,
+  MenuItem,
+  MenuList,
+} from '@mui/material'
 
 const ITEM_HEIGHT = 48
 
-export default function SimpleMenu({ expense, setUpdate, update }) {
+export default function SimpleMenu({ dataId, setUpdate }) {
   const [anchorEl, setAnchorEl] = useState(null)
+
   const open = Boolean(anchorEl)
   const dispatch = useDispatch()
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget)
   }
   const handleDelete = () => {
     setAnchorEl(null)
-    dispatch(delExpense(expense.id))
+    dispatch(delExpense(dataId))
   }
   const handleEdit = () => {
     setAnchorEl(null)
@@ -33,9 +36,7 @@ export default function SimpleMenu({ expense, setUpdate, update }) {
     setAnchorEl(null)
   }
 
-  return update ? (
-    <EditBtnForm />
-  ) : (
+  return (
     <>
       <IconButton
         aria-label="more"

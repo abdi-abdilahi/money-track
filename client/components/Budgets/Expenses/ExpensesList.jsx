@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchExpenses } from '../../../actions/expenses'
-import Button from '@mui/material/Button'
+import { fetchExpenses, postExpenses } from '../../../actions/expenses'
+import { Box, Button } from '@mui/material/'
 
-import AddBtnForm from './AddBtnForm'
+import ExpensesForm from './ExpensesForm'
 import ExpenseCard from './ExpensesCard'
-import Box from '@mui/material/Box'
+import { useParams } from 'react-router-dom'
+
 export default function ExpensesList() {
+  const { budgetId } = useParams()
   const expenses = useSelector((state) => state.expenses)
-  const [adding, setAdding] = useState(false)
   const dispatch = useDispatch()
+  const [adding, setAdding] = useState(false)
 
   useEffect(() => {
     dispatch(fetchExpenses(1))
@@ -21,7 +23,13 @@ export default function ExpensesList() {
       {expenses.error && <p>expenses.error</p>}
 
       {adding ? (
-        <AddBtnForm setAdding={setAdding} />
+        <ExpensesForm
+          title={'Add New Expense '}
+          thunk={postExpenses}
+          expensesData={{ name: '', amount: '', budget_id: budgetId }}
+          setStatus={setAdding}
+          firstParam={budgetId}
+        />
       ) : (
         <Box
           className="add-btn"

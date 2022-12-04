@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Box from '@mui/material/Box'
 import LinearProgress from '@mui/material/LinearProgress'
 
-export default function ExpenseStatus() {
+export default function ExpensesStatus() {
   const [progress, setProgress] = useState(50)
 
   // useEffect(() => {

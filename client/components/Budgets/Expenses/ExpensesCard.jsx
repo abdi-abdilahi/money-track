@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
-import Box from '@mui/material/Box'
-import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent'
-import Typography from '@mui/material/Typography'
-import ExpenseStatus from './ExpenseStatus'
-import SimpleMenu from './SimpleMenu'
-import EditBtnForm from './EditBtnForm'
+import { patchExpense } from '../../../actions/expenses'
+import { Box, Card, CardContent, Typography } from '@mui/material'
+import ExpensesStatus from './ExpensesStatus'
+import SimpleMenu from '../../SimpleMenu'
+import ExpensesForm from './ExpensesForm'
 
 export default function ExpenseCard({ expense }) {
   const [update, setUpdate] = useState(false)
@@ -42,7 +40,7 @@ export default function ExpenseCard({ expense }) {
                 <Typography component="div" variant="h5" color="text.primary">
                   {expense.name}
                 </Typography>
-                <SimpleMenu expense={expense} setUpdate={setUpdate} />
+                <SimpleMenu dataId={expense.id} setUpdate={setUpdate} />
               </Box>
               <Box className="middle">
                 <Typography
@@ -61,13 +59,20 @@ export default function ExpenseCard({ expense }) {
                 className="bottom"
                 sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}
               >
-                <ExpenseStatus />
+                <ExpensesStatus />
               </Box>
             </CardContent>
           </Box>
         </Card>
+
         {update ? (
-          <EditBtnForm expense={expense} setUpdate={setUpdate} />
+          <ExpensesForm
+            title={'Edit Expense '}
+            thunk={patchExpense}
+            expensesData={expense}
+            setStatus={setUpdate}
+            firstParam={expense.id}
+          />
         ) : null}
       </Box>
     </>
