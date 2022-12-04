@@ -21,6 +21,24 @@ const incomes = (state = initialState, action) => {
       return { ...state, loading: true }
     case INCOMES_REJECTED:
       return { ...state, loading: false, error: payload }
+    case GET_INCOMES_FULFILLED:
+      return { ...state, loading: false, data: payload }
+    case ADD_INCOME_FULFILLED:
+      return { ...state, loading: false, data: [...state.data, payload] }
+    case UPDATE_INCOME_FULFILLED:
+      return {
+        ...state,
+        loading: false,
+        data: state.data.map((income) => {
+          return income.id === payload.oldIncomeId ? payload.newIncome : income
+        }),
+      }
+    case DELETE_INCOME_FULFILLED:
+      return {
+        ...state,
+        loading: false,
+        data: state.data.filter((income) => income.id !== payload),
+      }
     default:
       return state
   }
