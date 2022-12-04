@@ -25,11 +25,7 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import FilterListIcon from '@mui/icons-material/FilterList'
 import { visuallyHidden } from '@mui/utils'
 import AddTransactions from './AddTransactions'
-import LongMenu from './LongMenu'
-
-// ===================  DATA ====================================
-
-// ===============================================================
+import EditDeleteTransaction from './EditDeleteTransaction'
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -344,7 +340,7 @@ export default function TransactionList() {
                         {new Date(row.dateCreated).toDateString()}
                       </TableCell>
                       <TableCell align="right">
-                        <LongMenu transactionId={row.id} />
+                        <EditDeleteTransaction transaction={row} />
                       </TableCell>
                     </TableRow>
                   )
