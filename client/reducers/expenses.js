@@ -13,7 +13,7 @@ const initialState = {
   loading: false,
 }
 
-const expenses = (state = initialState, action) => {
+function expenses(state = initialState, action) {
   const { type, payload } = action
 
   switch (type) {
@@ -21,6 +21,26 @@ const expenses = (state = initialState, action) => {
       return { ...state, loading: true }
     case EXPENSES_REJECTED:
       return { ...state, loading: false, error: payload }
+    case GET_EXPENSES_FULFILLED:
+      return { ...state, loading: false, data: payload }
+    case ADD_EXPENSE_FULFILLED:
+      return { ...state, loading: false, data: [...state.data, payload] }
+    case UPDATE_EXPENSE_FULFILLED:
+      return {
+        ...state,
+        loading: false,
+        data: state.data.map((expense) => {
+          return expense.id === payload.oldExpenseId
+            ? payload.newExpense
+            : expense
+        }),
+      }
+    case DELETE_EXPENSE_FULFILLED:
+      return {
+        ...state,
+        loading: false,
+        data: state.data.filter((expense) => expense.id !== payload),
+      }
     default:
       return state
   }
