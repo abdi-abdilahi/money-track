@@ -7,8 +7,8 @@ import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
 import DialogContentText from '@mui/material/DialogContentText'
 import DialogTitle from '@mui/material/DialogTitle'
-import MenuItem from '@mui/material/MenuItem'
 import { patchTransaction } from '../actions/transactions'
+import { Grid, Autocomplete } from '@mui/material'
 
 export default function EditForm({ transaction, setUpdating }) {
   const [open, setOpen] = React.useState(true)
@@ -69,61 +69,58 @@ export default function EditForm({ transaction, setUpdating }) {
           <DialogContentText>
             Edit your expense by udpating the details below.
           </DialogContentText>
-
-          <TextField
-            style={{ marginTop: 20 }}
-            label="Select an expense type"
-            fullWidth
-            select
-            variant="outlined"
-            name="expensesId"
-            // value={category.expensesId}
-            onChange={handleChange}
-            id="category"
-            margin="dense"
-            helperText="Please select your expense type"
-          >
-            {category.map((option) => (
-              <MenuItem key={option.expensesId} value={option.expensesId}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </TextField>
-
-          <TextField
-            margin="dense"
-            id="name"
-            label="Give your expense a name"
-            type="text"
-            name="name"
-            fullWidth
-            variant="standard"
-            value={data.name || ''}
-            onChange={handleChange}
-          />
-
-          <TextField
-            margin="dense"
-            id="amount"
-            label="Enter an amount"
-            type="amount"
-            name="amount"
-            fullWidth
-            variant="standard"
-            value={data.amount || ''}
-            onChange={handleChange}
-          />
-
-          <TextField
-            margin="dense"
-            id="date"
-            type="date"
-            name="dateCreated"
-            fullWidth
-            variant="standard"
-            value={data.dateCreated || ''}
-            onChange={handleChange}
-          />
+          <Grid container spacing={1}>
+            <Grid xs={12} sm={6} item>
+              <Autocomplete
+                id="expense-list"
+                name="expensesId"
+                options={category}
+                onChange={(_, value) => {
+                  setData({ ...data, expensesId: value.expensesId })
+                }}
+                isOptionEqualToValue={(option, value) =>
+                  option.value === value.value
+                }
+                renderInput={(params) => (
+                  <TextField {...params} label="Select an expense type" />
+                )}
+                fullWidth
+              />
+            </Grid>
+            <Grid xs={12} sm={6} item>
+              <TextField
+                label="Give your expense a name"
+                id="outlined-required"
+                name="name"
+                value={data.name || ''}
+                onChange={handleChange}
+                fullWidth
+                required
+              />
+            </Grid>
+            <Grid xs={12} sm={6} item>
+              <TextField
+                type="amount"
+                name="amount"
+                label="Enter an amount"
+                id="outlined-required"
+                value={data.amount || ''}
+                onChange={handleChange}
+                fullWidth
+                required
+              />
+            </Grid>
+            <Grid xs={12} sm={6} item>
+              <TextField
+                type="date"
+                name="dateCreated"
+                id="outlined-required"
+                value={data.dateCreated || ''}
+                onChange={handleChange}
+                fullWidth
+              />
+            </Grid>
+          </Grid>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
