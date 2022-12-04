@@ -14,7 +14,7 @@ export default function App() {
         <Route element={<Layout />}>
           <Route index element={<Dashboard />} />
           <Route path="/transactions" element={<TransactionsList />} />
-          <Route path="/expenses" element={<Budgets />} />
+          <Route path="/expenses/:budgetId" element={<Budgets />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

@@ -43,7 +43,7 @@ function Sidebar() {
               <NavLink
                 icon={<PaymentsIcon />}
                 text={'Expenses'}
-                path={'/expenses'}
+                path={'/expenses/1'}
               />
             </List>
 

@@ -2,9 +2,8 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { postExpenses } from '../../../actions/expenses'
 
-const formData = { name: '', amount: '', budget_id: 1 }
-
-export default function ExpenseForm() {
+export default function ExpenseForm({ budgetId }) {
+  const formData = { name: '', amount: '', budget_id: budgetId }
   const [form, setForm] = useState(formData)
   const dispatch = useDispatch()
 

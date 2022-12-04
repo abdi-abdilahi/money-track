@@ -1,16 +1,18 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { useParams } from 'react-router-dom'
 import { fetchExpenses } from '../../../actions/expenses'
 
 import ExpensesCard from './ExpensesCard'
 import ExpenseForm from './ExpensesForm'
 
 export default function ExpensesList() {
+  const { budgetId } = useParams()
   const expenses = useSelector((state) => state.expenses)
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(fetchExpenses(1))
+    dispatch(fetchExpenses(budgetId))
   }, [])
 
   return (
@@ -23,7 +25,7 @@ export default function ExpensesList() {
           return <ExpensesCard key={i} expense={expense} />
         })}
       </ul>
-      <ExpenseForm />
+      <ExpenseForm budgetId={budgetId} />
     </div>
   )
 }
