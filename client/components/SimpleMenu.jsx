@@ -1,22 +1,22 @@
-import * as React from 'react'
-import IconButton from '@mui/material/IconButton'
-import Menu from '@mui/material/Menu'
-import MenuItem from '@mui/material/MenuItem'
-import MoreVertIcon from '@mui/icons-material/MoreVert'
-import ListItemIcon from '@mui/material/ListItemIcon'
-import ListItemText from '@mui/material/ListItemText'
-import EditIcon from '@mui/icons-material/Edit'
-import MenuList from '@mui/material/MenuList'
-import DeleteIcon from '@mui/icons-material/Delete'
-import { delTransaction } from '../actions/transactions'
+import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import EditForm from './EditForm'
+import { delTransaction } from '../actions/transactions'
+import IconButton from '@mui/material/IconButton'
+import EditIcon from '@mui/icons-material/Edit'
+import DeleteIcon from '@mui/icons-material/Delete'
+import MoreVertIcon from '@mui/icons-material/MoreVert'
+import {
+  ListItemIcon,
+  ListItemText,
+  Menu,
+  MenuItem,
+  MenuList,
+} from '@mui/material'
 
 const ITEM_HEIGHT = 48
 
-export default function EditDeleteTransaction({ transaction }) {
-  const [anchorEl, setAnchorEl] = React.useState(null)
-  const [updating, setUpdating] = React.useState(false)
+export default function SimpleMenu({ dataId, setUpdate }) {
+  const [anchorEl, setAnchorEl] = useState(null)
 
   const open = Boolean(anchorEl)
   const dispatch = useDispatch()
@@ -24,27 +24,20 @@ export default function EditDeleteTransaction({ transaction }) {
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget)
   }
-
+  const handleDelete = () => {
+    setAnchorEl(null)
+    dispatch(delTransaction(dataId))
+  }
+  const handleEdit = () => {
+    setAnchorEl(null)
+    setUpdate(true)
+  }
   const handleClose = () => {
     setAnchorEl(null)
   }
 
-  const handleDelete = (event) => {
-    event.preventDefault()
-    setAnchorEl(null)
-    dispatch(delTransaction(Number(transaction.id)))
-  }
-
-  function handleEdit(event) {
-    event.preventDefault()
-    setAnchorEl(null)
-    setUpdating(true)
-  }
-
-  return updating ? (
-    <EditForm transaction={transaction} setUpdating={setUpdating} />
-  ) : (
-    <div>
+  return (
+    <>
       <IconButton
         aria-label="more"
         id="long-button"
@@ -55,6 +48,7 @@ export default function EditDeleteTransaction({ transaction }) {
       >
         <MoreVertIcon />
       </IconButton>
+
       <Menu
         id="long-menu"
         MenuListProps={{
@@ -81,10 +75,10 @@ export default function EditDeleteTransaction({ transaction }) {
             <ListItemIcon>
               <DeleteIcon fontSize="small" />
             </ListItemIcon>
-            <ListItemText value={transaction.id}>Delete</ListItemText>
+            <ListItemText>Delete</ListItemText>
           </MenuItem>
         </MenuList>
       </Menu>
-    </div>
+    </>
   )
 }

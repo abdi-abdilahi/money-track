@@ -1,47 +1,54 @@
-import * as React from 'react'
+import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import Button from '@mui/material/Button'
-import TextField from '@mui/material/TextField'
-import Dialog from '@mui/material/Dialog'
-import DialogActions from '@mui/material/DialogActions'
-import DialogContent from '@mui/material/DialogContent'
-import DialogContentText from '@mui/material/DialogContentText'
-import DialogTitle from '@mui/material/DialogTitle'
-import { patchTransaction } from '../actions/transactions'
-import { Grid, Autocomplete } from '@mui/material'
+import { postTransaction, patchTransaction } from '../../actions/transactions'
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Grid,
+  TextField,
+  Autocomplete,
+} from '@mui/material'
 
-export default function EditForm({ transaction, setUpdating }) {
-  const [open, setOpen] = React.useState(true)
-  const [data, setData] = React.useState(transaction)
+export default function TransactionsForm({
+  transactionData,
+  title,
+  setStatus,
+}) {
+  const [open, setOpen] = useState(true)
+  const [data, setData] = useState(transactionData)
   const dispatch = useDispatch()
 
   const handleClose = () => {
     setOpen(false)
-    setUpdating(false)
+    setStatus(false)
   }
 
-  function handleChange(e) {
+  const handleChange = (e) => {
     const { name, value } = e.target
     e.preventDefault()
     setData({ ...data, [name]: value })
   }
 
-  function handleUpdate(e) {
+  const handleSubmit = (e) => {
     e.preventDefault()
-
-    const updatedTransaction = {
+    const newTransaction = {
       name: data.name,
       amount: data.amount,
       date_created: data.dateCreated,
       expenses_id: data.expensesId,
     }
-    setUpdating(false)
-    dispatch(patchTransaction(transaction, updatedTransaction))
+    if (title === 'Edit Transaction') {
+      dispatch(patchTransaction(data.id, newTransaction))
+    } else {
+      dispatch(postTransaction(newTransaction))
+    }
+
+    setStatus(false)
     handleClose()
   }
-
-  //USING DATA BELOW FOR POPULATING CATEGORY / EXPENSES TYPES
-  //TODO - USE EXPENSES STATE
 
   const categoryNames = [
     { id: 1, name: 'Petrol', amount: 50, budget_id: 1 },
@@ -64,11 +71,8 @@ export default function EditForm({ transaction, setUpdating }) {
   return (
     <div>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Edit Transaction</DialogTitle>
+        <DialogTitle>{title}</DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            Edit your expense by udpating the details below.
-          </DialogContentText>
           <Grid container spacing={1}>
             <Grid xs={12} sm={6} item>
               <Autocomplete
@@ -124,7 +128,7 @@ export default function EditForm({ transaction, setUpdating }) {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleUpdate}>Save</Button>
+          <Button onClick={handleSubmit}>Submit</Button>
         </DialogActions>
       </Dialog>
     </div>

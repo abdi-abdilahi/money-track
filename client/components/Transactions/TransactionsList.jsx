@@ -1,42 +1,75 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchTransactions } from '../../actions/transactions'
-import { fetchExpenses } from '../../actions/expenses'
+import TransactionsForm from './TransactionsForm'
+import Button from '@mui/material/Button'
+import TransactionsTable from './Table/TransactionsTable'
+import { Grid, Autocomplete, TextField } from '@mui/material'
 
-import Transaction from './Transaction'
-import TransactionForm from './TransactionForm'
-
-export default function TransactionsList() {
+export default function TransactionList() {
   const transactions = useSelector((state) => state.transactions)
-  const expenses = useSelector((state) => state.expenses)
+  const [adding, setAdding] = useState(false)
+  const rows = transactions.data || []
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(fetchExpenses(1))
     dispatch(fetchTransactions())
   }, [])
 
-  return (
-    <div>
-      <div>
-        {transactions.loading && expenses.loading && <p>Loading.....</p>}
-      </div>
-      <div>
-        {transactions.error && expenses.error && <p>Something went wrong!</p>}
-      </div>
-      {expenses.data && <TransactionForm expenses={expenses} />}
+  const transactionsList = rows?.map((transaction) => {
+    return {
+      label: transaction.name,
+      id: transaction.id,
+      dateCreated: transaction.dateCreated,
+    }
+  })
 
-      <ul>
-        {transactions.data?.map((transaction, i) => {
-          return (
-            <Transaction
-              key={i}
-              transaction={transaction}
-              expenses={expenses}
-            />
-          )
-        })}
-      </ul>
-    </div>
+  return (
+    <>
+      {adding ? (
+        <TransactionsForm
+          transactionData={{}}
+          title={'Add New Transaction'}
+          setStatus={setAdding}
+        />
+      ) : null}
+
+      <Grid container spacing={2}>
+        <Grid xs={12} sm={6} item>
+          <Autocomplete
+            id="search-transactions"
+            name="transaction"
+            options={transactionsList}
+            onChange={(_, value) => {
+              console.log('m value', value)
+            }}
+            isOptionEqualToValue={(option, value) =>
+              option.value === value.value
+            }
+            renderInput={(params) => (
+              <TextField {...params} label="Select an expense type" />
+            )}
+            fullWidth
+          />
+        </Grid>
+        <Grid item>
+          <Button type="submit" variant="contained" fullWidth>
+            Search
+          </Button>
+        </Grid>
+      </Grid>
+
+      <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+        <Button
+          variant="contained"
+          size="medium"
+          onClick={() => setAdding(true)}
+        >
+          Add Transaction
+        </Button>
+      </div>
+
+      <TransactionsTable rows={rows} />
+    </>
   )
 }
