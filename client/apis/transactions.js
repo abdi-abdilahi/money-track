@@ -20,20 +20,20 @@ export function addTransaction(newTransaction) {
     })
 }
 
-export function deleteTransaction(transactionId) {
-  return request
-    .del(rootUrl + transactionId)
-    .then(() => {})
-    .catch((err) => {
-      return { message: err.message }
-    })
-}
-
 export function updateTransaction(transactionId, updatedTransaction) {
   return request
     .patch(rootUrl + transactionId)
     .send(updatedTransaction)
     .then((res) => res.body)
+    .catch((err) => {
+      return { message: err.message }
+    })
+}
+
+export function deleteTransaction(transactionId) {
+  return request
+    .del(rootUrl + transactionId)
+    .then((res) => res.status)
     .catch((err) => {
       return { message: err.message }
     })
