@@ -11,30 +11,67 @@ export default function ExpenseCard({ expense }) {
   const [update, setUpdate] = useState(false)
 
   return (
+    //TODO:STYLE: give the card round edges
     <>
-      <Card sx={{ display: 'flex' }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
+      <Box>
+        <Card
+          sx={{
+            display: 'flex',
+            m: 2,
+            p: 2,
+            width: 400,
+          }}
+        >
+          {/* <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
           <SimpleMenu expense={expense} setUpdate={setUpdate} />
-        </Box>
-        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-          <CardContent sx={{ flex: '1 0 auto' }}>
-            <Typography component="div" variant="h5">
-              {expense.name}
-            </Typography>
-            <Typography
-              variant="subtitle1"
-              color="text.secondary"
-              component="div"
-            >
-              {expense.amount}
-            </Typography>
-          </CardContent>
-          <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
-            <ExpenseStatus />
+        </Box> */}
+          <Box
+            className="contianer"
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              width: 400,
+            }}
+          >
+            <CardContent sx={{ flex: '1 0 auto' }}>
+              <Box
+                className="top"
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                }}
+              >
+                <Typography component="div" variant="h5" color="text.primary">
+                  {expense.name}
+                </Typography>
+                <SimpleMenu expense={expense} setUpdate={setUpdate} />
+              </Box>
+
+              <Box className="middle">
+                <Typography
+                  variant="subtitle1"
+                  color="text.secondary"
+                  component="div"
+                >
+                  ${expense.amount}
+                </Typography>
+              </Box>
+
+              <Box
+                className="bottom"
+                sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}
+              >
+                <ExpenseStatus />
+              </Box>
+            </CardContent>
           </Box>
-        </Box>
-      </Card>
-      {update ? <EditBtnForm expense={expense} setUpdate={setUpdate} /> : null}
+        </Card>
+
+        {update ? (
+          <EditBtnForm expense={expense} setUpdate={setUpdate} />
+        ) : null}
+      </Box>
     </>
   )
 }

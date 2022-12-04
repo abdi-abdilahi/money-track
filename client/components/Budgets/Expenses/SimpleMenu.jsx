@@ -8,6 +8,7 @@ import ListItemText from '@mui/material/ListItemText'
 import EditIcon from '@mui/icons-material/Edit'
 import MenuList from '@mui/material/MenuList'
 import DeleteIcon from '@mui/icons-material/Delete'
+
 import { useDispatch } from 'react-redux'
 import { delExpense } from '../actions/expenses'
 
@@ -33,7 +34,7 @@ export default function SimpleMenu({ expense, setUpdate }) {
   }
 
   return (
-    <div>
+    <>
       <IconButton
         aria-label="more"
         id="long-button"
@@ -44,6 +45,7 @@ export default function SimpleMenu({ expense, setUpdate }) {
       >
         <MoreVertIcon />
       </IconButton>
+
       <Menu
         id="long-menu"
         MenuListProps={{
@@ -74,6 +76,6 @@ export default function SimpleMenu({ expense, setUpdate }) {
           </MenuItem>
         </MenuList>
       </Menu>
-    </div>
+    </>
   )
 }

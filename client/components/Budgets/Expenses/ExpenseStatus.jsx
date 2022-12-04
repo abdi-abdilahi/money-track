@@ -20,10 +20,15 @@ export default function ExpenseStatus() {
   //     clearInterval(timer)
   //   }
   // }, [])
-
+  //TODO: STYLE: make the color of the progress bar the same as the name of the expense
   return (
-    <Box sx={{ width: 500 }}>
-      <LinearProgress variant="determinate" value={progress} />
+    <Box sx={{ width: 250, pt: 4 }}>
+      <LinearProgress
+        variant="determinate"
+        value={progress}
+        //change the progress bar colour to "text.primary"
+        sx={{ height: 15 }}
+      />
     </Box>
   )
 }
