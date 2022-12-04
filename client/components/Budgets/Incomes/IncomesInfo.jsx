@@ -27,7 +27,7 @@ export default function IncomesInfo({ incomes, expenses }) {
         className="incomes-info"
         sx={{
           display: 'flex',
-          width: '15vw',
+          width: '14vw',
           justifyContent: 'space-between',
           alignItems: 'center',
         }}
@@ -49,7 +49,7 @@ export default function IncomesInfo({ incomes, expenses }) {
 
         <Button
           variant="outlined"
-          size="small"
+          size="medium"
           startIcon={<EditIcon />}
           onClick={() => setAdding(true)}
         >
