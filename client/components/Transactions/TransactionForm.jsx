@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
 import Dialog from '@mui/material/Dialog'
@@ -9,7 +9,9 @@ import DialogTitle from '@mui/material/DialogTitle'
 import { Grid, Autocomplete } from '@mui/material'
 import { postTransaction } from '../actions/transactions'
 
-export default function Addtransaction() {
+export default function Addtransaction({ transactions }) {
+  //const transactions = useSelector((state) => state.transactions)
+  //console.log('m transactions', transactions)
   const [open, setOpen] = React.useState(false)
   const [data, setData] = useState([])
   const dispatch = useDispatch()
@@ -58,13 +60,51 @@ export default function Addtransaction() {
     }
   })
 
+  const transactionsList = transactions?.map((transaction) => {
+    return {
+      label: transaction.name,
+      id: transaction.id,
+      dateCreated: transaction.dateCreated,
+    }
+  })
+
   return (
     <div>
+      <Grid container spacing={2}>
+        <Grid xs={12} sm={6} item>
+          <Autocomplete
+            id="search-transactions"
+            name="transaction"
+            options={transactionsList}
+            onChange={(_, value) => {
+              console.log('m value', value)
+              setData({
+                ...data,
+                id: value.id,
+                dateCreated: value.dateCreated,
+              })
+            }}
+            isOptionEqualToValue={(option, value) =>
+              option.value === value.value
+            }
+            renderInput={(params) => (
+              <TextField {...params} label="Select an expense type" />
+            )}
+            fullWidth
+          />
+        </Grid>
+        <Grid item>
+          <Button type="submit" variant="contained" fullWidth>
+            Search
+          </Button>
+        </Grid>
+      </Grid>
       <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
         <Button variant="contained" size="medium" onClick={handleClickOpen}>
           Add Transaction
         </Button>
       </div>
+
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Add Transaction</DialogTitle>
         <DialogContent>

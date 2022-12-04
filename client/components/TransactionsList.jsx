@@ -72,10 +72,10 @@ const headCells = [
     label: 'Expenses',
   },
   {
-    id: 'description',
+    id: 'name',
     numeric: false,
     disablePadding: false,
-    label: 'Description',
+    label: 'Name',
   },
   {
     id: 'amount',
@@ -219,6 +219,7 @@ EnhancedTableToolbar.propTypes = {
 
 export default function TransactionList() {
   const transactions = useSelector((state) => state.transactions)
+  console.log('m transactions in list', transactions)
   const rows = transactions.data || []
   const dispatch = useDispatch()
   useEffect(() => {
@@ -296,7 +297,7 @@ export default function TransactionList() {
     <Box sx={{ width: '100%' }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
         <EnhancedTableToolbar numSelected={selected.length} />
-        <AddTransactions />
+        <AddTransactions transactions={rows} />
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}
