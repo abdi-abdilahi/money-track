@@ -3,7 +3,7 @@ exports.up = function (knex) {
     table.increments('id').primary()
     table.string('user_id')
     table.date('start_date')
-    table.bigInteger('duration')
+    table.date('end_date')
   })
 }
 
