@@ -1,0 +1,1 @@
+import incomes from '../incomes'

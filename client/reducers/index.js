@@ -1,3 +1,7 @@
 import { combineReducers } from 'redux'
 
-export default combineReducers({})
+import transactions from './transactions'
+import expenses from './expenses'
+import incomes from './incomes'
+
+export default combineReducers({ transactions, expenses, incomes })

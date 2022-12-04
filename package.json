@@ -1,5 +1,5 @@
 {
-  "name": "boilerplate-fullstack",
+  "name": "money-track",
   "version": "2.0.0",
   "main": "server/index.js",
   "license": "MIT",
@@ -34,10 +34,17 @@
     ]
   },
   "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@fontsource/roboto": "^4.5.8",
+    "@mui/icons-material": "^5.10.9",
+    "@mui/material": "^5.10.13",
+    "@mui/styled-engine-sc": "^5.10.6",
     "sqlite3": "^5.1.2",
     "express": "^4.17.2",
     "knex": "^2.3.0",
     "pg": "^8.8.0",
+    "react-router-dom": "^6.4.3",
     "superagent": "7.1.1"
   },
   "devDependencies": {
@@ -77,7 +84,8 @@
     "singleQuote": true
   },
   "jest": {
-    "testEnvironment": "jsdom"
+    "testEnvironment": "jsdom",
+    "globalSetup": "./global-setup.js"
   },
   "browserslist": "> 2%, not dead"
 }
