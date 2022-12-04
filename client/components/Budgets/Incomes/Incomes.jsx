@@ -52,7 +52,7 @@ export default function Income({ income }) {
           <TextField
             id="income-name"
             label=""
-            size="small"
+            size="medium"
             name="name"
             value={incomeData.name}
             onChange={handleChange}
@@ -62,7 +62,7 @@ export default function Income({ income }) {
             id="income-amount"
             label=""
             placeholder="Income after tax"
-            size="small"
+            size="medium"
             name="amount"
             value={incomeData.amount}
             onChange={handleChange}

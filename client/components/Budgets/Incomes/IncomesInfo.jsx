@@ -1,25 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Incomes from './Incomes'
 import IncomesForm from './IncomesForm'
-import { fetchIncomes } from '../../../actions/incomes'
-import { useSelector, useDispatch } from 'react-redux'
-import { Button, Typography } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit'
+import {
+  Box,
+  Button,
+  Typography,
+  Dialog,
+  DialogContent,
+  DialogTitle,
+} from '@mui/material'
 
-function IncomesInfo() {
-  const incomes = useSelector((state) => state.incomes)
-  const dispatch = useDispatch()
+export default function IncomesInfo({ incomes, expenses }) {
   const [adding, setAdding] = useState(false)
 
-  useEffect(() => {
-    dispatch(fetchIncomes(1))
-  }, [])
-
-  function addIncomes(incomes) {
-    return incomes.data?.reduce(
-      (total, income) => total + Number(income.amount),
-      0
-    )
+  function handleClose() {
+    setAdding(false)
   }
 
   return (
@@ -27,10 +23,30 @@ function IncomesInfo() {
       <div>{incomes.loading && <p>Loading.....</p>}</div>
       <div>{incomes.error && <p>Something went wrong!</p>}</div>
 
-      <div>
-        <Typography variant="h4" sx={{ color: '#3277d5' }}>{`$${
-          addIncomes(incomes) || '0.00'
-        }`}</Typography>
+      <Box
+        className="incomes-info"
+        sx={{
+          display: 'flex',
+          width: '15vw',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}
+      >
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Typography variant="h4" sx={{ color: '#3277d5' }}>{`$${
+            sumOfDataAmount(incomes) - sumOfDataAmount(expenses) || '0.00'
+          }`}</Typography>
+          <Typography variant="p" sx={{ color: '#3277d5' }}>
+            DISPOSABLE INCOME
+          </Typography>
+        </Box>
+
         <Button
           variant="outlined"
           size="small"
@@ -39,19 +55,29 @@ function IncomesInfo() {
         >
           Edit Income
         </Button>
-      </div>
+      </Box>
 
       {adding ? (
-        <>
-          {incomes.data?.map((income, i) => (
-            <Incomes key={i} income={income} />
-          ))}
+        <Dialog open="true" onClose={handleClose} scroll="paper">
+          <DialogTitle sx={{ color: '#3277d5', fontStyle: 'bold' }}>
+            Edit Income
+          </DialogTitle>
+          <DialogContent dividers="true">
+            {incomes.data?.map((income, i) => (
+              <Incomes key={i} income={income} />
+            ))}
 
-          <IncomesForm setAdding={setAdding} />
-        </>
+            <IncomesForm
+              handleClose={handleClose}
+              total={sumOfDataAmount(incomes)}
+            />
+          </DialogContent>
+        </Dialog>
       ) : null}
     </div>
   )
 }
 
-export default IncomesInfo
+function sumOfDataAmount(data) {
+  return data.data?.reduce((total, item) => total + Number(item.amount), 0)
+}
