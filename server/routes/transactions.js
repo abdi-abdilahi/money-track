@@ -15,7 +15,10 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
   db.addTransaction(req.body)
-    .then(([transaction]) => {
+    .then(([{ id }]) => {
+      return db.getTransactionById(id)
+    })
+    .then((transaction) => {
       res.json(transaction)
     })
     .catch((err) => {
@@ -28,8 +31,11 @@ router.patch('/:transactionId', (req, res) => {
   const transactionId = req.params.transactionId
   const updatedTransaction = req.body
   db.updateTransaction(transactionId, updatedTransaction)
-    .then(([transaction]) => {
-      res.json(transaction)
+    .then(() => {
+      return db.getTransactionById(transactionId)
+    })
+    .then((transactions) => {
+      res.json(transactions)
     })
     .catch((err) => {
       console.error(err)
