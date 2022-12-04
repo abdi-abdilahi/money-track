@@ -60,9 +60,11 @@ export default function Addtransaction() {
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Add Transaction
-      </Button>
+      <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+        <Button variant="contained" size="medium" onClick={handleClickOpen}>
+          Add Transaction
+        </Button>
+      </div>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Add Transaction</DialogTitle>
         <DialogContent>
