@@ -26,6 +26,15 @@ import FilterListIcon from '@mui/icons-material/FilterList'
 import { visuallyHidden } from '@mui/utils'
 import AddTransactions from './AddTransactions'
 import EditDeleteTransaction from './EditDeleteTransaction'
+import {
+  indigo,
+  orange,
+  teal,
+  green,
+  cyan,
+  blue,
+  lightBlue,
+} from '@mui/material/colors'
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -216,6 +225,18 @@ export default function TransactionList() {
     dispatch(fetchTransactions())
   }, [])
 
+  const getAvatarBgColor = ({ expensesName }) =>
+    ({
+      Petrol: lightBlue[400],
+      Fitness: cyan[400],
+      Groceries: green[400],
+      'Health Insurance': teal[400],
+      'Car Insurance': green[600],
+      'Car Maintenance': cyan[600],
+      Shopping: orange[400],
+      'Food/Dining Out': indigo[400],
+    }[expensesName] || blue[500])
+
   const [order, setOrder] = React.useState('asc')
   const [orderBy, setOrderBy] = React.useState('calories')
   const [selected, setSelected] = React.useState([])
@@ -324,8 +345,8 @@ export default function TransactionList() {
                       >
                         <Avatar
                           sx={{
-                            bgcolor: '#22A39F',
-                            width: 100,
+                            bgcolor: getAvatarBgColor(row),
+                            width: 130,
                             height: 30,
                             fontSize: 16,
                           }}
@@ -370,3 +391,5 @@ export default function TransactionList() {
     </Box>
   )
 }
+
+// bgcolor: '#22A39F',
