@@ -22,6 +22,7 @@ describe('getTransactions', () => {
       amount: 110,
       dateCreated: new Date('2022-11-25T23:59:59').toString(),
       expensesId: 3,
+      expensesName: 'Groceries',
     }
 
     return db.getTransactions(testDb).then((incomes) => {
@@ -31,8 +32,27 @@ describe('getTransactions', () => {
   })
 })
 
+describe('getTransactionById', () => {
+  it('should return the correct transaction.', () => {
+    expect.assertions(1)
+
+    const expected = {
+      id: 1,
+      name: 'PakNSave',
+      amount: 110,
+      dateCreated: new Date('2022-11-25T23:59:59').toString(),
+      expensesId: 3,
+      expensesName: 'Groceries',
+    }
+
+    return db.getTransactionById(1, testDb).then((incomes) => {
+      expect(incomes).toEqual(expected)
+    })
+  })
+})
+
 describe('addTransaction', () => {
-  it('should return the newly added transaction.', () => {
+  it('should add the new transaction and return the id created.', () => {
     expect.assertions(1)
 
     const mockData = {
@@ -42,22 +62,14 @@ describe('addTransaction', () => {
       expenses_id: 3,
     }
 
-    const mockDataResponse = {
-      id: 5,
-      name: 'Countdown',
-      amount: 110,
-      dateCreated: new Date('2022-11-25T23:59:59').toString(),
-      expensesId: 3,
-    }
-
-    return db.addTransaction(mockData, testDb).then(([income]) => {
-      expect(income).toEqual(mockDataResponse)
+    return db.addTransaction(mockData, testDb).then(([{ id }]) => {
+      expect(id).toBe(5)
     })
   })
 })
 
 describe('updateTransaction', () => {
-  it('should return the newly updated transaction.', () => {
+  it('should update the transaction with the given id', () => {
     expect.assertions(1)
     const mockData = {
       name: 'Countdown',
@@ -66,16 +78,8 @@ describe('updateTransaction', () => {
       expenses_id: 3,
     }
 
-    const mockDataResponse = {
-      id: 4,
-      name: 'Countdown',
-      amount: 200,
-      dateCreated: new Date('2022-11-25T23:59:59').toString(),
-      expensesId: 3,
-    }
-
-    return db.updateTransaction(4, mockData, testDb).then(([income]) => {
-      expect(income).toEqual(mockDataResponse)
+    return db.updateTransaction(4, mockData, testDb).then((res) => {
+      expect(res).toBe(1)
     })
   })
 })
