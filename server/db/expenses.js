@@ -1,13 +1,13 @@
 const connection = require('./connection')
 
 module.exports = {
-  getExpenses,
+  getExpensesByBudgetId,
   addExpense,
   updateExpense,
   deleteExpense,
 }
 
-function getExpenses(budgetId, db = connection) {
+function getExpensesByBudgetId(budgetId, db = connection) {
   return db('Expenses')
     .where('budget_id', budgetId)
     .select('id', 'name', 'amount')

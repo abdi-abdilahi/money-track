@@ -9,7 +9,7 @@ afterAll(() => {
 })
 
 const {
-  getExpenses,
+  getExpensesByBudgetId,
   addExpense,
   updateExpense,
   deleteExpense,
@@ -23,7 +23,7 @@ describe('GET /api/v1/expenses/:budgetId', () => {
       { id: 1, name: 'Petrol', amount: 50, budget_id: 1 },
     ]
 
-    getExpenses.mockReturnValue(Promise.resolve(mockDataResponse))
+    getExpensesByBudgetId.mockReturnValue(Promise.resolve(mockDataResponse))
 
     return request(server)
       .get('/api/v1/expenses/1')
@@ -36,7 +36,9 @@ describe('GET /api/v1/expenses/:budgetId', () => {
   it('should return status 500 and an error message when a failure occurs', () => {
     expect.assertions(2)
 
-    getExpenses.mockImplementation(() => Promise.reject('Something went wrong'))
+    getExpensesByBudgetId.mockImplementation(() =>
+      Promise.reject('Something went wrong')
+    )
 
     return request(server)
       .get('/api/v1/expenses/1')

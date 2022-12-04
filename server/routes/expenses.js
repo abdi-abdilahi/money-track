@@ -3,7 +3,7 @@ const db = require('../db/expenses')
 const router = express.Router()
 
 router.get('/:budgetId', (req, res) => {
-  db.getExpenses(req.params.budgetId)
+  db.getExpensesByBudgetId(req.params.budgetId)
     .then((expenses) => {
       res.json(expenses)
     })

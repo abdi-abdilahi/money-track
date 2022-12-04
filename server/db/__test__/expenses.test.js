@@ -22,7 +22,7 @@ describe('getExpenses', () => {
       amount: 50,
     }
 
-    return db.getExpenses(1, testDb).then((expenses) => {
+    return db.getExpensesByBudgetId(1, testDb).then((expenses) => {
       expect(expenses).toHaveLength(8)
       expect(expenses[0]).toEqual(expected)
     })
