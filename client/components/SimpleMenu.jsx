@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { delTransaction } from '../actions/transactions'
+import { delExpense } from '../actions/expenses'
 import IconButton from '@mui/material/IconButton'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
@@ -26,7 +26,7 @@ export default function SimpleMenu({ dataId, setUpdate }) {
   }
   const handleDelete = () => {
     setAnchorEl(null)
-    dispatch(delTransaction(dataId))
+    dispatch(delExpense(dataId))
   }
   const handleEdit = () => {
     setAnchorEl(null)
