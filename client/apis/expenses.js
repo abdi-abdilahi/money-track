@@ -33,7 +33,7 @@ export function updateExpense(expenseId, newExpense) {
 export function deleteExpense(expenseId) {
   return request
     .delete(rootUrl + expenseId)
-    .then(() => {})
+    .then((res) => res.status)
     .catch((err) => {
       return { message: err.message }
     })
