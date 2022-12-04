@@ -11,7 +11,6 @@ export default function ExpenseCard({ expense }) {
   const [update, setUpdate] = useState(false)
 
   return (
-    //TODO:STYLE: give the card round edges
     <>
       <Box>
         <Card
@@ -20,11 +19,9 @@ export default function ExpenseCard({ expense }) {
             m: 2,
             p: 2,
             width: 400,
+            borderRadius: 10,
           }}
         >
-          {/* <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
-          <SimpleMenu expense={expense} setUpdate={setUpdate} />
-        </Box> */}
           <Box
             className="contianer"
             sx={{
@@ -47,7 +44,6 @@ export default function ExpenseCard({ expense }) {
                 </Typography>
                 <SimpleMenu expense={expense} setUpdate={setUpdate} />
               </Box>
-
               <Box className="middle">
                 <Typography
                   variant="subtitle1"
@@ -56,6 +52,9 @@ export default function ExpenseCard({ expense }) {
                 >
                   ${expense.amount}
                 </Typography>
+              </Box>
+              <Box>
+                <Typography>Avaliable: $00</Typography>
               </Box>
 
               <Box
@@ -67,7 +66,6 @@ export default function ExpenseCard({ expense }) {
             </CardContent>
           </Box>
         </Card>
-
         {update ? (
           <EditBtnForm expense={expense} setUpdate={setUpdate} />
         ) : null}

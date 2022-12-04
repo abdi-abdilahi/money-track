@@ -8,7 +8,7 @@ import Paper from '@mui/material/Paper'
 import Stack from '@mui/material/Stack'
 import Button from '@mui/material/Button'
 import { useDispatch } from 'react-redux'
-import { postExpenses } from '../actions/expenses'
+import { postExpenses } from '../../../actions/expenses'
 
 const formData = { name: '', amount: '', budget_id: 1 }
 

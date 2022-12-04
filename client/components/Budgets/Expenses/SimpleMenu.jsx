@@ -8,13 +8,13 @@ import ListItemText from '@mui/material/ListItemText'
 import EditIcon from '@mui/icons-material/Edit'
 import MenuList from '@mui/material/MenuList'
 import DeleteIcon from '@mui/icons-material/Delete'
-
+import EditBtnForm from './EditBtnForm'
 import { useDispatch } from 'react-redux'
-import { delExpense } from '../actions/expenses'
+import { delExpense } from '../../../actions/expenses'
 
 const ITEM_HEIGHT = 48
 
-export default function SimpleMenu({ expense, setUpdate }) {
+export default function SimpleMenu({ expense, setUpdate, update }) {
   const [anchorEl, setAnchorEl] = useState(null)
   const open = Boolean(anchorEl)
   const dispatch = useDispatch()
@@ -33,7 +33,9 @@ export default function SimpleMenu({ expense, setUpdate }) {
     setAnchorEl(null)
   }
 
-  return (
+  return update ? (
+    <EditBtnForm />
+  ) : (
     <>
       <IconButton
         aria-label="more"
