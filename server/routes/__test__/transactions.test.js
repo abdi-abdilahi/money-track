@@ -3,6 +3,7 @@ const server = require('../../server')
 
 const {
   getTransactions,
+  getTransactionById,
   addTransaction,
   updateTransaction,
   deleteTransaction,
@@ -23,6 +24,7 @@ describe('GET /api/v1/transactions', () => {
       amount: 110,
       dateCreated: new Date('2022-11-25T23:59:59').toString(),
       expensesId: 3,
+      expensesName: 'Groceries',
     },
   ]
 
@@ -62,19 +64,20 @@ describe('POST /api/v1/transactions', () => {
     date_created: new Date('2022-11-25T23:59:59').toString(),
     expenses_id: 3,
   }
-  const mockDataResponse = [
-    {
-      ...mockData,
-      id: 1,
-      dateCreated: new Date('2022-11-25T23:59:59').toString(),
-      expensesId: 3,
-    },
-  ]
+  const mockDataResponse = {
+    id: 1,
+    name: 'PakNSave',
+    amount: 50,
+    dateCreated: new Date('2022-11-25T23:59:59').toString(),
+    expensesId: 3,
+    expensesName: 'Groceries',
+  }
 
   it('should return the newly added transaction.', () => {
     expect.assertions(2)
 
-    addTransaction.mockReturnValue(Promise.resolve([mockDataResponse]))
+    addTransaction.mockReturnValue(Promise.resolve([{ id: 1 }]))
+    getTransactionById.mockReturnValue(Promise.resolve(mockDataResponse))
 
     return request(server)
       .post('/api/v1/transactions')
@@ -109,19 +112,20 @@ describe('PATCH /api/v1/transactions/:transactionId', () => {
     date_created: new Date('2022-11-25T23:59:59').toString(),
     expenses_id: 3,
   }
-  const mockDataResponse = [
-    {
-      ...mockData,
-      id: 1,
-      dateCreated: new Date('2022-11-25T23:59:59').toString(),
-      expensesId: 3,
-    },
-  ]
+  const mockDataResponse = {
+    id: 1,
+    name: 'PakNSave',
+    amount: 500,
+    dateCreated: new Date('2022-11-25T23:59:59').toString(),
+    expensesId: 3,
+    expensesName: 'Groceries',
+  }
 
   it('should return the newly updated transaction.', () => {
     expect.assertions(2)
 
-    updateTransaction.mockReturnValue(Promise.resolve([mockDataResponse]))
+    updateTransaction.mockReturnValue(Promise.resolve([1]))
+    getTransactionById.mockReturnValue(Promise.resolve(mockDataResponse))
 
     return request(server)
       .patch('/api/v1/transactions/1')
