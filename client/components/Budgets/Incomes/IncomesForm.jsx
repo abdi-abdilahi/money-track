@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { postIncomes } from '../../../actions/incomes'
 import { useDispatch } from 'react-redux'
-import { Box, Button, TextField } from '@mui/material'
+import { Box, Button, TextField, Typography } from '@mui/material'
 import AddCircleIcon from '@mui/icons-material/AddCircle'
 import CloseIcon from '@mui/icons-material/Close'
 
-export default function IncomeForm({ setAdding }) {
+export default function IncomeForm({ handleClose, total }) {
   const dispatch = useDispatch()
 
   const defaultData = {
@@ -47,6 +47,9 @@ export default function IncomeForm({ setAdding }) {
         component="form"
         sx={{
           '& .MuiTextField-root': { m: 1, width: '25ch' },
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
         }}
         noValidate
         autoComplete="off"
@@ -55,7 +58,7 @@ export default function IncomeForm({ setAdding }) {
           <TextField
             id="income-name"
             label="Income Name"
-            size="small"
+            size="medium"
             name="name"
             value={income.name}
             onChange={handleChange}
@@ -65,11 +68,41 @@ export default function IncomeForm({ setAdding }) {
             id="income-amount"
             label="Income Amount"
             placeholder="Income after tax"
-            size="small"
+            size="medium"
             name="amount"
             value={income.amount}
             onChange={handleChange}
           />
+        </div>
+        <Box
+          component="div"
+          sx={{
+            height: 180,
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            marginTop: 4,
+          }}
+        >
+          <Box
+            component="div"
+            sx={{
+              height: 50,
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              marginBottom: 4,
+            }}
+          >
+            <Typography variant="h4" sx={{ color: '#3277d5' }}>
+              {`$${total}`}
+            </Typography>
+            <Typography variant="p" sx={{ color: '#3277d5' }}>
+              {`TOTAL WEEKLY DISPOSABLE INCOME`}
+            </Typography>
+          </Box>
           <Button
             variant="outlined"
             size="medium"
@@ -78,16 +111,17 @@ export default function IncomeForm({ setAdding }) {
           >
             Add another income
           </Button>
-        </div>
+          <Button
+            variant="outlined"
+            size="small"
+            startIcon={<CloseIcon />}
+            onClick={handleClose}
+            sx={{ width: 100 }}
+          >
+            Close
+          </Button>
+        </Box>
       </Box>
-      <Button
-        variant="outlined"
-        size="small"
-        startIcon={<CloseIcon />}
-        onClick={() => setAdding(false)}
-      >
-        Close
-      </Button>
     </>
   )
 }
