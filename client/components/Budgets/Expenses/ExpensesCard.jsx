@@ -5,7 +5,7 @@ import ExpensesStatus from './ExpensesStatus'
 import SimpleMenu from '../../SimpleMenu'
 import ExpensesForm from './ExpensesForm'
 
-export default function ExpenseCard({ expense }) {
+export default function ExpenseCard({ expense, transactionsTotal }) {
   const [update, setUpdate] = useState(false)
 
   return (
@@ -14,10 +14,12 @@ export default function ExpenseCard({ expense }) {
         <Card
           sx={{
             display: 'flex',
-            m: 2,
-            p: 2,
-            width: 400,
-            borderRadius: 10,
+
+            m: 1,
+            width: 165,
+            height: 175,
+            borderRadius: 4,
+            justifyContent: 'center',
           }}
         >
           <Box
@@ -25,7 +27,7 @@ export default function ExpenseCard({ expense }) {
             sx={{
               display: 'flex',
               flexDirection: 'column',
-              width: 400,
+              width: 175,
             }}
           >
             <CardContent sx={{ flex: '1 0 auto' }}>
@@ -37,7 +39,7 @@ export default function ExpenseCard({ expense }) {
                   justifyContent: 'space-between',
                 }}
               >
-                <Typography component="div" variant="h5" color="text.primary">
+                <Typography component="div" variant="h6" color="text.primary">
                   {expense.name}
                 </Typography>
                 <SimpleMenu dataId={expense.id} setUpdate={setUpdate} />
@@ -51,13 +53,17 @@ export default function ExpenseCard({ expense }) {
                   ${expense.amount}
                 </Typography>
               </Box>
-              <Box>
-                <Typography>Avaliable: $00</Typography>
+              <Box sx={{ display: 'flex', justifyContent: 'right' }}>
+                <Typography>
+                  Avaliable: ${expense.amount - transactionsTotal}
+                </Typography>
               </Box>
 
               <Box
                 className="bottom"
-                sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}
+                sx={{
+                  display: 'flex',
+                }}
               >
                 <ExpensesStatus />
               </Box>
