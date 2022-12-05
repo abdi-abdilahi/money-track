@@ -47,7 +47,7 @@ export default function TransactionList() {
         />
       ) : null}
 
-      <Grid container spacing={2}>
+      <Grid container spacing={1} sx={{ my: 2 }}>
         <Grid xs={12} sm={6} item>
           <Autocomplete
             id="search-transactions"
@@ -63,6 +63,7 @@ export default function TransactionList() {
               <TextField {...params} label="Select an expense type" />
             )}
             fullWidth
+            size="small"
           />
         </Grid>
         <Grid item>
@@ -71,6 +72,8 @@ export default function TransactionList() {
             variant="contained"
             fullWidth
             onClick={handleSearch}
+            color="info"
+            size="small"
           >
             Search
           </Button>
@@ -81,6 +84,8 @@ export default function TransactionList() {
             variant="contained"
             fullWidth
             onClick={() => setFilterData(rows)}
+            color="info"
+            size="small"
           >
             Reset Search
           </Button>
@@ -96,7 +101,6 @@ export default function TransactionList() {
           Add Transaction
         </Button>
       </div>
-
       <TransactionsTable rows={filterData || rows} />
     </>
   )

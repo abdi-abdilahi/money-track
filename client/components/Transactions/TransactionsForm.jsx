@@ -68,7 +68,7 @@ export default function TransactionsForm({
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>{title}</DialogTitle>
         <DialogContent>
-          <Grid container spacing={1}>
+          <Grid container spacing={1} sx={{ mt: 1 }}>
             <Grid xs={12} sm={6} item>
               <Autocomplete
                 id="expense-list"

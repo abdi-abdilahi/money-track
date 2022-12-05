@@ -4,7 +4,6 @@ import TransactionsForm from '../TransactionsForm'
 import { TableCell, Avatar, TableRow, Checkbox } from '@mui/material'
 import {
   indigo,
-  orange,
   teal,
   green,
   cyan,
@@ -20,7 +19,7 @@ const getAvatarBgColor = ({ expensesName }) =>
     'Health Insurance': teal[400],
     'Car Insurance': green[600],
     'Car Maintenance': cyan[600],
-    Shopping: orange[400],
+    Shopping: teal[600],
     'Food/Dining Out': indigo[400],
   }[expensesName] || blue[500])
 
@@ -55,7 +54,7 @@ export default function Transaction({
         <Avatar
           sx={{
             bgcolor: getAvatarBgColor(row),
-            width: 130,
+            width: 140,
             height: 30,
             fontSize: 16,
           }}
