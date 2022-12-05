@@ -1,14 +1,12 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
 import { postExpenses } from '../../../actions/expenses'
 import { Box, Button, Grid } from '@mui/material/'
 import { useParams } from 'react-router-dom'
 import ExpensesForm from './ExpensesForm'
 import ExpenseCard from './ExpensesCard'
 
-export default function ExpensesList() {
+export default function ExpensesList({ expenses }) {
   const { budgetId } = useParams()
-  const expenses = useSelector((state) => state.expenses)
   const [adding, setAdding] = useState(false)
 
   return (

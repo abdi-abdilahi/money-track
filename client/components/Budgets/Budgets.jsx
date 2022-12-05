@@ -23,6 +23,7 @@ export default function Budgets() {
     dispatch(fetchExpenses(budgetId))
     dispatch(fetchTransactions())
     dispatch(fetchBudget())
+    dispatch(fetchTransactions())
   }, [])
 
   return (
@@ -68,7 +69,7 @@ export default function Budgets() {
           ) : null}
         </Box>
 
-        <ExpensesList />
+        <ExpensesList expenses={expenses} />
       </Box>
     </Box>
   )
