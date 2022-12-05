@@ -10,7 +10,7 @@ export default function ExpensesList({ expenses }) {
   const [adding, setAdding] = useState(false)
 
   return (
-    <Box>
+    <Box className="container">
       {expenses.loading && <p>Loading....</p>}
       {expenses.error && <p>expenses.error</p>}
 
@@ -38,7 +38,7 @@ export default function ExpensesList({ expenses }) {
         </Button>
       </Box>
 
-      <Grid container spacing={{ xs: 4, md: 3 }}>
+      <Grid container sx={{ display: 'flex', justifyContent: 'center' }}>
         {expenses.data?.map((expense, i) => {
           return (
             <Grid item key={i}>

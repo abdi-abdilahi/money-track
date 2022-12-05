@@ -28,20 +28,20 @@ export default function Budgets() {
 
   return (
     <Box
+      className="container"
       sx={{
         display: 'flex',
         justifyContent: 'center',
         alignContent: 'center',
         width: '100%',
-        maxHeight: '90%',
+        maxHeight: '98vh',
       }}
     >
       <Box
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          width: '80%',
-          marginTop: 5,
+          minHeight: '94vh',
         }}
       >
         <Typography variant="h3" sx={{ color: '#0F3D3E' }}>
@@ -52,11 +52,12 @@ export default function Budgets() {
             display: 'flex',
             justifyContent: 'space-between',
             marginTop: 5,
-            marginBottom: 15,
+            marginBottom: '15vh',
           }}
         >
           <IncomesInfo incomes={incomes} expenses={expenses} />
-          {budget.data ? (
+
+          {budget.data && (
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <Typography
                 variant="h5"
@@ -66,7 +67,7 @@ export default function Budgets() {
               </Typography>
               <BudgetTimeframe budget={budget.data[0]} />
             </Box>
-          ) : null}
+          )}
         </Box>
 
         <ExpensesList expenses={expenses} />

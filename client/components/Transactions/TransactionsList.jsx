@@ -4,7 +4,7 @@ import { fetchTransactions } from '../../actions/transactions'
 import TransactionsForm from './TransactionsForm'
 import Button from '@mui/material/Button'
 import TransactionsTable from './Table/TransactionsTable'
-import { Grid, Autocomplete, TextField } from '@mui/material'
+import { Box, Grid, Autocomplete, TextField } from '@mui/material'
 
 export default function TransactionList() {
   const transactions = useSelector((state) => state.transactions)
@@ -38,7 +38,7 @@ export default function TransactionList() {
   }
 
   return (
-    <>
+    <Box>
       {adding ? (
         <TransactionsForm
           transactionData={{}}
@@ -106,6 +106,6 @@ export default function TransactionList() {
         </Grid>
       </Grid>
       <TransactionsTable rows={filterData || rows} />
-    </>
+    </Box>
   )
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import Sidebar from './Sidebar/Sidebar'
-import { Grid } from '@mui/material'
+import { Grid, Container } from '@mui/material'
 import { Outlet } from 'react-router-dom'
 
 function Layout() {
@@ -10,7 +10,13 @@ function Layout() {
         <Sidebar />
       </Grid>
       <Grid item sx={{ width: '90vw', backgroundColor: '#F1F1F1' }}>
-        <Outlet />
+        <Container
+          disableGutters="true"
+          fixed
+          sx={{ minWidth: '90%', paddingTop: 10 }}
+        >
+          <Outlet />
+        </Container>
       </Grid>
     </Grid>
   )
