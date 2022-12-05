@@ -1,12 +1,33 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { patchExpense } from '../../../actions/expenses'
 import { Box, Card, CardContent, Typography } from '@mui/material'
 import ExpensesStatus from './ExpensesStatus'
 import SimpleMenu from '../../SimpleMenu'
 import ExpensesForm from './ExpensesForm'
+import { useSelector } from 'react-redux'
 
-export default function ExpenseCard({ expense, transactionsTotal }) {
+export default function ExpenseCard({ expense }) {
   const [update, setUpdate] = useState(false)
+  const transactions = useSelector((state) => state.transactions)
+  const [progress, setProgress] = useState(0)
+  const [totalT, setTotalT] = useState(0)
+
+  const data = transactions.data || []
+
+  useEffect(() => {
+    const total = sumOfDataAmount(data, expense.id)
+    setTotalT(total)
+    const perct = Math.round((total / expense.amount) * 100)
+    setProgress(perct <= 100 ? perct : 100)
+  }, [data])
+
+  function sumOfDataAmount(data, expenseId) {
+    return data
+      ?.filter((item) => item.expensesId == expenseId)
+      .reduce((total, item) => {
+        return total + Number(item.amount)
+      }, 0)
+  }
 
   return (
     <>
@@ -54,9 +75,7 @@ export default function ExpenseCard({ expense, transactionsTotal }) {
                 </Typography>
               </Box>
               <Box sx={{ display: 'flex', justifyContent: 'right' }}>
-                <Typography>
-                  Avaliable: ${expense.amount - transactionsTotal}
-                </Typography>
+                <Typography>Avaliable: ${expense.amount - totalT}</Typography>
               </Box>
 
               <Box
@@ -65,7 +84,7 @@ export default function ExpenseCard({ expense, transactionsTotal }) {
                   display: 'flex',
                 }}
               >
-                <ExpensesStatus />
+                <ExpensesStatus progress={progress} />
               </Box>
             </CardContent>
           </Box>
