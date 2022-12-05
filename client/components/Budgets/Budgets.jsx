@@ -3,12 +3,14 @@ import { useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchExpenses } from '../../actions/expenses'
 import { fetchIncomes } from '../../actions/incomes'
+import { fetchBudget } from '../../actions/budget'
 import { Box, Typography } from '@mui/material'
 import IncomesInfo from './Incomes/IncomesInfo'
 import ExpensesList from './Expenses/ExpensesList'
 import BudgetTimeframe from './BudgetTimeframe'
 
 export default function Budgets() {
+  const budget = useSelector((state) => state.budget)
   const expenses = useSelector((state) => state.expenses)
   const incomes = useSelector((state) => state.incomes)
   const dispatch = useDispatch()
@@ -17,6 +19,7 @@ export default function Budgets() {
   useEffect(() => {
     dispatch(fetchIncomes(budgetId))
     dispatch(fetchExpenses(budgetId))
+    dispatch(fetchBudget())
   }, [])
 
   return (
@@ -47,13 +50,19 @@ export default function Budgets() {
           }}
         >
           <IncomesInfo incomes={incomes} expenses={expenses} />
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <Typography variant="h5" sx={{ color: '#3277d5', marginRight: 4 }}>
-              Budget Timeframe:
-            </Typography>
-            <BudgetTimeframe />
-          </Box>
+          {budget.data ? (
+            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+              <Typography
+                variant="h5"
+                sx={{ color: '#3277d5', marginRight: 4 }}
+              >
+                Budget Timeframe:
+              </Typography>
+              <BudgetTimeframe budget={budget.data[0]} />
+            </Box>
+          ) : null}
         </Box>
+
         <ExpensesList />
       </Box>
     </Box>
