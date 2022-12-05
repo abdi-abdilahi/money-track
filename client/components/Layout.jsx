@@ -8,10 +8,10 @@ function Layout() {
   return (
     <Box sx={{ height: '100vh' }}>
       <Grid container>
-        <Grid item>
+        <Grid item xs={4}>
           <Sidebar />
         </Grid>
-        <Grid item>
+        <Grid item xs={12} sm={6}>
           <Outlet />
         </Grid>
       </Grid>
