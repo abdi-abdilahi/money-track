@@ -70,7 +70,7 @@ export default function ExpensesList({ expenses }) {
           </Button>
         </Box>
       )}
-      <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(6,1fr)' }}>
+      <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(5,1fr)' }}>
         {expenses.data?.map((expense, i) => {
           //console.log(expense)
           return (
