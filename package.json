@@ -45,6 +45,7 @@
     "knex": "^2.3.0",
     "pg": "^8.8.0",
     "react-router-dom": "^6.4.3",
+    "recharts": "^2.1.16",
     "sqlite3": "^5.1.2",
     "superagent": "7.1.1"
   },
