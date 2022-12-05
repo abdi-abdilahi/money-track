@@ -27,7 +27,7 @@ export default function IncomesInfo({ incomes, expenses }) {
         className="incomes-info"
         sx={{
           display: 'flex',
-          width: '14vw',
+          width: 350,
           justifyContent: 'space-between',
           alignItems: 'center',
         }}
@@ -39,10 +39,10 @@ export default function IncomesInfo({ incomes, expenses }) {
             alignItems: 'center',
           }}
         >
-          <Typography variant="h4" sx={{ color: '#3277d5' }}>{`$${
+          <Typography variant="h4" sx={{ color: '#0F3D3E' }}>{`$${
             sumOfDataAmount(incomes) - sumOfDataAmount(expenses) || '0.00'
           }`}</Typography>
-          <Typography variant="p" sx={{ color: '#3277d5' }}>
+          <Typography variant="p" sx={{ color: '#0F3D3E' }}>
             DISPOSABLE INCOME
           </Typography>
         </Box>

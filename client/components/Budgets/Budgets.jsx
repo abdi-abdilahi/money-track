@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
+import { fetchTransactions } from '../../actions/transactions'
 import { fetchExpenses } from '../../actions/expenses'
 import { fetchIncomes } from '../../actions/incomes'
 import { fetchBudget } from '../../actions/budget'
@@ -11,14 +12,16 @@ import BudgetTimeframe from './BudgetTimeframe'
 
 export default function Budgets() {
   const budget = useSelector((state) => state.budget)
-  const expenses = useSelector((state) => state.expenses)
   const incomes = useSelector((state) => state.incomes)
-  const dispatch = useDispatch()
+  const expenses = useSelector((state) => state.expenses)
+
   const { budgetId } = useParams()
+  const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(fetchIncomes(budgetId))
     dispatch(fetchExpenses(budgetId))
+    dispatch(fetchTransactions())
     dispatch(fetchBudget())
   }, [])
 
@@ -40,7 +43,9 @@ export default function Budgets() {
           marginTop: 5,
         }}
       >
-        <Typography variant="h2">Expenses</Typography>
+        <Typography variant="h3" sx={{ color: '#0F3D3E' }}>
+          Expenses
+        </Typography>
         <Box
           sx={{
             display: 'flex',
@@ -54,7 +59,7 @@ export default function Budgets() {
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <Typography
                 variant="h5"
-                sx={{ color: '#3277d5', marginRight: 4 }}
+                sx={{ color: '#0F3D3E', marginRight: 4 }}
               >
                 Budget Timeframe:
               </Typography>
