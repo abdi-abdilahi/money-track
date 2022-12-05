@@ -46,6 +46,7 @@ export default function ExpenseForm({
           fullWidth
           id="outlined-adornment-expense"
           name="name"
+          inputProps={{ maxLength: 20 }}
           value={formData.name}
           onChange={handleChange}
           label="Expense"
@@ -57,6 +58,7 @@ export default function ExpenseForm({
           id="outlined-adornment-expense"
           value={formData.amount}
           name="amount"
+          inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
           onChange={handleChange}
           startadornment={<InputAdornment position="start">$</InputAdornment>}
           label="Amount"
