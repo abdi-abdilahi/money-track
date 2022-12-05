@@ -8,9 +8,9 @@ import ExpensesForm from './ExpensesForm'
 import ExpenseCard from './ExpensesCard'
 import { useParams } from 'react-router-dom'
 
-export default function ExpensesList() {
+export default function ExpensesList({ expenses }) {
+  //console.log(expenses)
   const { budgetId } = useParams()
-  const expenses = useSelector((state) => state.expenses)
   //const transactions = useSelector((state) => state.transactions)
   // Temp transactions, to be replaced by the above when transactions feature is finished
   const transactions = [
@@ -40,13 +40,7 @@ export default function ExpensesList() {
     })
     return total
   }
-
-  const dispatch = useDispatch()
   const [adding, setAdding] = useState(false)
-
-  useEffect(() => {
-    dispatch(fetchExpenses(1))
-  }, [])
 
   return (
     <>
@@ -78,16 +72,11 @@ export default function ExpensesList() {
       )}
       <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(6,1fr)' }}>
         {expenses.data?.map((expense, i) => {
+          //console.log(expense)
           return (
             <Grid key={i} container direction="row" spacing="2">
               <Grid item>
-                <ExpenseCard
-                  expense={expense}
-                  transactionsTotal={getExpensesTransactionsTotal(
-                    expense.id,
-                    transactions
-                  )}
-                />
+                <ExpenseCard expense={expense} />
               </Grid>
             </Grid>
           )

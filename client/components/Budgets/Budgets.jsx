@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
+import { fetchTransactions } from '../../actions/transactions'
 import { fetchExpenses } from '../../actions/expenses'
 import { fetchIncomes } from '../../actions/incomes'
 import { fetchBudget } from '../../actions/budget'
@@ -20,6 +21,7 @@ export default function Budgets() {
     dispatch(fetchIncomes(budgetId))
     dispatch(fetchExpenses(budgetId))
     dispatch(fetchBudget())
+    dispatch(fetchTransactions())
   }, [])
 
   return (
@@ -63,7 +65,7 @@ export default function Budgets() {
           ) : null}
         </Box>
 
-        <ExpensesList />
+        <ExpensesList expenses={expenses} />
       </Box>
     </Box>
   )
