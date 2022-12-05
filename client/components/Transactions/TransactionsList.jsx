@@ -10,6 +10,8 @@ export default function TransactionList() {
   const transactions = useSelector((state) => state.transactions)
   const [adding, setAdding] = useState(false)
   const rows = transactions.data || []
+  const [filterData, setFilterData] = useState(null)
+  const [searchTransaction, setSearchTransaction] = useState([])
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -23,6 +25,17 @@ export default function TransactionList() {
       dateCreated: transaction.dateCreated,
     }
   })
+
+  const searchResult = rows.filter((row) => {
+    if (row.name.includes(searchTransaction.value?.label)) {
+      return row
+    }
+  })
+
+  function handleSearch(e) {
+    e.preventDefault()
+    setFilterData(searchResult)
+  }
 
   return (
     <>
@@ -41,7 +54,7 @@ export default function TransactionList() {
             name="transaction"
             options={transactionsList}
             onChange={(_, value) => {
-              console.log('m value', value)
+              setSearchTransaction({ ...searchTransaction, value })
             }}
             isOptionEqualToValue={(option, value) =>
               option.value === value.value
@@ -53,8 +66,23 @@ export default function TransactionList() {
           />
         </Grid>
         <Grid item>
-          <Button type="submit" variant="contained" fullWidth>
+          <Button
+            type="submit"
+            variant="contained"
+            fullWidth
+            onClick={handleSearch}
+          >
             Search
+          </Button>
+        </Grid>
+        <Grid item>
+          <Button
+            type="submit"
+            variant="contained"
+            fullWidth
+            onClick={() => setFilterData(rows)}
+          >
+            Reset Search
           </Button>
         </Grid>
       </Grid>
@@ -69,7 +97,7 @@ export default function TransactionList() {
         </Button>
       </div>
 
-      <TransactionsTable rows={rows} />
+      <TransactionsTable rows={filterData || rows} />
     </>
   )
 }
