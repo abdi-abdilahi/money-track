@@ -53,10 +53,10 @@ function deleteSavingsFulfilled(savingsId) {
   }
 }
 
-export function fetchSavings() {
+export function fetchSavings(budgetId) {
   return (dispatch) => {
     dispatch(savingsPending())
-    return getSavings()
+    return getSavings(budgetId)
       .then((savings) => {
         dispatch(getSavingsFulfilled(savings))
       })
@@ -66,10 +66,10 @@ export function fetchSavings() {
   }
 }
 
-export function postSavings(newSaving) {
+export function postSavings(budgetId, newSaving) {
   return (dispatch) => {
     dispatch(savingsPending())
-    return addSavings(newSaving)
+    return addSavings(budgetId, newSaving)
       .then((savings) => {
         dispatch(addSavingsFulfilled(savings))
       })

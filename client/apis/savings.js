@@ -1,18 +1,18 @@
 import request from 'superagent'
-const rootUrl = '/api/v1/saving/'
+const rootUrl = '/api/v1/savings/'
 
-export function getSavings() {
+export function getSavings(budgetId) {
   return request
-    .get(rootUrl)
+    .get(rootUrl + budgetId)
     .then((res) => res.body)
     .catch((err) => {
       return { message: err.message }
     })
 }
 
-export function addSavings(newSaving) {
+export function addSavings(budgetId, newSaving) {
   return request
-    .post(rootUrl)
+    .post(rootUrl + budgetId)
     .send(newSaving)
     .then((res) => res.body)
     .catch((err) => {

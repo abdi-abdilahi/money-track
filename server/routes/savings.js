@@ -3,10 +3,10 @@ const router = express.Router()
 
 const db = require('../db/savings')
 
-router.get('/', (req, res) => {
+router.get('/:budgetId', (req, res) => {
   //const auth0Id = req.auth?.sub
-  const auth0Id = 2
-  db.getSavingsByUserId(auth0Id)
+  //const auth0Id = 2
+  db.getSavingsByBudgetId(req.params.budgetId)
     .then((saving) => {
       res.json(saving)
     })
