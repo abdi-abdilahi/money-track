@@ -14,10 +14,12 @@ export default function ExpenseCard({ expense, transactionsTotal }) {
         <Card
           sx={{
             display: 'flex',
+
             m: 1,
             width: 165,
             height: 175,
-            borderRadius: 6,
+            borderRadius: 4,
+            justifyContent: 'center',
           }}
         >
           <Box
@@ -59,7 +61,9 @@ export default function ExpenseCard({ expense, transactionsTotal }) {
 
               <Box
                 className="bottom"
-                sx={{ display: 'flex', alignItems: 'center' }}
+                sx={{
+                  display: 'flex',
+                }}
               >
                 <ExpensesStatus />
               </Box>
