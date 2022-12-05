@@ -91,16 +91,20 @@ export default function TransactionList() {
           </Button>
         </Grid>
       </Grid>
-
-      <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-        <Button
-          variant="contained"
-          size="medium"
-          onClick={() => setAdding(true)}
-        >
-          Add Transaction
-        </Button>
-      </div>
+      <Grid
+        container
+        sx={{ display: 'flex', justifyContent: 'flex-end', mb: 2 }}
+      >
+        <Grid item>
+          <Button
+            variant="contained"
+            size="medium"
+            onClick={() => setAdding(true)}
+          >
+            Add Transaction
+          </Button>
+        </Grid>
+      </Grid>
       <TransactionsTable rows={filterData || rows} />
     </>
   )
