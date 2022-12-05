@@ -16,7 +16,8 @@ export default function ExpenseCard({ expense }) {
             display: 'flex',
             m: 2,
             p: 2,
-            width: 400,
+            width: 250,
+
             borderRadius: 10,
           }}
         >
@@ -25,7 +26,7 @@ export default function ExpenseCard({ expense }) {
             sx={{
               display: 'flex',
               flexDirection: 'column',
-              width: 400,
+              width: 250,
             }}
           >
             <CardContent sx={{ flex: '1 0 auto' }}>
@@ -51,13 +52,13 @@ export default function ExpenseCard({ expense }) {
                   ${expense.amount}
                 </Typography>
               </Box>
-              <Box>
+              <Box sx={{ display: 'flex', justifyContent: 'right' }}>
                 <Typography>Avaliable: $00</Typography>
               </Box>
 
               <Box
                 className="bottom"
-                sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}
+                sx={{ display: 'flex', alignItems: 'center'}}
               >
                 <ExpensesStatus />
               </Box>

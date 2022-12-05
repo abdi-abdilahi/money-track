@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchExpenses, postExpenses } from '../../../actions/expenses'
-import { Box, Button } from '@mui/material/'
+import { Box, Button, Grid } from '@mui/material/'
 
 import ExpensesForm from './ExpensesForm'
 import ExpenseCard from './ExpensesCard'
@@ -45,12 +45,16 @@ export default function ExpensesList() {
           </Button>
         </Box>
       )}
-      <Box>
-        <ul>
-          {expenses.data?.map((expense, i) => {
-            return <ExpenseCard key={i} expense={expense} />
-          })}
-        </ul>
+      <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)' }}>
+        {expenses.data?.map((expense, i) => {
+          return (
+            <Grid key={i} container direction="row" spacing="2">
+              <Grid item>
+                <ExpenseCard expense={expense} />
+              </Grid>
+            </Grid>
+          )
+        })}
       </Box>
     </>
   )
