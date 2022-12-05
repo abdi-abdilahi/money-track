@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { delTransaction } from '../../../actions/transactions'
 import EnhancedTableHead from './EnhancedTableHead'
 import EnhancedTableToolbar from './EnhancedTableToolbar'
 import TransactionRow from './TransactionRow'
@@ -47,6 +49,15 @@ export default function TransactionsTable({ rows }) {
   const [selected, setSelected] = useState([])
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(5)
+  const dispatch = useDispatch()
+
+  const handleDeleteAll = (e) => {
+    e.preventDefault()
+    selected.map((id) => {
+      dispatch(delTransaction(id))
+    })
+    selected.length = 0
+  }
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc'
@@ -97,61 +108,64 @@ export default function TransactionsTable({ rows }) {
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0
   return (
-    <Box sx={{ width: '100%' }}>
-      <Paper sx={{ width: '100%', mb: 2 }}>
-        <EnhancedTableToolbar numSelected={selected.length} />
-        <TableContainer>
-          <Table
-            sx={{ minWidth: 750 }}
-            aria-labelledby="tableTitle"
-            size={'medium'}
-          >
-            <EnhancedTableHead
-              numSelected={selected.length}
-              order={order}
-              orderBy={orderBy}
-              onSelectAllClick={handleSelectAllClick}
-              onRequestSort={handleRequestSort}
-              rowCount={rows?.length}
-            />
-            <TableBody>
-              {stableSort(rows, getComparator(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => {
-                  const isItemSelected = isSelected(row.id)
-                  const labelId = `enhanced-table-checkbox-${index}`
-                  return (
-                    <TransactionRow
-                      key={index}
-                      row={row}
-                      isItemSelected={isItemSelected}
-                      labelId={labelId}
-                      handleClick={handleClick}
-                    />
-                  )
-                })}
-              {emptyRows > 0 && (
-                <TableRow
-                  style={{
-                    height: 53 * emptyRows,
-                  }}
-                >
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component="div"
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-      </Paper>
+    <Box sx={{ width: '100%'}}>
+    <Paper sx={{ width: '100%', mb: 2 }}>
+      <EnhancedTableToolbar
+        numSelected={selected.length}
+        handleDeleteAll={handleDeleteAll}
+      />
+      <TableContainer >
+        <Table
+          sx={{ minWidth: 750 }}
+          aria-labelledby="tableTitle"
+          size={'medium'}
+        >
+          <EnhancedTableHead
+            numSelected={selected.length}
+            order={order}
+            orderBy={orderBy}
+            onSelectAllClick={handleSelectAllClick}
+            onRequestSort={handleRequestSort}
+            rowCount={rows?.length}
+          />
+          <TableBody>
+            {stableSort(rows, getComparator(order, orderBy))
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((row, index) => {
+                const isItemSelected = isSelected(row.id)
+                const labelId = `enhanced-table-checkbox-${index}`
+                return (
+                  <TransactionRow
+                    key={index}
+                    row={row}
+                    isItemSelected={isItemSelected}
+                    labelId={labelId}
+                    handleClick={handleClick}
+                  />
+                )
+              })}
+            {emptyRows > 0 && (
+              <TableRow
+                style={{
+                  height: 53 * emptyRows,
+                }}
+              >
+                <TableCell colSpan={6} />
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <TablePagination
+        rowsPerPageOptions={[5, 10, 25]}
+        component="div"
+        count={rows.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
+    </Paper>
     </Box>
   )
 }
