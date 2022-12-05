@@ -5,7 +5,9 @@ import ExpensesStatus from './ExpensesStatus'
 import SimpleMenu from '../../SimpleMenu'
 import ExpensesForm from './ExpensesForm'
 
-export default function ExpenseCard({ expense }) {
+export default function ExpenseCard({ expense, transactionsTotal }) {
+  //amount
+  //allocated expenses
   const [update, setUpdate] = useState(false)
 
   return (
@@ -53,12 +55,14 @@ export default function ExpenseCard({ expense }) {
                 </Typography>
               </Box>
               <Box sx={{ display: 'flex', justifyContent: 'right' }}>
-                <Typography>Avaliable: $00</Typography>
+                <Typography>
+                  Avaliable: ${expense.amount - transactionsTotal}
+                </Typography>
               </Box>
 
               <Box
                 className="bottom"
-                sx={{ display: 'flex', alignItems: 'center'}}
+                sx={{ display: 'flex', alignItems: 'center' }}
               >
                 <ExpensesStatus />
               </Box>
