@@ -15,9 +15,9 @@ function Sidebar() {
         direction="column"
         justifyContent="center"
         alignItems="center"
-        sx={{ height: '100vh', width: 250 }}
+        sx={{ height: '100vh', width: '100%' }}
       >
-        <Paper sx={{ height: '100vh', width: 250 }}>
+        <Paper sx={{ height: '100vh', width: '100%' }}>
           <Grid
             container
             direction="column"

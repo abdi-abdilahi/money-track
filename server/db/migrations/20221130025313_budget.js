@@ -2,8 +2,9 @@ exports.up = function (knex) {
   return knex.schema.createTable('Budget', (table) => {
     table.increments('id').primary()
     table.string('user_id')
+    table.string('name')
     table.date('start_date')
-    table.bigInteger('duration')
+    table.date('end_date')
   })
 }
 
