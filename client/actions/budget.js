@@ -66,7 +66,7 @@ export function fetchBudget() {
   }
 }
 
-export function postIncomes(newIncome) {
+export function postBudget(newIncome) {
   return (dispatch) => {
     dispatch(budgetPending())
     return addBudget(newIncome)
@@ -79,7 +79,7 @@ export function postIncomes(newIncome) {
   }
 }
 
-export function patchIncomes(oldBudgetId, newBudget) {
+export function patchBudget(oldBudgetId, newBudget) {
   return (dispatch) => {
     dispatch(budgetPending())
     return updateBudget(oldBudgetId, newBudget)
@@ -92,7 +92,7 @@ export function patchIncomes(oldBudgetId, newBudget) {
   }
 }
 
-export function delIncomes(budgetId) {
+export function delBudget(budgetId) {
   return (dispatch) => {
     dispatch(budgetPending())
     return deleteBudget(budgetId)
