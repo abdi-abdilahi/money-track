@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { fetchExpenses, postExpenses } from '../../../actions/expenses'
 import { Box, Button, Grid } from '@mui/material/'
 
+//import TransactionsList from '../../Transactions/TransactionsList'
 import ExpensesForm from './ExpensesForm'
 import ExpenseCard from './ExpensesCard'
 import { useParams } from 'react-router-dom'
@@ -10,7 +11,7 @@ import { useParams } from 'react-router-dom'
 export default function ExpensesList() {
   const { budgetId } = useParams()
   const expenses = useSelector((state) => state.expenses)
-  // const transactions = useSelector((state) => state.transactions)
+  //const transactions = useSelector((state) => state.transactions)
   // Temp transactions, to be replaced by the above when transactions feature is finished
   const transactions = [
     {
@@ -75,7 +76,7 @@ export default function ExpensesList() {
           </Button>
         </Box>
       )}
-      <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)' }}>
+      <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(6,1fr)' }}>
         {expenses.data?.map((expense, i) => {
           return (
             <Grid key={i} container direction="row" spacing="2">

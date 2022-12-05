@@ -6,8 +6,6 @@ import SimpleMenu from '../../SimpleMenu'
 import ExpensesForm from './ExpensesForm'
 
 export default function ExpenseCard({ expense, transactionsTotal }) {
-  //amount
-  //allocated expenses
   const [update, setUpdate] = useState(false)
 
   return (
@@ -16,11 +14,10 @@ export default function ExpenseCard({ expense, transactionsTotal }) {
         <Card
           sx={{
             display: 'flex',
-            m: 2,
-            p: 2,
-            width: 250,
-
-            borderRadius: 10,
+            m: 1,
+            width: 165,
+            height: 175,
+            borderRadius: 6,
           }}
         >
           <Box
@@ -28,7 +25,7 @@ export default function ExpenseCard({ expense, transactionsTotal }) {
             sx={{
               display: 'flex',
               flexDirection: 'column',
-              width: 250,
+              width: 175,
             }}
           >
             <CardContent sx={{ flex: '1 0 auto' }}>
@@ -40,7 +37,7 @@ export default function ExpenseCard({ expense, transactionsTotal }) {
                   justifyContent: 'space-between',
                 }}
               >
-                <Typography component="div" variant="h5" color="text.primary">
+                <Typography component="div" variant="h6" color="text.primary">
                   {expense.name}
                 </Typography>
                 <SimpleMenu dataId={expense.id} setUpdate={setUpdate} />

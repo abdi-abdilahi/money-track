@@ -22,7 +22,7 @@ export default function ExpensesStatus() {
   // }, [])
   //TODO: STYLE: make the color of the progress bar the same as the name of the expense
   return (
-    <Box sx={{ width: 175, pt:4}}>
+    <Box sx={{ width: 175, justifyContent: 'centre' }}>
       <LinearProgress
         variant="determinate"
         value={progress}
