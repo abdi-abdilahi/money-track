@@ -1,21 +1,46 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchExpenses, postExpenses } from '../../../actions/expenses'
-import { Box, Button } from '@mui/material/'
+import { Box, Button, Grid } from '@mui/material/'
 
+//import TransactionsList from '../../Transactions/TransactionsList'
 import ExpensesForm from './ExpensesForm'
 import ExpenseCard from './ExpensesCard'
 import { useParams } from 'react-router-dom'
 
-export default function ExpensesList() {
+export default function ExpensesList({ expenses }) {
+  //console.log(expenses)
   const { budgetId } = useParams()
-  const expenses = useSelector((state) => state.expenses)
-  const dispatch = useDispatch()
-  const [adding, setAdding] = useState(false)
+  //const transactions = useSelector((state) => state.transactions)
+  // Temp transactions, to be replaced by the above when transactions feature is finished
+  const transactions = [
+    {
+      transactionId: 1,
+      expenseId: 2,
+      transactionAmount: 25,
+    },
+    {
+      transactionId: 2,
+      expenseId: 2,
+      transactionAmount: 15,
+    },
+    {
+      transactionId: 3,
+      expenseId: 2,
+      transactionAmount: 10,
+    },
+  ]
 
-  useEffect(() => {
-    dispatch(fetchExpenses(1))
-  }, [])
+  function getExpensesTransactionsTotal(expenseId, transactionsList) {
+    let total = 0
+    transactionsList.forEach((transaction) => {
+      if (transaction.expenseId == expenseId) {
+        total += transaction.transactionAmount
+      }
+    })
+    return total
+  }
+  const [adding, setAdding] = useState(false)
 
   return (
     <>
@@ -45,12 +70,17 @@ export default function ExpensesList() {
           </Button>
         </Box>
       )}
-      <Box>
-        <ul>
-          {expenses.data?.map((expense, i) => {
-            return <ExpenseCard key={i} expense={expense} />
-          })}
-        </ul>
+      <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(5,1fr)' }}>
+        {expenses.data?.map((expense, i) => {
+          //console.log(expense)
+          return (
+            <Grid key={i} container direction="row" spacing="2">
+              <Grid item>
+                <ExpenseCard expense={expense} />
+              </Grid>
+            </Grid>
+          )
+        })}
       </Box>
     </>
   )
