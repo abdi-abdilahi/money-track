@@ -57,7 +57,7 @@ function Sidebar() {
             />
           </List>
 
-          <UserInfo name={'John Doe'} />
+          <UserInfo />
         </Grid>
       </Paper>
     </Grid>
