@@ -7,6 +7,7 @@ import ExpensesForm from './ExpensesForm'
 import { currencyFormat } from '../../../utils/currencyFormat'
 
 export default function ExpensesCard({ expense }) {
+  const budget = useSelector((state) => state.budget)
   const transactions = useSelector((state) => state.transactions)
   const [transactionsTotal, setTransactionsTotal] = useState(0)
   const [progress, setProgress] = useState(0)
@@ -15,7 +16,7 @@ export default function ExpensesCard({ expense }) {
   const data = transactions.data || []
 
   useEffect(() => {
-    const total = sumOfDataAmount(data, expense.id)
+    const total = sumOfDataAmount(data, expense.id, budget?.data || [])
     const percentage = Math.round((total / expense.amount) * 100)
     setTransactionsTotal(total)
     setProgress(percentage <= 100 ? percentage : 100)
@@ -95,10 +96,18 @@ export default function ExpensesCard({ expense }) {
   )
 }
 
-function sumOfDataAmount(data, expenseId) {
-  return data
-    ?.filter((item) => item.expensesId == expenseId)
-    .reduce((total, item) => {
-      return total + Number(item.amount)
-    }, 0)
+function sumOfDataAmount(data, expenseId, [budget]) {
+  if (budget) {
+    return data
+      ?.filter((item) => {
+        return (
+          budget.startDate < item.dateCreated &&
+          item.dateCreated < budget.endDate &&
+          item.expensesId == expenseId
+        )
+      })
+      .reduce((total, item) => {
+        return total + Number(item.amount)
+      }, 0)
+  }
 }
