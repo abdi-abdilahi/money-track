@@ -23,6 +23,7 @@ function descendingComparator(a, b, orderBy) {
   if (b[orderBy] > a[orderBy]) {
     return 1
   }
+
   return 0
 }
 
@@ -46,7 +47,7 @@ function stableSort(array, comparator) {
 
 export default function TransactionsTable({ rows }) {
   const [order, setOrder] = useState('asc')
-  const [orderBy, setOrderBy] = useState('calories')
+  const [orderBy, setOrderBy] = useState('name')
   const [selected, setSelected] = useState([])
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(5)
