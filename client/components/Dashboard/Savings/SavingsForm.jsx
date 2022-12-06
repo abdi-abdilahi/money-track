@@ -10,7 +10,6 @@ import {
   TextField,
 } from '@mui/material'
 import { patchSavings, postSavings } from '../../../actions/savings'
-import { postExpenses } from '../../../actions/expenses'
 
 export default function SavingsForm({ title, savingsData, setStatus }) {
   const [open, setOpen] = useState(true)
@@ -34,13 +33,6 @@ export default function SavingsForm({ title, savingsData, setStatus }) {
       dispatch(patchSavings(formData.id, newSavings))
     } else {
       dispatch(postSavings(formData.budgetId, newSavings))
-      dispatch(
-        postExpenses(1, {
-          name: formData.name,
-          amount: formData.amount,
-          budget_id: formData.budgetId,
-        })
-      )
     }
     setStatus(false)
   }
