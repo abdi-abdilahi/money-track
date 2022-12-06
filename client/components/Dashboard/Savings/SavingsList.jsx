@@ -41,7 +41,7 @@ export default function SavingsList() {
           <h3>Goals</h3>
           <IconButton
             color="primary"
-            fontsize="large"
+            fontSize="large"
             onClick={() => {
               setAdding(true)
             }}
