@@ -35,7 +35,6 @@ export default function Transaction({
   return (
     <TableRow
       hover
-      onClick={(event) => handleClick(event, row.id)}
       role="checkbox"
       aria-checked={isItemSelected}
       tabIndex={-1}
@@ -49,6 +48,7 @@ export default function Transaction({
           inputProps={{
             'aria-labelledby': labelId,
           }}
+          onClick={(event) => handleClick(event, row.id)}
         />
       </TableCell>
       <TableCell component="th" id={labelId} scope="row" padding="none">
