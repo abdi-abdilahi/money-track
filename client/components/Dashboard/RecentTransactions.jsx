@@ -26,20 +26,39 @@ export default function RecentTransactions() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={1} style={{ fontWeight: 'bold' }} sx={{ mb: 2 }}>
-        <Grid item xs={3}>
-          Name
+        <Grid
+          container
+          item
+          xs={12}
+          style={{
+            fontSize: '22px',
+            display: 'flex',
+            justifyContent: 'center',
+            color: '#0F3D3E',
+          }}
+          sx={{ mb: 2 }}
+        >
+          Latest Transactions
         </Grid>
-        <Grid item xs={3}>
-          Type
-        </Grid>
-        <Grid item xs={3}>
-          Amount
-        </Grid>
-        <Grid item xs={3}>
-          Date
+        <Grid
+          container
+          style={{ display: 'flex', justifyContent: 'flex-start' }}
+        >
+          <Grid item xs={3}>
+            Name
+          </Grid>
+          <Grid item xs={3}>
+            Type
+          </Grid>
+          <Grid item xs={3}>
+            Amount
+          </Grid>
+          <Grid item xs={3}>
+            Date
+          </Grid>
         </Grid>
       </Grid>
-      <Grid container spacing={1}>
+      <Grid container spacing={1} sx={{ color: '#0F3D3E' }}>
         {latest?.map((recentTransaction, i) => (
           <Grid container key={i}>
             <Grid item xs={3}>

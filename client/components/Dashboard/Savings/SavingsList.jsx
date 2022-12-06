@@ -50,7 +50,7 @@ export default function SavingsList() {
           </IconButton>
         </Box>
       )}
-      <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(2,8fr)' }}>
+      <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(2,12fr)' }}>
         {savings.data?.map((saving, i) => {
           return (
             <Grid key={i} container direction="row" spacing="1">

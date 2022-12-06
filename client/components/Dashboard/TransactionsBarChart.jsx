@@ -50,11 +50,17 @@ export default function App() {
       }}
       barSize={20}
     >
+      <defs>
+        <linearGradient id="myGradient" gradientTransform="rotate(90)">
+          <stop offset="20%" stopColor="rgba(5,74,87,100)" />
+          <stop offset="80%" stopColor="rgba(5,38,38,100)" />
+        </linearGradient>
+      </defs>
       <XAxis dataKey="month" scale="point" padding={{ left: 10, right: 10 }} />
       <YAxis />
       <Tooltip />
       <Legend />
-      <Bar dataKey="total" fill="#0F3D3E" />
+      <Bar dataKey="total" fill="url(#myGradient)" />
     </BarChart>
   )
 }

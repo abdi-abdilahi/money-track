@@ -12,7 +12,7 @@ function SavingsCard({ saving }) {
       sx={{
         width: 325,
         height: 175,
-        margin: 4,
+        margin: 2,
         padding: 2,
         borderRadius: 5,
       }}
@@ -35,7 +35,9 @@ function SavingsCard({ saving }) {
           sx={{ display: 'flex', justifyContent: 'space-between', height: 60 }}
         >
           <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
-            <Typography variant="h6">${saving.amount}</Typography>
+            <Typography variant="h6" sx={{ color: 'red' }}>
+              ${saving.amount}
+            </Typography>
           </Box>
         </Box>
         <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
