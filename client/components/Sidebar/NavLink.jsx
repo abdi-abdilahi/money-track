@@ -9,11 +9,29 @@ import { Link } from 'react-router-dom'
 
 function NavLink({ icon, text, path }) {
   return (
-    <ListItem>
-      <Link to={`${path}`} style={{ textDecoration: 'none', color: '#707070' }}>
+    <ListItem
+      sx={{
+        '&& .Mui-selected, && .Mui-selected:hover': {
+          bgcolor: 'red',
+          '&, & .MuiListItemIcon-root': {
+            color: 'pink',
+          },
+        },
+        '& .MuiListItemButton-root:hover': {
+          bgcolor: '#0F3D3E',
+          '&, & .MuiListItemIcon-root': {
+            color: '#0F3D3E',
+          },
+        },
+      }}
+    >
+      <Link to={`${path}`} style={{ textDecoration: 'none', color: '#E2DCC8' }}>
         <ListItemButton sx={{ width: 200 }}>
           <ListItemIcon>{icon}</ListItemIcon>
-          <ListItemText primary={text} />
+          <ListItemText
+            sx={{ color: '#F1F1F1', fontSize: 'large' }}
+            primary={text}
+          />
         </ListItemButton>
       </Link>
     </ListItem>

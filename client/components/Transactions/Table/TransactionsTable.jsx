@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { delTransaction } from '../../../actions/transactions'
 import EnhancedTableHead from './EnhancedTableHead'
 import EnhancedTableToolbar from './EnhancedTableToolbar'
 import TransactionRow from './TransactionRow'
@@ -47,6 +49,15 @@ export default function TransactionsTable({ rows }) {
   const [selected, setSelected] = useState([])
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(5)
+  const dispatch = useDispatch()
+
+  const handleDeleteAll = (e) => {
+    e.preventDefault()
+    selected.map((id) => {
+      dispatch(delTransaction(id))
+    })
+    selected.length = 0
+  }
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc'
@@ -99,7 +110,10 @@ export default function TransactionsTable({ rows }) {
   return (
     <Box sx={{ width: '100%' }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
-        <EnhancedTableToolbar numSelected={selected.length} />
+        <EnhancedTableToolbar
+          numSelected={selected.length}
+          handleDeleteAll={handleDeleteAll}
+        />
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}
