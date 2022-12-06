@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { postTransaction, patchTransaction } from '../../actions/transactions'
 import {
@@ -11,24 +11,32 @@ import {
   TextField,
   Autocomplete,
 } from '@mui/material'
-import { fetchExpenses } from '../../actions/expenses'
 
 export default function TransactionsForm({
   transactionData,
   title,
   setStatus,
 }) {
+  const categoryNames = useSelector((state) => state.expenses)
   const [open, setOpen] = useState(true)
   const dispatch = useDispatch()
+  const category = categoryNames.data?.map((category) => {
+    return {
+      label: category.name,
+      expensesId: category.id,
+    }
+  })
 
   const defaultFormState = {
     expensesId: {
       value: transactionData.expensesId,
       error: false,
-      errorMessage: 'Incorrect entry',
+      errorMessage: '',
     },
     dateCreated: {
-      value: transactionData.dateCreated,
+      value:
+        transactionData.dateCreated ||
+        new Date(Date.now()).toISOString().split('T')[0],
       error: false,
       errorMessage: 'Incorrect entry',
     },
@@ -40,15 +48,10 @@ export default function TransactionsForm({
     },
   }
   const [formState, setFormState] = useState(defaultFormState)
-
-  console.log(defaultFormState)
-
-  const [data, setData] = useState(transactionData)
-  const categoryNames = useSelector((state) => state.expenses)
-
-  useEffect(() => {
-    dispatch(fetchExpenses(1))
-  }, [])
+  const [searchTransaction, setSearchTransaction] = useState({
+    label: transactionData.expensesName || '',
+    expensesId: transactionData.expensesId || 0,
+  })
 
   const handleClose = () => {
     setOpen(false)
@@ -57,34 +60,42 @@ export default function TransactionsForm({
 
   const handleChange = (e) => {
     const { name, value } = e.target
-    e.preventDefault()
-    setData({ ...data, [name]: value })
+    if (name == 'amount') {
+      setFormState({
+        ...formState,
+        amount: { ...formState.amount, value, error: isNaN(value) },
+      })
+    } else {
+      setFormState({ ...formState, [name]: { ...formState.name, value } })
+    }
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    const newTransaction = {
-      name: data.name,
-      amount: data.amount,
-      date_created: data.dateCreated,
-      expenses_id: data.expensesId,
-    }
-    if (title === 'Edit Transaction') {
-      dispatch(patchTransaction(data.id, newTransaction))
-    } else {
-      dispatch(postTransaction(newTransaction))
+    const newData = {
+      name: formState.name.value,
+      amount: formState.amount.value,
+      date_created: formState.dateCreated.value,
+      expenses_id: formState.expensesId.value,
     }
 
-    setStatus(false)
-    handleClose()
+    if (
+      formState.expensesId.value &&
+      formState.name.value &&
+      formState.dateCreated.value &&
+      formState.amount.value &&
+      !formState.amount.error
+    ) {
+      if (title === 'Edit Transaction') {
+        dispatch(patchTransaction(transactionData.id, newData))
+      } else {
+        dispatch(postTransaction(newData))
+      }
+
+      setStatus(false)
+      handleClose()
+    }
   }
-
-  const category = categoryNames.data?.map((category) => {
-    return {
-      label: category.name,
-      expensesId: category.id,
-    }
-  })
 
   return (
     <div>
@@ -97,8 +108,28 @@ export default function TransactionsForm({
                 id="expense-list"
                 name="expensesId"
                 options={category}
+                defaultValue={{
+                  label: transactionData.expensesName || '',
+                  expensesId: transactionData.expensesId || 0,
+                }}
+                onInputChange={(_, value) => {
+                  setSearchTransaction({
+                    ...searchTransaction,
+                    label: value || '',
+                  })
+                }}
                 onChange={(_, value) => {
-                  setData({ ...data, expensesId: value.expensesId })
+                  setSearchTransaction({
+                    ...searchTransaction,
+                    label: value?.label || '',
+                  })
+                  setFormState({
+                    ...formState,
+                    expensesId: {
+                      ...formState.expensesId,
+                      value: value?.expensesId || 0,
+                    },
+                  })
                 }}
                 isOptionEqualToValue={(option, value) =>
                   option.value === value.value
@@ -109,14 +140,17 @@ export default function TransactionsForm({
                 fullWidth
               />
             </Grid>
+
             <Grid xs={12} sm={6} item>
               <TextField
                 label="Give your expense a name"
                 id="outlined-required"
                 name="name"
-                value={data.name || ''}
+                value={formState.name.value || ''}
+                error={formState.name.error}
                 onChange={handleChange}
                 fullWidth
+                inputProps={{ maxLength: 20 }}
                 required
               />
             </Grid>
@@ -126,7 +160,11 @@ export default function TransactionsForm({
                 name="amount"
                 label="Enter an amount"
                 id="outlined-required"
-                value={data.amount || ''}
+                value={formState.amount.value || ''}
+                error={formState.amount.error}
+                helperText={
+                  formState.amount.error && formState.amount.errorMessage
+                }
                 onChange={handleChange}
                 fullWidth
                 required
@@ -137,7 +175,7 @@ export default function TransactionsForm({
                 type="date"
                 name="dateCreated"
                 id="outlined-required"
-                value={data.dateCreated || ''}
+                value={formState.dateCreated.value}
                 onChange={handleChange}
                 fullWidth
               />
