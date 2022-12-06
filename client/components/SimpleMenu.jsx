@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { delExpense } from '../actions/expenses'
 import IconButton from '@mui/material/IconButton'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
@@ -15,7 +14,7 @@ import {
 
 const ITEM_HEIGHT = 48
 
-export default function SimpleMenu({ dataId, setUpdate }) {
+export default function SimpleMenu({ dataId, setUpdate, thunk }) {
   const [anchorEl, setAnchorEl] = useState(null)
 
   const open = Boolean(anchorEl)
@@ -26,7 +25,7 @@ export default function SimpleMenu({ dataId, setUpdate }) {
   }
   const handleDelete = () => {
     setAnchorEl(null)
-    dispatch(delExpense(dataId))
+    dispatch(thunk(dataId))
   }
   const handleEdit = () => {
     setAnchorEl(null)

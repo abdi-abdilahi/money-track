@@ -4,13 +4,13 @@ import TransactionsForm from '../TransactionsForm'
 import { TableCell, Avatar, TableRow, Checkbox } from '@mui/material'
 import {
   indigo,
-  orange,
   teal,
   green,
   cyan,
   blue,
   lightBlue,
 } from '@mui/material/colors'
+import { delTransaction } from '../../../actions/transactions'
 
 const getAvatarBgColor = ({ expensesName }) =>
   ({
@@ -20,7 +20,7 @@ const getAvatarBgColor = ({ expensesName }) =>
     'Health Insurance': teal[400],
     'Car Insurance': green[600],
     'Car Maintenance': cyan[600],
-    Shopping: orange[400],
+    Shopping: teal[600],
     'Food/Dining Out': indigo[400],
   }[expensesName] || blue[500])
 
@@ -35,7 +35,6 @@ export default function Transaction({
   return (
     <TableRow
       hover
-      onClick={(event) => handleClick(event, row.id)}
       role="checkbox"
       aria-checked={isItemSelected}
       tabIndex={-1}
@@ -49,13 +48,14 @@ export default function Transaction({
           inputProps={{
             'aria-labelledby': labelId,
           }}
+          onClick={(event) => handleClick(event, row.id)}
         />
       </TableCell>
       <TableCell component="th" id={labelId} scope="row" padding="none">
         <Avatar
           sx={{
             bgcolor: getAvatarBgColor(row),
-            width: 130,
+            width: 140,
             height: 30,
             fontSize: 16,
           }}
@@ -70,7 +70,11 @@ export default function Transaction({
         {new Date(row.dateCreated).toDateString()}
       </TableCell>
       <TableCell align="right">
-        <SimpleMenu dataId={row.id} setUpdate={setUpdate} />
+        <SimpleMenu
+          dataId={row.id}
+          setUpdate={setUpdate}
+          thunk={delTransaction}
+        />
         {update ? (
           <TransactionsForm
             transactionData={row}
