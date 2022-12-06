@@ -40,8 +40,8 @@ export default function RecentTransactions() {
         </Grid>
       </Grid>
       <Grid container spacing={1}>
-        {latest?.map((recentTransaction) => (
-          <>
+        {latest?.map((recentTransaction, i) => (
+          <Grid container key={i}>
             <Grid item xs={3}>
               {recentTransaction.name}
             </Grid>
@@ -54,7 +54,7 @@ export default function RecentTransactions() {
             <Grid item xs={3}>
               {recentTransaction.dateCreated}
             </Grid>
-          </>
+          </Grid>
         ))}
       </Grid>
     </Box>
