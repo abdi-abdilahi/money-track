@@ -6,6 +6,7 @@ import SimpleMenu from '../../SimpleMenu'
 import ExpensesForm from './ExpensesForm'
 
 export default function ExpenseCard({ expense, transactionsTotal }) {
+  console.log('expense parameter passed in Expense card is ', expense)
   const [update, setUpdate] = useState(false)
 
   return (

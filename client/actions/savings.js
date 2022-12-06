@@ -79,7 +79,7 @@ export function postSavings(budgetId, newSaving) {
   }
 }
 
-export function patchsavings(oldSavingsId, newSavings) {
+export function patchSavings(oldSavingsId, newSavings) {
   return (dispatch) => {
     dispatch(savingsPending())
     return updateSavings(oldSavingsId, newSavings)
