@@ -9,6 +9,7 @@ import { Box, Typography } from '@mui/material'
 import IncomesInfo from './Incomes/IncomesInfo'
 import ExpensesList from './Expenses/ExpensesList'
 import BudgetTimeframe from './BudgetTimeframe'
+import { createTheme, ThemeProvider } from '@mui/material/styles'
 
 export default function Budgets() {
   const budget = useSelector((state) => state.budget)
@@ -26,52 +27,63 @@ export default function Budgets() {
     dispatch(fetchTransactions())
   }, [])
 
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#0F3D3E',
+        contrastText: '#fff',
+      },
+    },
+  })
+
   return (
-    <Box
-      className="container"
-      sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignContent: 'center',
-        width: '100%',
-        maxHeight: '98vh',
-      }}
-    >
+    <ThemeProvider theme={theme}>
       <Box
+        className="container"
         sx={{
           display: 'flex',
-          flexDirection: 'column',
-          minHeight: '94vh',
+          justifyContent: 'center',
+          alignContent: 'center',
+          width: '100%',
+          maxHeight: '98vh',
         }}
       >
-        <Typography variant="h3" sx={{ color: '#0F3D3E' }}>
-          Expenses
-        </Typography>
         <Box
           sx={{
             display: 'flex',
-            justifyContent: 'space-between',
-            marginTop: 5,
-            marginBottom: '15vh',
+            flexDirection: 'column',
+            minHeight: '94vh',
           }}
         >
-          <IncomesInfo incomes={incomes} expenses={expenses} />
+          <Typography variant="h4" sx={{ color: '#0F3D3E' }}>
+            Expenses
+          </Typography>
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              marginTop: 5,
+              marginBottom: '15vh',
+            }}
+          >
+            <IncomesInfo incomes={incomes} expenses={expenses} />
 
-          {budget.data && (
-            <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              <Typography
-                variant="h5"
-                sx={{ color: '#0F3D3E', marginRight: 4 }}
-              >
-                Budget Timeframe:
-              </Typography>
-              <BudgetTimeframe budget={budget.data[0]} />
-            </Box>
-          )}
+            {budget.data && (
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <Typography
+                  variant="p"
+                  sx={{ color: '#0F3D3E', marginRight: 2, fontSize: 18 }}
+                >
+                  Budget Timeframe:
+                </Typography>
+                <BudgetTimeframe budget={budget.data[0]} />
+              </Box>
+            )}
+          </Box>
+
+          <ExpensesList expenses={expenses} />
         </Box>
-
-        <ExpensesList expenses={expenses} />
       </Box>
-    </Box>
+    </ThemeProvider>
   )
 }
