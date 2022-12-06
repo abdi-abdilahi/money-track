@@ -19,9 +19,32 @@ export default function TransactionsForm({
   setStatus,
 }) {
   const [open, setOpen] = useState(true)
+  const dispatch = useDispatch()
+
+  const defaultFormState = {
+    expensesId: {
+      value: transactionData.expensesId,
+      error: false,
+      errorMessage: 'Incorrect entry',
+    },
+    dateCreated: {
+      value: transactionData.dateCreated,
+      error: false,
+      errorMessage: 'Incorrect entry',
+    },
+    name: { value: transactionData.name, error: false, errorMessage: '' },
+    amount: {
+      value: transactionData.amount,
+      error: false,
+      errorMessage: 'Incorrect entry',
+    },
+  }
+  const [formState, setFormState] = useState(defaultFormState)
+
+  console.log(defaultFormState)
+
   const [data, setData] = useState(transactionData)
   const categoryNames = useSelector((state) => state.expenses)
-  const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(fetchExpenses(1))
