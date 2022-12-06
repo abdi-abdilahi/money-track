@@ -71,6 +71,7 @@ export function postSavings(budgetId, newSaving) {
     dispatch(savingsPending())
     return addSavings(budgetId, newSaving)
       .then((savings) => {
+        console.log(savings)
         dispatch(addSavingsFulfilled(savings))
       })
       .catch((err) => {
@@ -80,6 +81,8 @@ export function postSavings(budgetId, newSaving) {
 }
 
 export function patchSavings(oldSavingsId, newSavings) {
+  console.log('Old Saving id', oldSavingsId)
+  console.log('new Saving ', newSavings)
   return (dispatch) => {
     dispatch(savingsPending())
     return updateSavings(oldSavingsId, newSavings)

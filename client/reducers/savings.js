@@ -30,6 +30,7 @@ const savings = (state = initialState, action) => {
         ...state,
         loading: false,
         data: state.data.map((saving) => {
+          console.log('saving is ', saving)
           return saving.id === payload.oldSavingtId ? payload.newSaving : saving
         }),
       }

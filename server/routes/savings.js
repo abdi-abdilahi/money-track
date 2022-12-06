@@ -16,7 +16,7 @@ router.get('/:budgetId', (req, res) => {
     })
 })
 
-router.post('/', (req, res) => {
+router.post('/:budgetId', (req, res) => {
   db.addSaving(req.body)
     .then(([saving]) => {
       res.json(saving)

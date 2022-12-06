@@ -9,14 +9,9 @@ import {
   InputAdornment,
   TextField,
 } from '@mui/material'
+import { patchSavings, postSavings } from '../../../actions/savings'
 
-export default function SavingsForm({
-  title,
-  thunk,
-  savingsData,
-  setStatus,
-  firstParam,
-}) {
+export default function SavingsForm({ title, savingsData, setStatus }) {
   const [open, setOpen] = useState(true)
   const [formData, setFormData] = useState(savingsData)
   const dispatch = useDispatch()
@@ -28,7 +23,17 @@ export default function SavingsForm({
 
   function handleSubmit(e) {
     e.preventDefault()
-    dispatch(thunk(firstParam, formData))
+    const newSavings = {
+      name: formData.name,
+      amount: formData.amount,
+      goal_date: formData.goalDate,
+      budget_id: formData.budgetId,
+    }
+    if (title === 'Edit Saving') {
+      dispatch(patchSavings(formData.id, newSavings))
+    } else {
+      dispatch(postSavings(newSavings))
+    }
     setStatus(false)
   }
 
@@ -49,7 +54,7 @@ export default function SavingsForm({
           inputProps={{ maxLength: 20 }}
           value={formData.name}
           onChange={handleChange}
-          label="Expense"
+          label="Savings"
         />
 
         <TextField
@@ -62,6 +67,15 @@ export default function SavingsForm({
           onChange={handleChange}
           startadornment={<InputAdornment position="start">$</InputAdornment>}
           label="Amount"
+        />
+        <TextField
+          style={{ marginTop: 20 }}
+          type="date"
+          name="goalDate"
+          id="outlined-required"
+          value={formData.goalDate || ''}
+          onChange={handleChange}
+          fullWidth
         />
       </DialogContent>
       <DialogActions>

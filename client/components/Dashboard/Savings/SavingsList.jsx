@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchSavings, postSavings } from '../../../actions/savings'
+import { fetchSavings } from '../../../actions/savings'
 import { Box, Button, Grid } from '@mui/material/'
 
 //import TransactionsList from '../../Transactions/TransactionsList'
@@ -55,16 +55,14 @@ export default function SavingsList() {
 
       {adding ? (
         <SavingsForm
-          title={'Add New Saving '}
-          thunk={postSavings}
+          title={'Add New Saving'}
           savingsData={{
             name: '',
             amount: '',
-            goal_date: '',
-            budget_id: budgetId,
+            goalDate: '',
+            budgetId: budgetId,
           }}
           setStatus={setAdding}
-          firstParam={budgetId}
         />
       ) : (
         <Box
