@@ -6,6 +6,7 @@ import Button from '@mui/material/Button'
 import TransactionsTable from './Table/TransactionsTable'
 import { Box, Grid, Autocomplete, TextField, Typography } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
+import { fetchExpenses } from '../../actions/expenses'
 
 const theme = createTheme({
   palette: {
@@ -28,6 +29,7 @@ export default function TransactionList() {
 
   useEffect(() => {
     dispatch(fetchTransactions())
+    dispatch(fetchExpenses(1))
   }, [])
 
   useEffect(() => {
