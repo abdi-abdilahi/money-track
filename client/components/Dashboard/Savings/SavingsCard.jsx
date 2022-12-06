@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Box, Paper, Typography, LinearProgress } from '@mui/material'
 import SimpleMenu from '../../SimpleMenu'
 import SavingsForm from './SavingsForm'
+import { delSavings } from '../../../actions/savings'
 
 function SavingsCard({ saving }) {
   const [update, setUpdate] = useState(false)
@@ -23,7 +24,11 @@ function SavingsCard({ saving }) {
           sx={{ display: 'flex', justifyContent: 'space-between' }}
         >
           <Typography variant="h4">{saving.name}</Typography>
-          <SimpleMenu dataId={saving.id} setUpdate={setUpdate} />
+          <SimpleMenu
+            thunk={delSavings}
+            dataId={saving.id}
+            setUpdate={setUpdate}
+          />
         </Box>
         <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
           <Typography variant="h6">
@@ -35,10 +40,12 @@ function SavingsCard({ saving }) {
           sx={{ display: 'flex', justifyContent: 'space-between', height: 60 }}
         >
           <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
-            <Typography variant="h6">{saving.amount}</Typography>
+            <Typography variant="h6">${saving.amount}</Typography>
           </Box>
           <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-            <Typography variant="h6">Current:$00</Typography>
+            <Typography variant="h6">{`Current: $${
+              saving.amount - 100
+            }`}</Typography>
           </Box>
         </Box>
         <Box>

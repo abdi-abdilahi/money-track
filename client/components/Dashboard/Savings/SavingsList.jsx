@@ -6,35 +6,33 @@ import { Box, Button, Grid } from '@mui/material/'
 //import TransactionsList from '../../Transactions/TransactionsList'
 import SavingsForm from './SavingsForm'
 import SavingsCard from './SavingsCard'
-import { useParams } from 'react-router-dom'
 
 export default function SavingsList() {
-  const { budgetId } = useParams()
   const savings = useSelector((state) => state.savings)
   //const transactions = useSelector((state) => state.transactions)
   // Temp transactions, to be replaced by the above when transactions feature is finished
   // const transactions = [
   //   {
   //     transactionId: 1,
-  //     expenseId: 2,
+  //     savingId: 2,
   //     transactionAmount: 25,
   //   },
   //   {
   //     transactionId: 2,
-  //     expenseId: 2,
+  //     savingId: 2,
   //     transactionAmount: 15,
   //   },
   //   {
   //     transactionId: 3,
-  //     expenseId: 2,
+  //     savingId: 2,
   //     transactionAmount: 10,
   //   },
   // ]
 
-  // function getExpensesTransactionsTotal(expenseId, transactionsList) {
+  // function getSavingsTransactionsTotal(savingsId, transactionsList) {
   //   let total = 0
   //   transactionsList.forEach((transaction) => {
-  //     if (transaction.expenseId == expenseId) {
+  //     if (transaction.savingsId == savingsId) {
   //       total += transaction.transactionAmount
   //     }
   //   })
@@ -86,8 +84,8 @@ export default function SavingsList() {
               <Grid item>
                 <SavingsCard
                   saving={saving}
-                  // transactionsTotal={getExpensesTransactionsTotal(
-                  //   expense.id,
+                  // transactionsTotal={getSavingsTransactionsTotal(
+                  //   savings.id,
                   //   transactions
                   // )}
                 />
