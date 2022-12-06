@@ -38,6 +38,7 @@ export default function SavingsForm({ title, savingsData, setStatus }) {
         postExpenses(1, {
           name: formData.name,
           amount: formData.amount,
+          budget_id: formData.budgetId,
         })
       )
     }

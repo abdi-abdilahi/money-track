@@ -11,7 +11,7 @@ function SavingsCard({ saving }) {
   return (
     <Paper
       sx={{
-        width: 425,
+        width: 325,
         height: 175,
         margin: 4,
         padding: 2,
@@ -36,7 +36,7 @@ function SavingsCard({ saving }) {
           </Typography>
         </Box>
         <Box
-          className="card-boddy"
+          className="card-body"
           sx={{ display: 'flex', justifyContent: 'space-between', height: 60 }}
         >
           <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>

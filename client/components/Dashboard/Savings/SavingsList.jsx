@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchSavings } from '../../../actions/savings'
-import { Box, Button, Grid } from '@mui/material/'
+import { Box, Grid, IconButton } from '@mui/material/'
+import AddSharpIcon from '@mui/icons-material/AddSharp'
 
 //import TransactionsList from '../../Transactions/TransactionsList'
 import SavingsForm from './SavingsForm'
@@ -65,22 +66,24 @@ export default function SavingsList() {
       ) : (
         <Box
           className="add-btn"
-          sx={{ display: 'flex', justifyContent: 'flex-end', m: 1, p: 1 }}
+          sx={{ display: 'flex', justifyContent: 'flex-start', m: 1, p: 1 }}
         >
-          <Button
-            variant="contained"
+          <h3>Goals</h3>
+          <IconButton
+            color="primary"
+            fontsize="large"
             onClick={() => {
               setAdding(true)
             }}
           >
-            +
-          </Button>
+            <AddSharpIcon />
+          </IconButton>
         </Box>
       )}
-      <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(2,1fr)' }}>
+      <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(2,8fr)' }}>
         {savings.data?.map((saving, i) => {
           return (
-            <Grid key={i} container direction="row" spacing="2">
+            <Grid key={i} container direction="row" spacing="1">
               <Grid item>
                 <SavingsCard
                   saving={saving}
