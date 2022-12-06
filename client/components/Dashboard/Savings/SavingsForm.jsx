@@ -32,7 +32,7 @@ export default function SavingsForm({ title, savingsData, setStatus }) {
     if (title === 'Edit Saving') {
       dispatch(patchSavings(formData.id, newSavings))
     } else {
-      dispatch(postSavings(newSavings))
+      dispatch(postSavings(formData.budgetId, newSavings))
     }
     setStatus(false)
   }

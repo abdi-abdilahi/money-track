@@ -60,7 +60,7 @@ export default function SavingsList() {
             name: '',
             amount: '',
             goalDate: '',
-            budgetId: budgetId,
+            budgetId: 1,
           }}
           setStatus={setAdding}
         />
