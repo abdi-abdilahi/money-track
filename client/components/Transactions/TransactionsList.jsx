@@ -50,6 +50,7 @@ export default function TransactionList() {
       <Grid container spacing={1} sx={{ my: 2 }}>
         <Grid xs={12} sm={6} item>
           <Autocomplete
+            freeSolo
             id="search-transactions"
             name="transaction"
             options={transactionsList}

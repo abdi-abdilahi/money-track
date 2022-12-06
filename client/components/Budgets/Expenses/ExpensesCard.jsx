@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { patchExpense } from '../../../actions/expenses'
+import { patchExpense, delExpense } from '../../../actions/expenses'
 import { Box, Paper, Typography, LinearProgress } from '@mui/material'
 import SimpleMenu from '../../SimpleMenu'
 import ExpensesForm from './ExpensesForm'
@@ -36,7 +36,11 @@ export default function ExpensesCard({ expense }) {
           sx={{ display: 'flex', justifyContent: 'space-between' }}
         >
           <Typography variant="h4">{expense.name}</Typography>
-          <SimpleMenu dataId={expense.id} setUpdate={setUpdate} />
+          <SimpleMenu
+            dataId={expense.id}
+            setUpdate={setUpdate}
+            thunk={delExpense}
+          />
         </Box>
         <Box
           className="card-boddy"

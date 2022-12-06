@@ -10,6 +10,7 @@ import {
   blue,
   lightBlue,
 } from '@mui/material/colors'
+import { delTransaction } from '../../../actions/transactions'
 
 const getAvatarBgColor = ({ expensesName }) =>
   ({
@@ -69,7 +70,11 @@ export default function Transaction({
         {new Date(row.dateCreated).toDateString()}
       </TableCell>
       <TableCell align="right">
-        <SimpleMenu dataId={row.id} setUpdate={setUpdate} />
+        <SimpleMenu
+          dataId={row.id}
+          setUpdate={setUpdate}
+          thunk={delTransaction}
+        />
         {update ? (
           <TransactionsForm
             transactionData={row}
