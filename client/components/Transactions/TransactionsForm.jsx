@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { postTransaction, patchTransaction } from '../../actions/transactions'
 import {
   Button,
@@ -11,6 +11,7 @@ import {
   TextField,
   Autocomplete,
 } from '@mui/material'
+import { fetchExpenses } from '../../actions/expenses'
 
 export default function TransactionsForm({
   transactionData,
@@ -19,7 +20,12 @@ export default function TransactionsForm({
 }) {
   const [open, setOpen] = useState(true)
   const [data, setData] = useState(transactionData)
+  const categoryNames = useSelector((state) => state.expenses)
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(fetchExpenses(1))
+  }, [])
 
   const handleClose = () => {
     setOpen(false)
@@ -50,18 +56,7 @@ export default function TransactionsForm({
     handleClose()
   }
 
-  const categoryNames = [
-    { id: 1, name: 'Petrol', amount: 50, budget_id: 1 },
-    { id: 2, name: 'Fitness', amount: 15, budget_id: 1 },
-    { id: 3, name: 'Groceries', amount: 175, budget_id: 1 },
-    { id: 4, name: 'Health Insurance', amount: 50, budget_id: 1 },
-    { id: 5, name: 'Car Insurance', amount: 20, budget_id: 1 },
-    { id: 6, name: 'Car Maintenance', amount: 50, budget_id: 1 },
-    { id: 7, name: 'Shopping', amount: 25, budget_id: 1 },
-    { id: 8, name: 'Food/Dining Out', amount: 25, budget_id: 1 },
-  ]
-
-  const category = categoryNames.map((category) => {
+  const category = categoryNames.data?.map((category) => {
     return {
       label: category.name,
       expensesId: category.id,
@@ -73,7 +68,7 @@ export default function TransactionsForm({
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>{title}</DialogTitle>
         <DialogContent>
-          <Grid container spacing={1}>
+          <Grid container spacing={1} sx={{ mt: 1 }}>
             <Grid xs={12} sm={6} item>
               <Autocomplete
                 id="expense-list"

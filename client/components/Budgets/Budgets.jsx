@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
+import { fetchTransactions } from '../../actions/transactions'
 import { fetchExpenses } from '../../actions/expenses'
 import { fetchIncomes } from '../../actions/incomes'
 import { fetchBudget } from '../../actions/budget'
@@ -11,59 +12,65 @@ import BudgetTimeframe from './BudgetTimeframe'
 
 export default function Budgets() {
   const budget = useSelector((state) => state.budget)
-  const expenses = useSelector((state) => state.expenses)
   const incomes = useSelector((state) => state.incomes)
-  const dispatch = useDispatch()
+  const expenses = useSelector((state) => state.expenses)
+
   const { budgetId } = useParams()
+  const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(fetchIncomes(budgetId))
     dispatch(fetchExpenses(budgetId))
+    dispatch(fetchTransactions())
     dispatch(fetchBudget())
+    dispatch(fetchTransactions())
   }, [])
 
   return (
     <Box
+      className="container"
       sx={{
         display: 'flex',
         justifyContent: 'center',
         alignContent: 'center',
         width: '100%',
-        maxHeight: '90%',
+        maxHeight: '98vh',
       }}
     >
       <Box
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          width: '80%',
-          marginTop: 5,
+          minHeight: '94vh',
         }}
       >
-        <Typography variant="h2">Expenses</Typography>
+        <Typography variant="h3" sx={{ color: '#0F3D3E' }}>
+          Expenses
+        </Typography>
         <Box
           sx={{
             display: 'flex',
             justifyContent: 'space-between',
             marginTop: 5,
-            marginBottom: 15,
+            marginBottom: '15vh',
           }}
         >
           <IncomesInfo incomes={incomes} expenses={expenses} />
-          {budget.data ? (
+
+          {budget.data && (
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <Typography
                 variant="h5"
-                sx={{ color: '#3277d5', marginRight: 4 }}
+                sx={{ color: '#0F3D3E', marginRight: 4 }}
               >
                 Budget Timeframe:
               </Typography>
               <BudgetTimeframe budget={budget.data[0]} />
             </Box>
-          ) : null}
+          )}
         </Box>
 
-        <ExpensesList />
+        <ExpensesList expenses={expenses} />
       </Box>
     </Box>
   )

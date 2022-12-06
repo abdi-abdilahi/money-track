@@ -1,21 +1,24 @@
 import React from 'react'
 import Sidebar from './Sidebar/Sidebar'
-import Box from '@mui/material/Box'
-import Grid from '@mui/material/Grid'
+import { Grid, Container } from '@mui/material'
 import { Outlet } from 'react-router-dom'
 
 function Layout() {
   return (
-    <Box sx={{ height: '100vh' }}>
-      <Grid container>
-        <Grid item sx={{ width: '13vw' }}>
-          <Sidebar />
-        </Grid>
-        <Grid item sx={{ width: '85vw' }}>
-          <Outlet />
-        </Grid>
+    <Grid container wrap="nowrap" sx={{ margin: 0, width: '100vw' }}>
+      <Grid item sx={{ width: 300 }}>
+        <Sidebar />
       </Grid>
-    </Box>
+      <Grid item sx={{ width: '90vw', backgroundColor: '#F1F1F1' }}>
+        <Container
+          disableGutters="true"
+          fixed
+          sx={{ minWidth: '90%', paddingTop: 10 }}
+        >
+          <Outlet />
+        </Container>
+      </Grid>
+    </Grid>
   )
 }
 
