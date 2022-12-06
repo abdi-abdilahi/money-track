@@ -25,7 +25,10 @@ function NavLink({ icon, text, path }) {
         },
       }}
     >
-      <Link to={`${path}`} style={{ textDecoration: 'none', color: '#E2DCC8' }}>
+      <Link
+        to={`${path}`}
+        style={{ textDecoration: 'none', color: '#E2DCC8', width: '100%' }}
+      >
         <ListItemButton>
           <ListItemIcon>{icon}</ListItemIcon>
           <ListItemText sx={{ color: '#F1F1F1' }} primary={text} />
