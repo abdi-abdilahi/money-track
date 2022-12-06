@@ -10,6 +10,7 @@ import {
   blue,
   lightBlue,
 } from '@mui/material/colors'
+import { delTransaction } from '../../../actions/transactions'
 
 const getAvatarBgColor = ({ expensesName }) =>
   ({
@@ -34,7 +35,6 @@ export default function Transaction({
   return (
     <TableRow
       hover
-      onClick={(event) => handleClick(event, row.id)}
       role="checkbox"
       aria-checked={isItemSelected}
       tabIndex={-1}
@@ -48,6 +48,7 @@ export default function Transaction({
           inputProps={{
             'aria-labelledby': labelId,
           }}
+          onClick={(event) => handleClick(event, row.id)}
         />
       </TableCell>
       <TableCell component="th" id={labelId} scope="row" padding="none">
@@ -69,7 +70,11 @@ export default function Transaction({
         {new Date(row.dateCreated).toDateString()}
       </TableCell>
       <TableCell align="right">
-        <SimpleMenu dataId={row.id} setUpdate={setUpdate} />
+        <SimpleMenu
+          dataId={row.id}
+          setUpdate={setUpdate}
+          thunk={delTransaction}
+        />
         {update ? (
           <TransactionsForm
             transactionData={row}
