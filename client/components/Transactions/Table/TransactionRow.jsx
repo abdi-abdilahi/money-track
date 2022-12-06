@@ -2,27 +2,7 @@ import React, { useState } from 'react'
 import SimpleMenu from '../../SimpleMenu'
 import TransactionsForm from '../TransactionsForm'
 import { TableCell, Avatar, TableRow, Checkbox } from '@mui/material'
-import {
-  indigo,
-  teal,
-  green,
-  cyan,
-  blue,
-  lightBlue,
-} from '@mui/material/colors'
 import { delTransaction } from '../../../actions/transactions'
-
-const getAvatarBgColor = ({ expensesName }) =>
-  ({
-    Petrol: lightBlue[400],
-    Fitness: cyan[400],
-    Groceries: green[400],
-    'Health Insurance': teal[400],
-    'Car Insurance': green[600],
-    'Car Maintenance': cyan[600],
-    Shopping: teal[600],
-    'Food/Dining Out': indigo[400],
-  }[expensesName] || blue[500])
 
 export default function Transaction({
   row,
@@ -54,8 +34,9 @@ export default function Transaction({
       <TableCell component="th" id={labelId} scope="row" padding="none">
         <Avatar
           sx={{
-            bgcolor: getAvatarBgColor(row),
-            width: 140,
+            background:
+              'linear-gradient(9deg, rgba(15,61,62,1) 58%, rgba(16,15,15,0.948338270855217) 98%)',
+            width: 160,
             height: 30,
             fontSize: 16,
           }}

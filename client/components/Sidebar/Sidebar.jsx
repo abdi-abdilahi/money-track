@@ -18,14 +18,14 @@ function Sidebar() {
       <Paper
         sx={{
           height: '100vh',
-          width: 300,
+          width: '100%',
           position: 'sticky',
           background:
             'linear-gradient(172deg, rgba(16,15,15,1) 32%, rgba(15,61,62,1) 93%)',
         }}
       >
         <Grid
-          sx={{ height: '98vh', width: '100%' }}
+          sx={{ height: '98vh' }}
           container
           direction="column"
           justifyContent="space-between"
@@ -36,7 +36,7 @@ function Sidebar() {
             src="/images/logo.svg"
             alt="logo"
             marginTop="50px"
-            sx={{ height: 60, width: 220 }}
+            sx={{ height: 60, width: '80%' }}
           />
 
           <List sx={{ height: '50vh', width: 220 }}>

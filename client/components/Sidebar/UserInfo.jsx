@@ -1,5 +1,6 @@
 import React from 'react'
 import ExitToAppIcon from '@mui/icons-material/ExitToApp'
+import PersonIcon from '@mui/icons-material/Person'
 import {
   Avatar,
   List,
@@ -15,17 +16,19 @@ function UserInfo({ name }) {
     <List>
       <ListItem>
         <ListItemIcon>
-          <Avatar sx={{ bgcolor: '#F1F1F1', color: '#0F3D3E' }}>WS</Avatar>{' '}
+          <Avatar sx={{ bgcolor: '#F1F1F1' }}>
+            <PersonIcon sx={{ color: '#0F3D3E', fontSize: 24 }} />
+          </Avatar>
         </ListItemIcon>
         <ListItemText
           primary={
-            <Typography style={{ fontSize: 20, color: '#F1F1F1' }}>
+            <Typography style={{ fontSize: 18, color: '#F1F1F1' }}>
               {name}
             </Typography>
           }
         />
         <IconButton>
-          <ExitToAppIcon sx={{ fontSize: '35px', color: '#F1F1F1' }} />
+          <ExitToAppIcon sx={{ fontSize: 24, color: '#F1F1F1' }} />
         </IconButton>
       </ListItem>
     </List>
