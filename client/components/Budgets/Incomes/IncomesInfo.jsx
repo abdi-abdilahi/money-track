@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Incomes from './Incomes'
 import IncomesForm from './IncomesForm'
 import EditIcon from '@mui/icons-material/Edit'
+import { currencyFormat } from '../../../utils/currencyFormat'
 import {
   Box,
   Button,
@@ -19,15 +20,11 @@ export default function IncomesInfo({ incomes, expenses }) {
   }
 
   return (
-    <div>
-      <div>{incomes.loading && <p>Loading.....</p>}</div>
-      <div>{incomes.error && <p>Something went wrong!</p>}</div>
-
+    <Box>
       <Box
         className="incomes-info"
         sx={{
           display: 'flex',
-          width: 350,
           justifyContent: 'space-between',
           alignItems: 'center',
         }}
@@ -39,30 +36,40 @@ export default function IncomesInfo({ incomes, expenses }) {
             alignItems: 'center',
           }}
         >
-          <Typography variant="h4" sx={{ color: '#0F3D3E' }}>{`$${
-            sumOfDataAmount(incomes) - sumOfDataAmount(expenses) || '0.00'
+          <Typography
+            variant="p"
+            sx={{ color: '#0F3D3E', fontSize: 24, fontWeight: 500 }}
+          >{`${
+            currencyFormat(
+              sumOfDataAmount(incomes) - sumOfDataAmount(expenses)
+            ) || '$0.00'
           }`}</Typography>
-          <Typography variant="p" sx={{ color: '#0F3D3E' }}>
+          <Typography
+            variant="p"
+            sx={{ color: '#0F3D3E', fontSize: 16, fontWeight: 300 }}
+          >
             DISPOSABLE INCOME
           </Typography>
         </Box>
 
         <Button
+          color="primary"
           variant="outlined"
           size="medium"
           startIcon={<EditIcon />}
           onClick={() => setAdding(true)}
+          sx={{ color: '#0F3D3E', marginLeft: 2 }}
         >
           Edit Income
         </Button>
       </Box>
 
       {adding ? (
-        <Dialog open="true" onClose={handleClose} scroll="paper">
-          <DialogTitle sx={{ color: '#3277d5', fontStyle: 'bold' }}>
+        <Dialog open={true} onClose={handleClose} scroll="paper">
+          <DialogTitle sx={{ color: '#0F3D3E', fontWeight: 500, fontSize: 24 }}>
             Edit Income
           </DialogTitle>
-          <DialogContent dividers="true">
+          <DialogContent dividers={true}>
             {incomes.data?.map((income, i) => (
               <Incomes key={i} income={income} />
             ))}
@@ -74,7 +81,7 @@ export default function IncomesInfo({ incomes, expenses }) {
           </DialogContent>
         </Dialog>
       ) : null}
-    </div>
+    </Box>
   )
 }
 
