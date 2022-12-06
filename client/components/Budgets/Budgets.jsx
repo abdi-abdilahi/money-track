@@ -52,7 +52,7 @@ export default function Budgets() {
           sx={{
             display: 'flex',
             flexDirection: 'column',
-            minHeight: '94vh',
+            height: '91vh',
           }}
         >
           <Typography variant="h4" sx={{ color: '#0F3D3E' }}>

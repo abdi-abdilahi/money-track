@@ -4,6 +4,7 @@ import { delTransaction } from '../../../actions/transactions'
 import EnhancedTableHead from './EnhancedTableHead'
 import EnhancedTableToolbar from './EnhancedTableToolbar'
 import TransactionRow from './TransactionRow'
+import PropTypes from 'prop-types'
 import {
   Box,
   Table,
@@ -168,4 +169,17 @@ export default function TransactionsTable({ rows }) {
       </Paper>
     </Box>
   )
+}
+
+EnhancedTableHead.propTypes = {
+  numSelected: PropTypes.number.isRequired,
+  onRequestSort: PropTypes.func.isRequired,
+  onSelectAllClick: PropTypes.func.isRequired,
+  order: PropTypes.oneOf(['asc', 'desc']).isRequired,
+  orderBy: PropTypes.string.isRequired,
+  rowCount: PropTypes.number.isRequired,
+}
+
+EnhancedTableToolbar.propTypes = {
+  numSelected: PropTypes.number.isRequired,
 }
