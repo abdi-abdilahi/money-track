@@ -39,12 +39,14 @@ export default function ExpenseForm({
 
   return (
     <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>{title}</DialogTitle>
-      <DialogContent>
+      <DialogTitle sx={{ color: '#0F3D3E', fontWeight: 500, fontSize: 24 }}>
+        {title}
+      </DialogTitle>
+      <DialogContent dividers={true}>
         <TextField
           style={{ marginTop: 20 }}
           fullWidth
-          id="outlined-adornment-expense"
+          id="expense-name"
           name="name"
           inputProps={{ maxLength: 20 }}
           value={formData.name}
@@ -55,7 +57,7 @@ export default function ExpenseForm({
         <TextField
           style={{ marginTop: 20 }}
           fullWidth
-          id="outlined-adornment-expense"
+          id="expense-amount"
           value={formData.amount}
           name="amount"
           inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
@@ -64,7 +66,7 @@ export default function ExpenseForm({
           label="Amount"
         />
       </DialogContent>
-      <DialogActions>
+      <DialogActions sx={{ margin: 1 }}>
         <Button variant="outlined" onClick={() => setStatus(false)}>
           Cancel
         </Button>

@@ -11,9 +11,6 @@ export default function ExpensesList({ expenses }) {
 
   return (
     <Box className="container">
-      {expenses.loading && <p>Loading....</p>}
-      {expenses.error && <p>expenses.error</p>}
-
       {adding && (
         <ExpensesForm
           title={'Add New Expense '}
