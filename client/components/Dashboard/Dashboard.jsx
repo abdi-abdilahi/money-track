@@ -1,7 +1,12 @@
 import React from 'react'
+import ExpensesPieChart from './ExpensesPieChart'
 
 function Dashboard() {
-  return <div>Dashboard</div>
+  return (
+    <div>
+      <ExpensesPieChart />
+    </div>
+  )
 }
 
 export default Dashboard
