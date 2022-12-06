@@ -1,8 +1,6 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { alpha } from '@mui/material/styles'
 import DeleteIcon from '@mui/icons-material/Delete'
-import FilterListIcon from '@mui/icons-material/FilterList'
 import { Toolbar, Typography, IconButton, Tooltip } from '@mui/material'
 export default function EnhancedTableToolbar(props) {
   const { numSelected, handleDeleteAll } = props
@@ -41,23 +39,13 @@ export default function EnhancedTableToolbar(props) {
         </Typography>
       )}
 
-      {numSelected > 0 ? (
+      {numSelected > 0 && (
         <Tooltip title="Delete">
           <IconButton onClick={handleDeleteAll}>
             <DeleteIcon />
           </IconButton>
         </Tooltip>
-      ) : (
-        <Tooltip title="Filter list">
-          <IconButton>
-            <FilterListIcon />
-          </IconButton>
-        </Tooltip>
       )}
     </Toolbar>
   )
-}
-
-EnhancedTableToolbar.propTypes = {
-  numSelected: PropTypes.number.isRequired,
 }

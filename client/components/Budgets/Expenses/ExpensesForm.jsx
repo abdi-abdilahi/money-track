@@ -6,7 +6,6 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
-  InputAdornment,
   TextField,
 } from '@mui/material'
 
@@ -18,18 +17,47 @@ export default function ExpenseForm({
   firstParam,
 }) {
   const [open, setOpen] = useState(true)
-  const [formData, setFormData] = useState(expensesData)
   const dispatch = useDispatch()
 
-  function handleChange(e) {
+  const defaultFormState = {
+    name: { value: expensesData.name, error: false, errorMessage: '' },
+    amount: {
+      value: expensesData.amount,
+      error: false,
+      errorMessage: 'Incorrect entry',
+    },
+  }
+  const [formState, setFormState] = useState(defaultFormState)
+
+  const handleChange = (e) => {
     const { name, value } = e.target
-    setFormData({ ...formData, [name]: value })
+
+    if (name == 'amount') {
+      setFormState({
+        ...formState,
+        amount: { ...formState.amount, value, error: isNaN(value) },
+      })
+    } else if (name == 'name') {
+      setFormState({ ...formState, name: { ...formState.name, value } })
+    }
   }
 
-  function handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault()
-    dispatch(thunk(firstParam, formData))
-    setStatus(false)
+    const newData = {
+      name: formState.name.value,
+      amount: formState.amount.value,
+      budget_id: firstParam,
+    }
+
+    if (
+      formState.name.value &&
+      formState.amount.value &&
+      !formState.amount.error
+    ) {
+      dispatch(thunk(firstParam, newData))
+      setStatus(false)
+    }
   }
 
   function handleClose() {
@@ -39,32 +67,35 @@ export default function ExpenseForm({
 
   return (
     <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>{title}</DialogTitle>
-      <DialogContent>
+      <DialogTitle sx={{ color: '#0F3D3E', fontWeight: 500, fontSize: 24 }}>
+        {title}
+      </DialogTitle>
+      <DialogContent dividers={true}>
         <TextField
-          style={{ marginTop: 20 }}
-          fullWidth
-          id="outlined-adornment-expense"
-          name="name"
-          inputProps={{ maxLength: 20 }}
-          value={formData.name}
-          onChange={handleChange}
+          id="expense-name"
           label="Expense"
+          name="name"
+          value={formState.name.value || ''}
+          error={formState.name.error}
+          onChange={handleChange}
+          fullWidth
+          inputProps={{ maxLength: 20 }}
+          style={{ marginTop: 20 }}
         />
 
         <TextField
-          style={{ marginTop: 20 }}
-          fullWidth
-          id="outlined-adornment-expense"
-          value={formData.amount}
-          name="amount"
-          inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
-          onChange={handleChange}
-          startadornment={<InputAdornment position="start">$</InputAdornment>}
+          id="expense-amount"
           label="Amount"
+          name="amount"
+          value={formState.amount.value || ''}
+          error={formState.amount.error}
+          helperText={formState.amount.error && formState.amount.errorMessage}
+          onChange={handleChange}
+          fullWidth
+          style={{ marginTop: 20 }}
         />
       </DialogContent>
-      <DialogActions>
+      <DialogActions sx={{ margin: 1 }}>
         <Button variant="outlined" onClick={() => setStatus(false)}>
           Cancel
         </Button>

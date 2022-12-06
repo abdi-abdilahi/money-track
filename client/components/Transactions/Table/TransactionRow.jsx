@@ -2,26 +2,7 @@ import React, { useState } from 'react'
 import SimpleMenu from '../../SimpleMenu'
 import TransactionsForm from '../TransactionsForm'
 import { TableCell, Avatar, TableRow, Checkbox } from '@mui/material'
-import {
-  indigo,
-  teal,
-  green,
-  cyan,
-  blue,
-  lightBlue,
-} from '@mui/material/colors'
-
-const getAvatarBgColor = ({ expensesName }) =>
-  ({
-    Petrol: lightBlue[400],
-    Fitness: cyan[400],
-    Groceries: green[400],
-    'Health Insurance': teal[400],
-    'Car Insurance': green[600],
-    'Car Maintenance': cyan[600],
-    Shopping: teal[600],
-    'Food/Dining Out': indigo[400],
-  }[expensesName] || blue[500])
+import { delTransaction } from '../../../actions/transactions'
 
 export default function Transaction({
   row,
@@ -34,7 +15,6 @@ export default function Transaction({
   return (
     <TableRow
       hover
-      onClick={(event) => handleClick(event, row.id)}
       role="checkbox"
       aria-checked={isItemSelected}
       tabIndex={-1}
@@ -48,13 +28,15 @@ export default function Transaction({
           inputProps={{
             'aria-labelledby': labelId,
           }}
+          onClick={(event) => handleClick(event, row.id)}
         />
       </TableCell>
       <TableCell component="th" id={labelId} scope="row" padding="none">
         <Avatar
           sx={{
-            bgcolor: getAvatarBgColor(row),
-            width: 140,
+            background:
+              'linear-gradient(9deg, rgba(15,61,62,1) 58%, rgba(16,15,15,0.948338270855217) 98%)',
+            width: 160,
             height: 30,
             fontSize: 16,
           }}
@@ -69,7 +51,11 @@ export default function Transaction({
         {new Date(row.dateCreated).toDateString()}
       </TableCell>
       <TableCell align="right">
-        <SimpleMenu dataId={row.id} setUpdate={setUpdate} />
+        <SimpleMenu
+          dataId={row.id}
+          setUpdate={setUpdate}
+          thunk={delTransaction}
+        />
         {update ? (
           <TransactionsForm
             transactionData={row}

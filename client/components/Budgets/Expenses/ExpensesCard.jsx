@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { patchExpense } from '../../../actions/expenses'
+import { patchExpense, delExpense } from '../../../actions/expenses'
 import { Box, Paper, Typography, LinearProgress } from '@mui/material'
 import SimpleMenu from '../../SimpleMenu'
 import ExpensesForm from './ExpensesForm'
+import { currencyFormat } from '../../../utils/currencyFormat'
 
 export default function ExpensesCard({ expense }) {
   const transactions = useSelector((state) => state.transactions)
@@ -22,12 +23,15 @@ export default function ExpensesCard({ expense }) {
 
   return (
     <Paper
+      elevation={2}
       sx={{
-        width: 400,
-        height: 150,
+        width: 300,
+        height: 125,
         margin: 4,
         padding: 2,
         borderRadius: 5,
+        background:
+          'linear-gradient(13deg, rgba(249,246,237,1) 0%, rgba(241,241,241,0.8699068983061975) 53%)',
       }}
     >
       <Box className="card-container">
@@ -35,20 +39,37 @@ export default function ExpensesCard({ expense }) {
           className="card-header"
           sx={{ display: 'flex', justifyContent: 'space-between' }}
         >
-          <Typography variant="h4">{expense.name}</Typography>
-          <SimpleMenu dataId={expense.id} setUpdate={setUpdate} />
+          <Typography
+            variant="p"
+            sx={{ fontSize: 24, fontWeight: 700, color: '#0F3D3E' }}
+          >
+            {expense.name}
+          </Typography>
+          <SimpleMenu
+            dataId={expense.id}
+            setUpdate={setUpdate}
+            thunk={delExpense}
+          />
         </Box>
         <Box
           className="card-boddy"
-          sx={{ display: 'flex', justifyContent: 'space-between', height: 60 }}
+          sx={{ display: 'flex', justifyContent: 'space-between', height: 40 }}
         >
           <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
-            <Typography variant="h6">${expense.amount}</Typography>
+            <Typography
+              variant="p"
+              sx={{ fontSize: 16, fontWeight: 700, color: '#0F3D3E' }}
+            >
+              {currencyFormat(expense.amount)}
+            </Typography>
           </Box>
           <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-            <Typography variant="h6">{`Avaliable: $${
+            <Typography
+              variant="p"
+              sx={{ fontSize: 16, fontWeight: 300, color: '#0F3D3E' }}
+            >{`Avaliable: ${currencyFormat(
               expense.amount - transactionsTotal
-            }`}</Typography>
+            )}`}</Typography>
           </Box>
         </Box>
         <Box>

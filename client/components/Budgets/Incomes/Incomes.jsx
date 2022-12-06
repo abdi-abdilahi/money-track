@@ -6,26 +6,46 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import SaveIcon from '@mui/icons-material/Save'
 
 export default function Income({ income }) {
-  const dispatch = useDispatch()
   const [updating, setUpdating] = useState(false)
-  const [incomeData, setIncomeData] = useState({
-    name: income.name,
-    amount: income.amount,
-  })
+  const dispatch = useDispatch()
+
+  const defaultFormState = {
+    name: { value: income.name, error: false, errorMessage: '' },
+    amount: {
+      value: income.amount,
+      error: false,
+      errorMessage: 'Incorrect entry',
+    },
+  }
+  const [formState, setFormState] = useState(defaultFormState)
 
   const handleChange = (e) => {
     const { name, value } = e.target
     setUpdating(true)
-    if (name == 'amount' && !isNaN(value)) {
-      setIncomeData({
-        ...incomeData,
-        amount: value,
+    if (name == 'amount') {
+      setFormState({
+        ...formState,
+        amount: { ...formState.amount, value, error: isNaN(value) },
       })
     } else if (name == 'name') {
-      setIncomeData({
-        ...incomeData,
-        name: value,
-      })
+      setFormState({ ...formState, name: { ...formState.name, value } })
+    }
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const newData = {
+      name: formState.name.value,
+      amount: formState.amount.value,
+    }
+
+    if (
+      formState.name.value &&
+      formState.amount.value &&
+      !formState.amount.error
+    ) {
+      dispatch(patchIncomes(income.id, newData))
+      setUpdating(false)
     }
   }
 
@@ -33,14 +53,6 @@ export default function Income({ income }) {
     e.preventDefault()
     dispatch(delIncomes(Number(income.id)))
   }
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    setUpdating(false)
-    dispatch(patchIncomes(Number(income.id), incomeData))
-  }
-
-  const invalid = false
 
   return (
     <div>
@@ -62,25 +74,28 @@ export default function Income({ income }) {
         >
           <TextField
             id="income-name"
-            label=""
-            size="medium"
+            label="Income Name"
+            size="small"
             name="name"
-            value={incomeData.name}
+            required
+            value={formState.name.value || ''}
+            error={formState.name.error}
             onChange={handleChange}
           />
           <TextField
-            error={invalid}
             id="income-amount"
-            label=""
-            placeholder="Income after tax"
-            size="medium"
+            label="Income Amount"
+            size="small"
             name="amount"
-            value={incomeData.amount}
+            required
+            value={formState.amount.value || ''}
+            error={formState.amount.error}
+            helperText={formState.amount.error && formState.amount.errorMessage}
             onChange={handleChange}
           />
           {updating ? (
             <IconButton aria-label="delete" color="primary" type="submit">
-              <SaveIcon fontSize="large" />
+              <SaveIcon fontSize="medium" />
             </IconButton>
           ) : (
             <IconButton
@@ -88,7 +103,7 @@ export default function Income({ income }) {
               color="primary"
               onClick={handleDelete}
             >
-              <DeleteIcon fontSize="large" />
+              <DeleteIcon fontSize="medium" />
             </IconButton>
           )}
         </Box>

@@ -30,7 +30,7 @@ export default function BudgetTimeframe({ budget }) {
   }
 
   return (
-    <FormControl size="large" sx={{ width: 160 }}>
+    <FormControl size="small" sx={{ width: 140 }}>
       <Select
         labelId="select-timeFrame"
         id="select"
