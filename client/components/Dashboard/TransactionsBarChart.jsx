@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchTransactions } from '../../actions/transactions'
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend } from 'recharts'
+import Paper from '@mui/material/Paper'
 
 export default function App() {
   const transactionsData = useSelector((state) => state.transactions)
@@ -38,29 +39,49 @@ export default function App() {
   })
 
   return (
-    <BarChart
-      width={600}
-      height={300}
-      data={transactionHistory}
-      margin={{
-        top: 5,
-        right: 30,
-        left: 20,
-        bottom: 5,
+    <Paper
+      elevation={2}
+      sx={{
+        width: '100%',
+        height: 380,
+        borderRadius: 5,
+        margin: 0,
+        padding: 0,
+        background:
+          'linear-gradient(13deg, rgba(249,246,237,1) 0%, rgba(241,241,241,0.8699068983061975) 53%)',
       }}
-      barSize={20}
     >
-      <defs>
-        <linearGradient id="myGradient" gradientTransform="rotate(90)">
-          <stop offset="20%" stopColor="rgba(5,74,87,100)" />
-          <stop offset="80%" stopColor="rgba(5,38,38,100)" />
-        </linearGradient>
-      </defs>
-      <XAxis dataKey="month" scale="point" padding={{ left: 10, right: 10 }} />
-      <YAxis />
-      <Tooltip />
-      <Legend />
-      <Bar dataKey="total" fill="url(#myGradient)" radius={[10, 10, 0, 0]} />
-    </BarChart>
+      <h2 style={{ textAlign: 'center', fontWeight: 'bold', color: '#0F3D3E' }}>
+        Transactions Bar Chart
+      </h2>
+      <BarChart
+        width={600}
+        height={300}
+        data={transactionHistory}
+        margin={{
+          top: 5,
+          right: 30,
+          left: 20,
+          bottom: 5,
+        }}
+        barSize={20}
+      >
+        <defs>
+          <linearGradient id="myGradient" gradientTransform="rotate(90)">
+            <stop offset="20%" stopColor="rgba(5,74,87,100)" />
+            <stop offset="80%" stopColor="rgba(5,38,38,100)" />
+          </linearGradient>
+        </defs>
+        <XAxis
+          dataKey="month"
+          scale="point"
+          padding={{ left: 10, right: 10 }}
+        />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        <Bar dataKey="total" fill="url(#myGradient)" radius={[10, 10, 0, 0]} />
+      </BarChart>
+    </Paper>
   )
 }
