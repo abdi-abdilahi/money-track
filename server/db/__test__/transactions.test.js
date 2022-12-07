@@ -19,14 +19,14 @@ describe('getTransactions', () => {
     const expected = {
       id: 1,
       name: 'PakNSave',
-      amount: 110,
+      amount: 1110,
       dateCreated: '2022-11-12',
       expensesId: 3,
       expensesName: 'Groceries',
     }
 
     return db.getTransactions(testDb).then((incomes) => {
-      expect(incomes).toHaveLength(4)
+      expect(incomes).toHaveLength(16)
       expect(incomes[0]).toEqual(expected)
     })
   })
@@ -39,7 +39,7 @@ describe('getTransactionById', () => {
     const expected = {
       id: 1,
       name: 'PakNSave',
-      amount: 110,
+      amount: 1110,
       dateCreated: '2022-11-12',
       expensesId: 3,
       expensesName: 'Groceries',
@@ -63,7 +63,7 @@ describe('addTransaction', () => {
     }
 
     return db.addTransaction(mockData, testDb).then(([{ id }]) => {
-      expect(id).toBe(5)
+      expect(id).toBe(17)
     })
   })
 })
