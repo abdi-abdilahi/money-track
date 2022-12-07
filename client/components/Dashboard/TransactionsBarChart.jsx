@@ -42,10 +42,11 @@ export default function App() {
     <Paper
       elevation={3}
       sx={{
-        width: '100%',
+        width: 600,
         height: 380,
         borderRadius: 5,
         paddingRight: 2,
+        marginRight: 2,
         background: '#FFFFFF',
       }}
     >
