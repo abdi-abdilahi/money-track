@@ -28,7 +28,7 @@ export default function ExpensesCard({ expense }) {
       sx={{
         width: 300,
         height: 125,
-        margin: 4,
+        margin: 2,
         padding: 2,
         borderRadius: 5,
         background: '#FFFFFF',

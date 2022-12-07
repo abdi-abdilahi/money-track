@@ -20,7 +20,7 @@ describe('getTransactions', () => {
       id: 1,
       name: 'PakNSave',
       amount: 110,
-      dateCreated: new Date('2022-11-25T23:59:59').toString(),
+      dateCreated: '2022-11-12',
       expensesId: 3,
       expensesName: 'Groceries',
     }
@@ -40,7 +40,7 @@ describe('getTransactionById', () => {
       id: 1,
       name: 'PakNSave',
       amount: 110,
-      dateCreated: new Date('2022-11-25T23:59:59').toString(),
+      dateCreated: '2022-11-12',
       expensesId: 3,
       expensesName: 'Groceries',
     }
@@ -58,7 +58,7 @@ describe('addTransaction', () => {
     const mockData = {
       name: 'Countdown',
       amount: 110,
-      date_created: new Date('2022-11-25T23:59:59').toString(),
+      date_created: '2022-11-25',
       expenses_id: 3,
     }
 
@@ -74,7 +74,7 @@ describe('updateTransaction', () => {
     const mockData = {
       name: 'Countdown',
       amount: 200,
-      date_created: new Date('2022-11-25T23:59:59').toString(),
+      date_created: '2022-11-25',
       expenses_id: 3,
     }
 
