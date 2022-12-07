@@ -11,7 +11,7 @@ export default function SavingsList() {
   const [adding, setAdding] = useState(false)
 
   return (
-    <Box>
+    <Box sx={{ width: 600, mr: 2 }}>
       {adding ? (
         <SavingsForm
           title={'Add New Saving'}
