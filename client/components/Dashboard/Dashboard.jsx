@@ -42,6 +42,7 @@ function Dashboard() {
       </Typography>
 
       <Box
+        className="container"
         sx={{
           display: 'flex',
           flexDirection: 'column',
@@ -63,21 +64,22 @@ function Dashboard() {
               marginTop: 2,
             }}
           >
-            <SavingsList />
-            <Box sx={{ maxWidth: '35vw' }}>
+            <Box>
+              <SavingsList />
+            </Box>
+            <Box sx={{ maxWidth: 600 }}>
               <Paper
+                elevation={3}
                 sx={{
-                  width: '100%',
+                  minWidth: 600,
                   height: 300,
-                  padding: 2,
                   marginTop: 6,
                   borderRadius: 5,
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  background:
-                    'linear-gradient(13deg, rgba(249,246,237,1) 0%, rgba(241,241,241,0.8699068983061975) 53%)',
+                  background: '#FFFFFF',
                 }}
               >
                 <RecentTransactions />
@@ -89,16 +91,13 @@ function Dashboard() {
             sx={{
               display: 'flex',
               justifyContent: 'space-between',
-              marginTop: 2,
-              maxHeight: 300,
+              marginTop: 4,
+              maxHeight: 380,
             }}
           >
-            <Box sx={{ pr: 2 }}>
-              <TransactionsBarChart />
-            </Box>
-            <Box>
-              <ExpensesPieChart />
-            </Box>
+            <TransactionsBarChart />
+
+            <ExpensesPieChart />
           </Box>
         </Box>
       </Box>

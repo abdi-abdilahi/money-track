@@ -106,21 +106,19 @@ export default function App() {
 
   return (
     <Paper
-      elevation={2}
+      elevation={3}
       sx={{
-        width: 550,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        width: 380,
         height: 380,
         borderRadius: 5,
-        margin: 0,
-        padding: 0,
-        background:
-          'linear-gradient(13deg, rgba(249,246,237,1) 0%, rgba(241,241,241,0.8699068983061975) 53%)',
+        background: '#FFFFFF',
       }}
     >
-      <h2 style={{ textAlign: 'center', color: '#0F3D3E' }}>
-        Expenses Pie Chart
-      </h2>
-      <PieChart width={530} height={335}>
+      <h2 style={{ textAlign: 'center', color: '#0F3D3E' }}>Expenses</h2>
+      <PieChart width={550} height={300}>
         <defs>
           <linearGradient id="myGradient" gradientTransform="rotate(90)">
             <stop offset="5%" stopColor="rgba(5,74,87,100)" />
