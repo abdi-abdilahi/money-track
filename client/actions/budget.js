@@ -53,10 +53,10 @@ function deleteBudgetFulfilled(budgetId) {
   }
 }
 
-export function fetchBudget() {
+export function fetchBudget(token) {
   return (dispatch) => {
     dispatch(budgetPending())
-    return getBudget()
+    return getBudget(token)
       .then((budget) => {
         dispatch(getBudgetFulfilled(budget))
       })

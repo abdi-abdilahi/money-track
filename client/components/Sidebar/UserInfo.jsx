@@ -1,4 +1,5 @@
 import React from 'react'
+import { useAuth0 } from '@auth0/auth0-react'
 import ExitToAppIcon from '@mui/icons-material/ExitToApp'
 import PersonIcon from '@mui/icons-material/Person'
 import {
@@ -11,7 +12,13 @@ import {
   IconButton,
 } from '@mui/material'
 
-function UserInfo({ name }) {
+function UserInfo() {
+  const { user, logout } = useAuth0()
+
+  const handleLogOff = (e) => {
+    e.preventDefault()
+    logout({ returnTo: window.location.origin })
+  }
   return (
     <List>
       <ListItem>
@@ -22,12 +29,12 @@ function UserInfo({ name }) {
         </ListItemIcon>
         <ListItemText
           primary={
-            <Typography style={{ fontSize: 18, color: '#F1F1F1' }}>
-              {name}
+            <Typography style={{ fontSize: 16, color: '#F1F1F1' }}>
+              {user.name}
             </Typography>
           }
         />
-        <IconButton>
+        <IconButton onClick={handleLogOff}>
           <ExitToAppIcon sx={{ fontSize: 24, color: '#F1F1F1' }} />
         </IconButton>
       </ListItem>

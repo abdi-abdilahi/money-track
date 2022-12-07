@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { fetchTransactions } from '../../actions/transactions'
 import { fetchExpenses } from '../../actions/expenses'
 import { fetchIncomes } from '../../actions/incomes'
-import { fetchBudget } from '../../actions/budget'
 import { Box, Typography } from '@mui/material'
 import IncomesInfo from './Incomes/IncomesInfo'
 import ExpensesList from './Expenses/ExpensesList'
@@ -23,7 +22,7 @@ export default function Budgets() {
     dispatch(fetchIncomes(budgetId))
     dispatch(fetchExpenses(budgetId))
     dispatch(fetchTransactions())
-    dispatch(fetchBudget())
+
     dispatch(fetchTransactions())
   }, [])
 
