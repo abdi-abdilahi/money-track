@@ -69,8 +69,8 @@ export default function Budgets() {
             sx={{
               display: 'flex',
               justifyContent: 'space-between',
-              marginTop: 5,
-              marginBottom: '15vh',
+              marginTop: 2.5,
+              marginBottom: 'auto',
             }}
           >
             <IncomesInfo incomes={incomes} expenses={expenses} />
