@@ -17,25 +17,27 @@ function Dashboard() {
   return (
     <div>
       <Grid container>
-        <Grid item xs={8}>
-          <SavingsList />
-        </Grid>
-        <Grid
-          item
-          xs={4}
-          container
-          style={{ display: 'flex', alignItems: 'center' }}
-        >
-          <Paper
-            sx={{
-              width: '600',
-              height: 250,
-              padding: 2,
-              borderRadius: 5,
-            }}
+        <Grid container sx={{ pb: 10 }}>
+          <Grid item xs={8}>
+            <SavingsList />
+          </Grid>
+          <Grid
+            item
+            xs={4}
+            container
+            style={{ display: 'flex', alignItems: 'center' }}
           >
-            <RecentTransactions />
-          </Paper>
+            <Paper
+              sx={{
+                width: '600',
+                height: 250,
+                padding: 2,
+                borderRadius: 5,
+              }}
+            >
+              <RecentTransactions />
+            </Paper>
+          </Grid>
         </Grid>
 
         <Grid item xs={12} sm={6}>

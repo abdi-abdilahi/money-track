@@ -10,8 +10,8 @@ function SavingsCard({ saving }) {
   return (
     <Paper
       sx={{
-        width: 325,
-        height: 175,
+        width: 295,
+        height: 150,
         margin: 2,
         padding: 2,
         borderRadius: 5,
@@ -22,7 +22,12 @@ function SavingsCard({ saving }) {
           className="paper-header"
           sx={{ display: 'flex', justifyContent: 'space-between' }}
         >
-          <Typography variant="h4">{saving.name}</Typography>
+          <Typography
+            variant="p"
+            sx={{ fontSize: 24, fontWeight: 700, color: '#0F3D3E' }}
+          >
+            {saving.name}
+          </Typography>
           <SimpleMenu
             thunk={delSavings}
             dataId={saving.id}
@@ -35,13 +40,16 @@ function SavingsCard({ saving }) {
           sx={{ display: 'flex', justifyContent: 'space-between', height: 60 }}
         >
           <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
-            <Typography variant="h6" sx={{ color: 'red' }}>
+            <Typography
+              variant="p"
+              sx={{ fontSize: 16, fontWeight: 700, color: '#0F3D3E' }}
+            >
               ${saving.amount}
             </Typography>
           </Box>
         </Box>
         <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
-          <Typography variant="h6">
+          <Typography sx={{ fontSize: 16, fontWeight: 300, color: '#0F3D3E' }}>
             {new Date(saving.goalDate).toDateString()}
           </Typography>
         </Box>

@@ -42,18 +42,27 @@ export default function RecentTransactions() {
         </Grid>
         <Grid
           container
-          style={{ display: 'flex', justifyContent: 'flex-start' }}
+          style={{
+            display: 'flex',
+            justifyContent: 'flex-start',
+          }}
+          sx={{ color: '#0F3D3E' }}
         >
           <Grid item xs={3}>
             Name
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={3} sx={{ pl: 2 }}>
             Type
           </Grid>
           <Grid item xs={3}>
             Amount
           </Grid>
-          <Grid item xs={3}>
+          <Grid
+            item
+            xs={3}
+            container
+            style={{ display: 'flex', justifyContent: 'center' }}
+          >
             Date
           </Grid>
         </Grid>
@@ -64,10 +73,16 @@ export default function RecentTransactions() {
             <Grid item xs={3}>
               {recentTransaction.name}
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={3} sx={{ pl: 2 }}>
               {recentTransaction.expensesName}
             </Grid>
-            <Grid item xs={3}>
+            <Grid
+              item
+              xs={3}
+              container
+              style={{ display: 'flex', justifyContent: 'center' }}
+              sx={{ pr: 3 }}
+            >
               {recentTransaction.amount}
             </Grid>
             <Grid item xs={3}>

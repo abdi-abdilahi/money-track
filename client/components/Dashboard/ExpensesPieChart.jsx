@@ -104,7 +104,7 @@ export default function App() {
   )
 
   return (
-    <PieChart width={600} height={500}>
+    <PieChart width={650} height={430}>
       <defs>
         <linearGradient id="myGradient" gradientTransform="rotate(90)">
           <stop offset="5%" stopColor="rgba(5,74,87,100)" />
@@ -116,9 +116,10 @@ export default function App() {
         activeShape={renderActiveShape}
         data={expenses}
         cx={300}
-        cy={300}
-        innerRadius={110}
-        outerRadius={145}
+        cy={200}
+        r={50}
+        innerRadius={120}
+        outerRadius={155}
         fill="url(#myGradient)"
         dataKey="value"
         onMouseEnter={onPieEnter}

@@ -38,7 +38,9 @@ export default function SavingsList() {
           className="add-btn"
           sx={{ display: 'flex', justifyContent: 'flex-start', m: 1, p: 1 }}
         >
-          <h3>Goals</h3>
+          <h2>
+            <strong>Goals</strong>
+          </h2>
           <IconButton
             color="primary"
             fontSize="large"
