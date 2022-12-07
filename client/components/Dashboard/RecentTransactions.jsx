@@ -53,16 +53,16 @@ export default function RecentTransactions() {
           }}
           sx={{ color: '#0F3D3E' }}
         >
-          <Grid item xs={3}>
+          <Grid item xs={4}>
             Name
           </Grid>
-          <Grid item xs={3} sx={{ pl: 2 }}>
+          <Grid item xs={4}>
             Type
           </Grid>
-          <Grid item xs={3} style={{ textAlign: 'right' }}>
+          <Grid item xs={2} style={{ textAlign: 'left' }}>
             Amount
           </Grid>
-          <Grid item xs={3} style={{ textAlign: 'right' }}>
+          <Grid item xs={2} style={{ textAlign: 'right' }}>
             Date
           </Grid>
         </Grid>
@@ -70,16 +70,16 @@ export default function RecentTransactions() {
       <Grid container spacing={1} sx={{ color: '#0F3D3E' }}>
         {latest?.map((recentTransaction, i) => (
           <Grid container key={i} sx={{ marginBottom: 1.5 }}>
-            <Grid item xs={3}>
+            <Grid item xs={4}>
               {recentTransaction.name}
             </Grid>
-            <Grid item xs={3} sx={{ pl: 2, color: '#0F3D3E' }}>
+            <Grid item xs={4} sx={{ color: '#0F3D3E' }}>
               {recentTransaction.expensesName}
             </Grid>
-            <Grid item xs={3} style={{ textAlign: 'right' }}>
+            <Grid item xs={2} style={{ textAlign: 'left' }}>
               {recentTransaction.amount}
             </Grid>
-            <Grid item xs={3} style={{ textAlign: 'right' }}>
+            <Grid item xs={2} style={{ textAlign: 'right' }}>
               {recentTransaction.dateCreated}
             </Grid>
           </Grid>
