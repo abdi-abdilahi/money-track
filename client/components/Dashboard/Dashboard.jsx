@@ -63,9 +63,7 @@ function Dashboard() {
               marginTop: 2,
             }}
           >
-            <Box sx={{ maxWidth: '25vw' }}>
-              <SavingsList />
-            </Box>
+            <SavingsList />
             <Box sx={{ maxWidth: '35vw' }}>
               <Paper
                 sx={{
