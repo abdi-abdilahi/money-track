@@ -9,6 +9,7 @@ import SavingsList from './Savings/SavingsList'
 import { fetchExpenses } from '../../actions/expenses'
 import { fetchBudget } from '../../actions/budget'
 import { useAuth0 } from '@auth0/auth0-react'
+import { fetchSavings } from '../../actions/savings'
 
 function Dashboard() {
   const dispatch = useDispatch()
@@ -17,6 +18,7 @@ function Dashboard() {
     const token = await getAccessTokenSilently()
     dispatch(fetchBudget(token))
     dispatch(fetchExpenses(1))
+    dispatch(fetchSavings(1))
   }, [])
 
   const theme = createTheme({
