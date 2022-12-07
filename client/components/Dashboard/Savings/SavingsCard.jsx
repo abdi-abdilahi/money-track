@@ -10,7 +10,7 @@ function SavingsCard({ saving }) {
 
   return (
     <Paper
-      elevation={2}
+      elevation={3}
       sx={{
         width: 250,
         height: 110,

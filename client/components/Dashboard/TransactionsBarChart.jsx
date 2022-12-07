@@ -40,13 +40,12 @@ export default function App() {
 
   return (
     <Paper
-      elevation={2}
+      elevation={3}
       sx={{
         width: '100%',
         height: 380,
         borderRadius: 5,
-        margin: 0,
-        padding: 0,
+        paddingRight: 2,
         background: '#FFFFFF',
       }}
     >
@@ -58,7 +57,7 @@ export default function App() {
         height={300}
         data={transactionHistory}
         margin={{
-          top: 5,
+          top: 0,
           right: 30,
           left: 20,
           bottom: 5,

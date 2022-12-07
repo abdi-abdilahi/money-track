@@ -42,6 +42,7 @@ function Dashboard() {
       </Typography>
 
       <Box
+        className="container"
         sx={{
           display: 'flex',
           flexDirection: 'column',
@@ -66,12 +67,12 @@ function Dashboard() {
             <Box>
               <SavingsList />
             </Box>
-            <Box sx={{ maxWidth: '35vw' }}>
+            <Box sx={{ maxWidth: 600 }}>
               <Paper
+                elevation={3}
                 sx={{
-                  width: '100%',
+                  minWidth: 600,
                   height: 300,
-                  padding: 2,
                   marginTop: 6,
                   borderRadius: 5,
                   display: 'flex',
@@ -90,16 +91,13 @@ function Dashboard() {
             sx={{
               display: 'flex',
               justifyContent: 'space-between',
-              marginTop: 2,
-              maxHeight: 300,
+              marginTop: 4,
+              maxHeight: 380,
             }}
           >
-            <Box sx={{ pr: 2 }}>
-              <TransactionsBarChart />
-            </Box>
-            <Box>
-              <ExpensesPieChart />
-            </Box>
+            <TransactionsBarChart />
+
+            <ExpensesPieChart />
           </Box>
         </Box>
       </Box>
