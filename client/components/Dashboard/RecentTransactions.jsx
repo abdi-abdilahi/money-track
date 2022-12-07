@@ -24,14 +24,19 @@ export default function RecentTransactions() {
   })
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box
+      sx={{
+        flexGrow: 1,
+        width: '95%',
+      }}
+    >
       <Grid container spacing={1} style={{ fontWeight: 'bold' }} sx={{ mb: 2 }}>
         <Grid
           container
           item
           xs={12}
           style={{
-            fontSize: '22px',
+            fontSize: '24px',
             display: 'flex',
             justifyContent: 'center',
             color: '#0F3D3E',
@@ -54,38 +59,27 @@ export default function RecentTransactions() {
           <Grid item xs={3} sx={{ pl: 2 }}>
             Type
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={3} style={{ textAlign: 'right' }}>
             Amount
           </Grid>
-          <Grid
-            item
-            xs={3}
-            container
-            style={{ display: 'flex', justifyContent: 'center' }}
-          >
+          <Grid item xs={3} style={{ textAlign: 'right' }}>
             Date
           </Grid>
         </Grid>
       </Grid>
       <Grid container spacing={1} sx={{ color: '#0F3D3E' }}>
         {latest?.map((recentTransaction, i) => (
-          <Grid container key={i}>
+          <Grid container key={i} sx={{ marginBottom: 1.5 }}>
             <Grid item xs={3}>
               {recentTransaction.name}
             </Grid>
-            <Grid item xs={3} sx={{ pl: 2 }}>
+            <Grid item xs={3} sx={{ pl: 2, color: '#0F3D3E' }}>
               {recentTransaction.expensesName}
             </Grid>
-            <Grid
-              item
-              xs={3}
-              container
-              style={{ display: 'flex', justifyContent: 'center' }}
-              sx={{ pr: 3 }}
-            >
+            <Grid item xs={3} style={{ textAlign: 'right' }}>
               {recentTransaction.amount}
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={3} style={{ textAlign: 'right' }}>
               {recentTransaction.dateCreated}
             </Grid>
           </Grid>

@@ -74,6 +74,10 @@ function Dashboard() {
                   padding: 2,
                   marginTop: 6,
                   borderRadius: 5,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
                   background:
                     'linear-gradient(13deg, rgba(249,246,237,1) 0%, rgba(241,241,241,0.8699068983061975) 53%)',
                 }}
@@ -91,7 +95,7 @@ function Dashboard() {
               maxHeight: 300,
             }}
           >
-            <Box>
+            <Box sx={{ pr: 2 }}>
               <TransactionsBarChart />
             </Box>
             <Box>

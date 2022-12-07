@@ -22,7 +22,7 @@ describe('GET /api/v1/transactions', () => {
       id: 1,
       name: 'PakNSave',
       amount: 110,
-      dateCreated: new Date('2022-11-25T23:59:59').toString(),
+      dateCreated: '2022-11-25',
       expensesId: 3,
       expensesName: 'Groceries',
     },
@@ -61,14 +61,14 @@ describe('POST /api/v1/transactions', () => {
   const mockData = {
     name: 'PakNSave',
     amount: 50,
-    date_created: new Date('2022-11-25T23:59:59').toString(),
+    date_created: '2022-11-25',
     expenses_id: 3,
   }
   const mockDataResponse = {
     id: 1,
     name: 'PakNSave',
     amount: 50,
-    dateCreated: new Date('2022-11-25T23:59:59').toString(),
+    dateCreated: '2022-11-25',
     expensesId: 3,
     expensesName: 'Groceries',
   }
@@ -109,14 +109,14 @@ describe('PATCH /api/v1/transactions/:transactionId', () => {
   const mockData = {
     name: 'PakNSave',
     amount: 500,
-    date_created: new Date('2022-11-25T23:59:59').toString(),
+    date_created: '2022-11-25',
     expenses_id: 3,
   }
   const mockDataResponse = {
     id: 1,
     name: 'PakNSave',
     amount: 500,
-    dateCreated: new Date('2022-11-25T23:59:59').toString(),
+    dateCreated: '2022-11-25',
     expensesId: 3,
     expensesName: 'Groceries',
   }
