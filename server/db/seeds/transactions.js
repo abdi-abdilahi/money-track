@@ -110,8 +110,8 @@ exports.seed = async function (knex) {
     {
       id: 16,
       name: 'Countdown',
-      amount: 500,
-      date_created: '2022-12-25',
+      amount: 50,
+      date_created: '2022-12-05',
       expenses_id: 3,
     },
   ])

@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { postExpenses } from '../../../actions/expenses'
 import { Box, Button, Grid } from '@mui/material/'
-import { useParams } from 'react-router-dom'
+//import { useParams } from 'react-router-dom'
 import ExpensesForm from './ExpensesForm'
 import ExpenseCard from './ExpensesCard'
 
 export default function ExpensesList({ expenses }) {
-  const { budgetId } = useParams()
+  //const { budgetId } = useParams()
   const [adding, setAdding] = useState(false)
 
   return (
@@ -15,9 +15,9 @@ export default function ExpensesList({ expenses }) {
         <ExpensesForm
           title={'Add New Expense '}
           thunk={postExpenses}
-          expensesData={{ name: '', amount: '', budget_id: budgetId }}
+          expensesData={{ name: '', amount: '', budgetId: 1 }}
           setStatus={setAdding}
-          firstParam={budgetId}
+          firstParam={1}
         />
       )}
 

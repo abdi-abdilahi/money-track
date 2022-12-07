@@ -47,11 +47,12 @@ export default function SavingsForm({ title, savingsData, setStatus }) {
 
   function handleSubmit(e) {
     e.preventDefault()
+    console.log(formState)
     const newSavings = {
       name: formState.name.value,
       amount: formState.amount.value,
       goal_date: formState.goalDate.value,
-      budget_id: formState.budgetId.value,
+      budget_id: savingsData.budgetId,
     }
     if (
       formState.name.value &&
