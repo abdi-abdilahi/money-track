@@ -26,7 +26,11 @@ export default function SavingsList() {
       ) : (
         <Box
           className="add-btn"
-          sx={{ display: 'flex', justifyContent: 'flex-start' }}
+          sx={{
+            display: 'flex',
+            justifyContent: 'flex-start',
+            alignItems: 'center',
+          }}
         >
           <Typography
             variant="p"

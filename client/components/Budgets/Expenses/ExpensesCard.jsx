@@ -28,11 +28,10 @@ export default function ExpensesCard({ expense }) {
       sx={{
         width: 300,
         height: 125,
-        margin: 4,
+        margin: 2,
         padding: 2,
         borderRadius: 5,
-        background:
-          'linear-gradient(13deg, rgba(249,246,237,1) 0%, rgba(241,241,241,0.8699068983061975) 53%)',
+        background: '#FFFFFF',
       }}
     >
       <Box className="card-container">
