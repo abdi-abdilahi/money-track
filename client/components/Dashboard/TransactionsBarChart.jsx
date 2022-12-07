@@ -47,8 +47,7 @@ export default function App() {
         borderRadius: 5,
         margin: 0,
         padding: 0,
-        background:
-          'linear-gradient(13deg, rgba(249,246,237,1) 0%, rgba(241,241,241,0.8699068983061975) 53%)',
+        background: '#FFFFFF',
       }}
     >
       <h2 style={{ textAlign: 'center', fontWeight: 'bold', color: '#0F3D3E' }}>

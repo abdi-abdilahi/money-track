@@ -62,7 +62,7 @@ function Dashboard() {
               marginTop: 2,
             }}
           >
-            <Box sx={{ maxWidth: '25vw' }}>
+            <Box>
               <SavingsList />
             </Box>
             <Box sx={{ maxWidth: '35vw' }}>
@@ -77,8 +77,7 @@ function Dashboard() {
                   flexDirection: 'column',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  background:
-                    'linear-gradient(13deg, rgba(249,246,237,1) 0%, rgba(241,241,241,0.8699068983061975) 53%)',
+                  background: '#FFFFFF',
                 }}
               >
                 <RecentTransactions />
