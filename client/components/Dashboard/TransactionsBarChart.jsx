@@ -13,18 +13,18 @@ export default function App() {
   }, [])
 
   const transactionHistory = [
-    { month: 'Jan', total: 0 },
-    { month: 'Feb', total: 0 },
-    { month: 'Mar', total: 0 },
-    { month: 'Apr', total: 0 },
-    { month: 'May', total: 0 },
-    { month: 'Jun', total: 0 },
-    { month: 'Jul', total: 0 },
-    { month: 'Aug', total: 0 },
-    { month: 'Sep', total: 0 },
-    { month: 'Oct', total: 0 },
-    { month: 'Nov', total: 0 },
-    { month: 'Dec', total: 0 },
+    { month: 'Jan', Total: 0 },
+    { month: 'Feb', Total: 0 },
+    { month: 'Mar', Total: 0 },
+    { month: 'Apr', Total: 0 },
+    { month: 'May', Total: 0 },
+    { month: 'Jun', Total: 0 },
+    { month: 'Jul', Total: 0 },
+    { month: 'Aug', Total: 0 },
+    { month: 'Sep', Total: 0 },
+    { month: 'Oct', Total: 0 },
+    { month: 'Nov', Total: 0 },
+    { month: 'Dec', Total: 0 },
   ]
 
   const sortData =
@@ -35,7 +35,7 @@ export default function App() {
   sortData?.map((transaction) => {
     const date = transaction.dateCreated.split(/[- :]/)
     const monthHistory = transactionHistory[date[1] - 1]
-    monthHistory.total += transaction.amount
+    monthHistory.Total += transaction.amount
   })
 
   return (
@@ -52,7 +52,7 @@ export default function App() {
       }}
     >
       <h2 style={{ textAlign: 'center', fontWeight: 'bold', color: '#0F3D3E' }}>
-        Transactions Bar Chart
+        Transactions
       </h2>
       <BarChart
         width={600}
@@ -80,7 +80,7 @@ export default function App() {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Bar dataKey="total" fill="url(#myGradient)" radius={[10, 10, 0, 0]} />
+        <Bar dataKey="Total" fill="url(#myGradient)" radius={[10, 10, 0, 0]} />
       </BarChart>
     </Paper>
   )
