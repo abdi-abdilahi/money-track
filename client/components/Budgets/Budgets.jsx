@@ -70,7 +70,7 @@ export default function Budgets() {
               display: 'flex',
               justifyContent: 'space-between',
               marginTop: 2.5,
-              marginBottom: 'auto',
+              //marginBottom: 'auto',
             }}
           >
             <IncomesInfo incomes={incomes} expenses={expenses} />
