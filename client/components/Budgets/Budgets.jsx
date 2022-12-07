@@ -9,16 +9,19 @@ import IncomesInfo from './Incomes/IncomesInfo'
 import ExpensesList from './Expenses/ExpensesList'
 import BudgetTimeframe from './BudgetTimeframe'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
-
+import { fetchBudget } from '../../actions/budget'
+import { useAuth0 } from '@auth0/auth0-react'
 export default function Budgets() {
   const budget = useSelector((state) => state.budget)
   const incomes = useSelector((state) => state.incomes)
   const expenses = useSelector((state) => state.expenses)
-
+  const { getAccessTokenSilently } = useAuth0()
   const { budgetId } = useParams()
   const dispatch = useDispatch()
 
-  useEffect(() => {
+  useEffect(async () => {
+    const token = await getAccessTokenSilently()
+    dispatch(fetchBudget(token))
     dispatch(fetchIncomes(budgetId))
     dispatch(fetchExpenses(budgetId))
     dispatch(fetchTransactions())
@@ -70,7 +73,6 @@ export default function Budgets() {
               display: 'flex',
               justifyContent: 'space-between',
               marginTop: 2.5,
-              //marginBottom: 'auto',
             }}
           >
             <IncomesInfo incomes={incomes} expenses={expenses} />
