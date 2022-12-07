@@ -115,7 +115,7 @@ export default function IncomeForm({ handleClose, total }) {
             {`${currencyFormat(total)}`}
           </Typography>
           <Typography variant="p" sx={{ color: '#0F3D3E', fontSize: 16 }}>
-            {`TOTAL WEEKLY DISPOSABLE INCOME`}
+            {`TOTAL DISPOSABLE INCOME`}
           </Typography>
         </Box>
         <Button

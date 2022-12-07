@@ -10,7 +10,7 @@ function Layout() {
         <Sidebar />
       </Grid>
       <Grid item sx={{ width: '90vw', backgroundColor: '#F1F1F1' }}>
-        <Container fixed sx={{ minWidth: '90%', paddingTop: 10 }}>
+        <Container fixed sx={{ minWidth: '90%', paddingTop: 5 }}>
           <Outlet />
         </Container>
       </Grid>

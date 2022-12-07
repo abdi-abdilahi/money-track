@@ -54,7 +54,15 @@ export default function Budgets() {
             height: '91vh',
           }}
         >
-          <Typography variant="h4" sx={{ color: '#0F3D3E' }}>
+          <Typography
+            variant="p"
+            sx={{
+              fontSize: 32,
+              fontWeight: 700,
+              color: '#0F3D3E',
+              marginBottom: 2,
+            }}
+          >
             Expenses
           </Typography>
           <Box
