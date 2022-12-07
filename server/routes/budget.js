@@ -1,11 +1,11 @@
 const express = require('express')
+const checkJwt = require('../auth0')
 const router = express.Router()
 
 const db = require('../db/budget')
 
-router.get('/', (req, res) => {
-  //const auth0Id = req.auth?.sub
-  const auth0Id = 2
+router.get('/', checkJwt, (req, res) => {
+  const auth0Id = req.auth?.sub
   db.getBudgetByUserId(auth0Id)
     .then((budget) => {
       res.json(budget)
@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
     })
 })
 
-router.post('/', (req, res) => {
+router.post('/', checkJwt, (req, res) => {
   db.addBudget(req.body)
     .then(([budget]) => {
       res.json(budget)
