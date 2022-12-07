@@ -72,11 +72,7 @@ export default function App() {
             <stop offset="80%" stopColor="rgba(5,38,38,100)" />
           </linearGradient>
         </defs>
-        <XAxis
-          dataKey="month"
-          scale="point"
-          padding={{ left: 10, right: 10 }}
-        />
+        <XAxis dataKey="month" scale="point" padding={{ left: 20, right: 5 }} />
         <YAxis />
         <Tooltip />
         <Legend />
