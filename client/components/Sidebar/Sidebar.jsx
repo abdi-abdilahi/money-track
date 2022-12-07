@@ -8,6 +8,8 @@ import NavLink from './NavLink'
 import UserInfo from './UserInfo'
 
 function Sidebar() {
+  // TODO:
+  const param = 1
   return (
     <Grid
       container
@@ -53,7 +55,7 @@ function Sidebar() {
             <NavLink
               icon={<PaymentsIcon sx={{ color: '#F1F1F1' }} />}
               text={'Expenses'}
-              path={'/expenses/1'}
+              path={`/expenses/${param}`}
             />
           </List>
 

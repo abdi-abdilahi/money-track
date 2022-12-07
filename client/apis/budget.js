@@ -1,9 +1,10 @@
 import request from 'superagent'
 const rootUrl = '/api/v1/budget/'
 
-export function getBudget() {
+export function getBudget(token) {
   return request
     .get(rootUrl)
+    .set('Authorization', `Bearer ${token}`)
     .then((res) => res.body)
     .catch((err) => {
       return { message: err.message }
