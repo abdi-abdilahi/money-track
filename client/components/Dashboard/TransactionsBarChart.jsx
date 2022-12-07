@@ -40,7 +40,7 @@ export default function App() {
   return (
     <BarChart
       width={600}
-      height={400}
+      height={300}
       data={transactionHistory}
       margin={{
         top: 5,
@@ -60,7 +60,7 @@ export default function App() {
       <YAxis />
       <Tooltip />
       <Legend />
-      <Bar dataKey="total" fill="url(#myGradient)" />
+      <Bar dataKey="total" fill="url(#myGradient)" radius={[10, 10, 0, 0]} />
     </BarChart>
   )
 }

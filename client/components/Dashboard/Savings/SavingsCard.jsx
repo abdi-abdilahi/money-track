@@ -3,18 +3,22 @@ import { Box, Paper, Typography } from '@mui/material'
 import SimpleMenu from '../../SimpleMenu'
 import SavingsForm from './SavingsForm'
 import { delSavings } from '../../../actions/savings'
+import { currencyFormat } from '../../../utils/currencyFormat'
 
 function SavingsCard({ saving }) {
   const [update, setUpdate] = useState(false)
 
   return (
     <Paper
+      elevation={2}
       sx={{
-        width: 295,
-        height: 150,
+        width: 250,
+        height: 110,
         margin: 2,
-        padding: 2,
+        padding: 1,
         borderRadius: 5,
+        background:
+          'linear-gradient(13deg, rgba(249,246,237,1) 0%, rgba(241,241,241,0.8699068983061975) 53%)',
       }}
     >
       <Box className="paper-container">
@@ -37,20 +41,20 @@ function SavingsCard({ saving }) {
 
         <Box
           className="paper-body"
-          sx={{ display: 'flex', justifyContent: 'space-between', height: 60 }}
+          sx={{ display: 'flex', justifyContent: 'space-between', height: 30 }}
         >
           <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
             <Typography
               variant="p"
               sx={{ fontSize: 16, fontWeight: 700, color: '#0F3D3E' }}
             >
-              ${saving.amount}
+              {currencyFormat(saving.amount)}
             </Typography>
           </Box>
         </Box>
         <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
           <Typography sx={{ fontSize: 16, fontWeight: 300, color: '#0F3D3E' }}>
-            {new Date(saving.goalDate).toDateString()}
+            {`Goal Date: ${new Date(saving.goalDate).toDateString()}`}
           </Typography>
         </Box>
       </Box>

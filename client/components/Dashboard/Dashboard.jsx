@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import ExpensesPieChart from './ExpensesPieChart'
-import { Grid, Paper } from '@mui/material'
-
+import { Paper, Box, Typography } from '@mui/material'
+import { createTheme, ThemeProvider } from '@mui/material/styles'
 import TransactionsBarChart from './TransactionsBarChart'
 import RecentTransactions from './RecentTransactions'
 import { useDispatch } from 'react-redux'
@@ -19,40 +19,87 @@ function Dashboard() {
     dispatch(fetchExpenses(1))
   }, [])
 
-  return (
-    <div>
-      <Grid container>
-        <Grid container sx={{ pb: 10 }}>
-          <Grid item xs={8}>
-            <SavingsList />
-          </Grid>
-          <Grid
-            item
-            xs={4}
-            container
-            style={{ display: 'flex', alignItems: 'center' }}
-          >
-            <Paper
-              sx={{
-                width: '600',
-                height: 250,
-                padding: 2,
-                borderRadius: 5,
-              }}
-            >
-              <RecentTransactions />
-            </Paper>
-          </Grid>
-        </Grid>
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#0F3D3E',
+        contrastText: '#fff',
+      },
+    },
+  })
 
-        <Grid item xs={12} sm={6}>
-          <TransactionsBarChart />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <ExpensesPieChart />
-        </Grid>
-      </Grid>
-    </div>
+  return (
+    <ThemeProvider theme={theme}>
+      <Typography
+        variant="p"
+        sx={{
+          fontSize: 32,
+          fontWeight: 700,
+          color: '#0F3D3E',
+        }}
+      >
+        Dashboard
+      </Typography>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          height: '90vh',
+        }}
+      >
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+          }}
+        >
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              marginTop: 2,
+            }}
+          >
+            <Box sx={{ maxWidth: '25vw' }}>
+              <SavingsList />
+            </Box>
+            <Box sx={{ maxWidth: '35vw' }}>
+              <Paper
+                sx={{
+                  width: '100%',
+                  height: 300,
+                  padding: 2,
+                  marginTop: 6,
+                  borderRadius: 5,
+                  background:
+                    'linear-gradient(13deg, rgba(249,246,237,1) 0%, rgba(241,241,241,0.8699068983061975) 53%)',
+                }}
+              >
+                <RecentTransactions />
+              </Paper>
+            </Box>
+          </Box>
+
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              marginTop: 2,
+              maxHeight: 300,
+            }}
+          >
+            <Box>
+              <TransactionsBarChart />
+            </Box>
+            <Box>
+              <ExpensesPieChart />
+            </Box>
+          </Box>
+        </Box>
+      </Box>
+    </ThemeProvider>
   )
 }
 

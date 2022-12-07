@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchSavings } from '../../../actions/savings'
-import { Box, Grid, IconButton } from '@mui/material/'
+import { Box, Grid, IconButton, Typography } from '@mui/material/'
 import AddSharpIcon from '@mui/icons-material/AddSharp'
-
 import SavingsForm from './SavingsForm'
 import SavingsCard from './SavingsCard'
 
@@ -16,12 +15,8 @@ export default function SavingsList() {
   useEffect(() => {
     dispatch(fetchSavings(1))
   }, [])
-
   return (
-    <>
-      {savings.loading && <p>Loading....</p>}
-      {savings.error && <p>expenses.error</p>}
-
+    <Box>
       {adding ? (
         <SavingsForm
           title={'Add New Saving'}
@@ -36,11 +31,15 @@ export default function SavingsList() {
       ) : (
         <Box
           className="add-btn"
-          sx={{ display: 'flex', justifyContent: 'flex-start', m: 1, p: 1 }}
+          sx={{ display: 'flex', justifyContent: 'flex-start' }}
         >
-          <h2>
-            <strong>Goals</strong>
-          </h2>
+          <Typography
+            variant="p"
+            sx={{ fontSize: 24, fontWeight: 700, color: '#0F3D3E' }}
+          >
+            Goals
+          </Typography>
+
           <IconButton
             color="primary"
             fontSize="large"
@@ -63,6 +62,6 @@ export default function SavingsList() {
           )
         })}
       </Box>
-    </>
+    </Box>
   )
 }
