@@ -2,6 +2,7 @@ import React, { useCallback, useState, useEffect } from 'react'
 import { PieChart, Pie, Sector } from 'recharts'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchExpenses } from '../../actions/expenses'
+import Paper from '@mui/material/Paper'
 
 const renderActiveShape = (props) => {
   const RADIAN = Math.PI / 180
@@ -104,26 +105,41 @@ export default function App() {
   )
 
   return (
-    <PieChart width={650} height={300}>
-      <defs>
-        <linearGradient id="myGradient" gradientTransform="rotate(90)">
-          <stop offset="5%" stopColor="rgba(5,74,87,100)" />
-          <stop offset="95%" stopColor="rgba(5,38,38,100)" />
-        </linearGradient>
-      </defs>
-      <Pie
-        activeIndex={activeIndex}
-        activeShape={renderActiveShape}
-        data={expenses}
-        cx={300}
-        cy={150}
-        r={30}
-        innerRadius={90}
-        outerRadius={115}
-        fill="url(#myGradient)"
-        dataKey="value"
-        onMouseEnter={onPieEnter}
-      />
-    </PieChart>
+    <Paper
+      elevation={2}
+      sx={{
+        width: 550,
+        height: 380,
+        borderRadius: 5,
+        margin: 0,
+        padding: 0,
+        background:
+          'linear-gradient(13deg, rgba(249,246,237,1) 0%, rgba(241,241,241,0.8699068983061975) 53%)',
+      }}
+    >
+      <h2 style={{ textAlign: 'center', color: '#0F3D3E' }}>
+        Expenses Pie Chart
+      </h2>
+      <PieChart width={530} height={335}>
+        <defs>
+          <linearGradient id="myGradient" gradientTransform="rotate(90)">
+            <stop offset="5%" stopColor="rgba(5,74,87,100)" />
+            <stop offset="95%" stopColor="rgba(5,38,38,100)" />
+          </linearGradient>
+        </defs>
+        <Pie
+          activeIndex={activeIndex}
+          activeShape={renderActiveShape}
+          data={expenses}
+          cx={265}
+          cy={150}
+          innerRadius={90}
+          outerRadius={115}
+          fill="url(#myGradient)"
+          dataKey="value"
+          onMouseEnter={onPieEnter}
+        />
+      </PieChart>
+    </Paper>
   )
 }
