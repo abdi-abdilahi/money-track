@@ -36,7 +36,7 @@ export default function RecentTransactions() {
           item
           xs={12}
           style={{
-            fontSize: '22px',
+            fontSize: '24px',
             display: 'flex',
             justifyContent: 'center',
             color: '#0F3D3E',

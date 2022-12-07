@@ -94,7 +94,7 @@ function Dashboard() {
               maxHeight: 300,
             }}
           >
-            <Box>
+            <Box sx={{ pr: 2 }}>
               <TransactionsBarChart />
             </Box>
             <Box>
