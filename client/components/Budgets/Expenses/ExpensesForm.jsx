@@ -47,7 +47,7 @@ export default function ExpenseForm({
     const newData = {
       name: formState.name.value,
       amount: formState.amount.value,
-      budget_id: firstParam,
+      budget_id: formState.budgetId,
     }
 
     if (
