@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { useAuth0 } from '@auth0/auth0-react'
 import Layout from './Layout'
@@ -8,12 +8,16 @@ import NotFound from './NotFound'
 import Budgets from './Budgets/Budgets'
 
 export default function App() {
-  const { loginWithRedirect, isAuthenticated } = useAuth0()
+  const { loginWithRedirect, isAuthenticated, isLoading } = useAuth0()
+  console.log(isAuthenticated)
+  console.log(isLoading)
 
-  const handleSignIn = (e) => {
-    e.preventDefault()
-    loginWithRedirect()
-  }
+  useEffect(() => {
+    if (!isAuthenticated && !isLoading) {
+      loginWithRedirect()
+    }
+  }, [isAuthenticated, isLoading])
+
   return (
     <>
       {isAuthenticated ? (
@@ -26,7 +30,14 @@ export default function App() {
           </Route>
         </Routes>
       ) : (
-        <button onClick={handleSignIn}>Log In</button>
+        <div
+          style={{
+            width: '100vw',
+            height: '100vh',
+            background:
+              'linear-gradient(172deg, rgba(16,15,15,1) 32%, rgba(15,61,62,1) 93%)',
+          }}
+        ></div>
       )}
     </>
   )
