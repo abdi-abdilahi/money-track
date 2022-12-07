@@ -117,9 +117,7 @@ export default function App() {
           'linear-gradient(13deg, rgba(249,246,237,1) 0%, rgba(241,241,241,0.8699068983061975) 53%)',
       }}
     >
-      <h2 style={{ textAlign: 'center', color: '#0F3D3E' }}>
-        Expenses Pie Chart
-      </h2>
+      <h2 style={{ textAlign: 'center', color: '#0F3D3E' }}>Expenses</h2>
       <PieChart width={530} height={335}>
         <defs>
           <linearGradient id="myGradient" gradientTransform="rotate(90)">
