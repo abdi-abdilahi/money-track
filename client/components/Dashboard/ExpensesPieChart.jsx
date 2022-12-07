@@ -111,7 +111,7 @@ export default function App() {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        width: 600,
+        minWidth: 600,
         height: 380,
         borderRadius: 5,
         background: '#FFFFFF',
