@@ -30,8 +30,9 @@ const savings = (state = initialState, action) => {
         ...state,
         loading: false,
         data: state.data.map((saving) => {
-          console.log('saving is ', saving)
-          return saving.id === payload.oldSavingtId ? payload.newSaving : saving
+          return saving.id === payload.oldSavingsId
+            ? payload.newSavings
+            : saving
         }),
       }
     case DELETE_SAVINGS_FULFILLED:

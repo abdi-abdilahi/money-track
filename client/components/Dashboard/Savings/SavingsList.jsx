@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { fetchSavings } from '../../../actions/savings'
+import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
+
 import { Box, Grid, IconButton, Typography } from '@mui/material/'
 import AddSharpIcon from '@mui/icons-material/AddSharp'
 import SavingsForm from './SavingsForm'
@@ -8,13 +8,8 @@ import SavingsCard from './SavingsCard'
 
 export default function SavingsList() {
   const savings = useSelector((state) => state.savings)
-
-  const dispatch = useDispatch()
   const [adding, setAdding] = useState(false)
 
-  useEffect(() => {
-    dispatch(fetchSavings(1))
-  }, [])
   return (
     <Box>
       {adding ? (

@@ -9,8 +9,6 @@ import Budgets from './Budgets/Budgets'
 
 export default function App() {
   const { loginWithRedirect, isAuthenticated, isLoading } = useAuth0()
-  console.log(isAuthenticated)
-  console.log(isLoading)
 
   useEffect(() => {
     if (!isAuthenticated && !isLoading) {
