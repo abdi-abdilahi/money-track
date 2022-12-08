@@ -18,24 +18,24 @@ exports.seed = async function (knex) {
     },
     {
       id: 3,
-      name: 'Z Energy',
+      name: 'Countdown',
       amount: 500,
       date_created: '2022-11-20',
-      expenses_id: 1,
+      expenses_id: 3,
     },
     {
       id: 4,
-      name: 'Anytime Fitness',
+      name: 'Southern Cross',
       amount: 1500,
       date_created: '2022-11-29',
-      expenses_id: 2,
+      expenses_id: 4,
     },
     {
       id: 5,
-      name: 'Anytime Fitness',
+      name: 'Southern Cross',
       amount: 4000,
       date_created: '2022-01-29',
-      expenses_id: 2,
+      expenses_id: 4,
     },
     {
       id: 6,
@@ -110,8 +110,8 @@ exports.seed = async function (knex) {
     {
       id: 16,
       name: 'Countdown',
-      amount: 500,
-      date_created: '2022-12-25',
+      amount: 50,
+      date_created: '2022-12-05',
       expenses_id: 3,
     },
   ])
