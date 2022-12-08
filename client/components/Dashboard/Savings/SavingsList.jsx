@@ -12,7 +12,7 @@ export default function SavingsList() {
 
   return (
     <Box sx={{ width: 600, mr: 2 }}>
-      {adding ? (
+      {adding && (
         <SavingsForm
           title={'Add New Saving'}
           savingsData={{
@@ -23,33 +23,33 @@ export default function SavingsList() {
           }}
           setStatus={setAdding}
         />
-      ) : (
-        <Box
-          className="add-btn"
-          sx={{
-            display: 'flex',
-            justifyContent: 'flex-start',
-            alignItems: 'center',
+      )}
+      <Box
+        className="add-btn"
+        sx={{
+          display: 'flex',
+          justifyContent: 'flex-start',
+          alignItems: 'center',
+        }}
+      >
+        <Typography
+          variant="p"
+          sx={{ fontSize: 24, fontWeight: 700, color: '#0F3D3E' }}
+        >
+          Goals
+        </Typography>
+
+        <IconButton
+          color="primary"
+          fontSize="large"
+          onClick={() => {
+            setAdding(true)
           }}
         >
-          <Typography
-            variant="p"
-            sx={{ fontSize: 24, fontWeight: 700, color: '#0F3D3E' }}
-          >
-            Goals
-          </Typography>
+          <AddSharpIcon />
+        </IconButton>
+      </Box>
 
-          <IconButton
-            color="primary"
-            fontSize="large"
-            onClick={() => {
-              setAdding(true)
-            }}
-          >
-            <AddSharpIcon />
-          </IconButton>
-        </Box>
-      )}
       <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(2,12fr)' }}>
         {savings.data?.map((saving, i) => {
           return (

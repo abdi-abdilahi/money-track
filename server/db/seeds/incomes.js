@@ -5,7 +5,7 @@ exports.seed = async function (knex) {
     {
       id: 1,
       name: 'Software Developer',
-      amount: 1000,
+      amount: 1200,
       start_date: '2022-11-26',
       end_date: null,
       budget_id: 1,
