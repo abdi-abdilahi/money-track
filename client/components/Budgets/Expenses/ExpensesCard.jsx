@@ -1,26 +1,70 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { patchExpense, delExpense } from '../../../actions/expenses'
 import { Box, Paper, Typography, LinearProgress } from '@mui/material'
 import SimpleMenu from '../../SimpleMenu'
 import ExpensesForm from './ExpensesForm'
 import { currencyFormat } from '../../../utils/currencyFormat'
+import { CompressOutlined } from '@mui/icons-material'
 
 export default function ExpensesCard({ expense }) {
   const budget = useSelector((state) => state.budget)
   const transactions = useSelector((state) => state.transactions)
-  const [transactionsTotal, setTransactionsTotal] = useState(0)
-  const [progress, setProgress] = useState(0)
+  // const { data: budgetData } = useSelector(state => state.budget)
+  // const { data: transactionsData } = useSelector(state => state.transactions)
+  //const [transactionsTotal, setTransactionsTotal] = useState(0)
+  //const [progress, setProgress] = useState(0)
+  console.log('budget:', budget)
+  console.log('transactions:', transactions)
+  console.log('expense.id:', expense.id)
+
   const [update, setUpdate] = useState(false)
 
   const data = transactions.data || []
+  // useEffect(() => {
+  //   console.log('Updating transactionsTotal and progress')
+  //   console.log('transactions:', transactions)
+  //   console.log('expense.id:', expense.id)
+  //   console.log('budget:', budget)
+  //   const total = sumOfDataAmount(
+  //     transactions.data,
+  //     expense.id,
+  //     budget?.data || []
+  //   )
+  //   console.log('total:', total)
+  //   const percentage = Math.round((total / expense.amount) * 100)
+  //   console.log('percentage:', percentage)
+  //   setTransactionsTotal(total)
+  //   setProgress(percentage <= 100 ? percentage : 100)
+  // }, [data, expense.id, budget])
 
-  useEffect(() => {
-    const total = sumOfDataAmount(data, expense.id, budget?.data || [])
-    const percentage = Math.round((total / expense.amount) * 100)
-    setTransactionsTotal(total)
-    setProgress(percentage <= 100 ? percentage : 100)
-  }, [data])
+  // useEffect(() => {
+  //   console.log(
+  //     'Calculating transactionsTotal and progress',
+  //     transactionsTotal,
+  //     progress
+  //   )
+  //   const total = sumOfDataAmount(
+  //     transactions.data,
+  //     expense.id,
+  //     budget?.data || []
+  //   )
+  //   const percentage = Math.round((total / expense.amount) * 100)
+  //   setTransactionsTotal(total)
+  //   setProgress(percentage <= 100 ? percentage : 100)
+  // }, [transactions.data, expense.id, budget])
+  //Use useMemo to avoid recalculating transactionsTotal on every render
+  const transactionsTotal = useMemo(() => {
+    return sumOfDataAmount(transactions.data, expense.id, budget?.data || [])
+  }, [data, expense.id, budget])
+  console.log('Calculating transactionsTotal', transactionsTotal)
+
+  const progress = useMemo(() => {
+    const percentage = Math.round((transactionsTotal / expense.amount) * 100)
+    return percentage <= 100 ? percentage : 100
+  }, [transactionsTotal, expense.amount])
+  console.log('Calculating progress', progress)
+  console.log('expense.amount:', expense.amount)
 
   return (
     <Paper
@@ -110,3 +154,18 @@ function sumOfDataAmount(data, expenseId, [budget]) {
       }, 0)
   }
 }
+// function sumOfDataAmount(data, expenseId, [budget]) {
+//   if (budget) {
+//     return data
+//       ?.filter(({ dateCreated, expensesId }) => {
+//         // destructure here
+//         return (
+//           budget.startDate < dateCreated &&
+//           dateCreated < budget.endDate &&
+//           expensesId == expenseId
+//         )
+//       })
+//       .reduce((total, { amount }) => total + Number(amount), 0) // destructure here
+//   }
+//   return 0
+// }
