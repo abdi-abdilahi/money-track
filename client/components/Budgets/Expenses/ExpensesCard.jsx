@@ -48,8 +48,12 @@ export default function ExpensesCard({ expense }) {
       progress
     )
     console.log('transactions:', transactions)
+    console.log('transactions _proto_:', transactions.__proto__)
+
+    console.log('budget _proto_:', budget.__proto__)
     console.log('budget:', budget)
     console.log('data:', data)
+    console.log('data _proto_:', data.__proto__)
     console.log('expense.id:', expense?.id)
 
     //const previousTransactions = Object.values(transactions).slice(0, -1)
@@ -64,11 +68,13 @@ export default function ExpensesCard({ expense }) {
     const percentage = Math.round((total / expense?.amount) * 100)
     setTransactionsTotal(total)
     setProgress(percentage <= 100 ? percentage : 100)
-  }, [data, expense?.id, budget, transactions])
+  }, [data, expense?.id, budget, previousTransactions])
+
   // console.log('expense:', expense)
   // console.log('expense.parentObject:', expense.parentObject)
   // console.log('expense.amount:', expense.amount)
-  // console.log('expense.parentObject.amount:', expense?.parentObject?.amount)
+  console.log('previousTransactions:', previousTransactions)
+  console.log('expense.parentObject.amount:', expense?.parentObject?.amount)
 
   //Use useMemo to avoid recalculating transactionsTotal on every render
   // const transactionsTotal = useMemo(() => {
@@ -156,100 +162,34 @@ export default function ExpensesCard({ expense }) {
   )
 }
 
-// function sumOfDataAmount(data, expense, [budget]) {
-//   console.log('data:', data)
-//   console.log('expenseId:', expense)
-//   console.log('budget:', budget)
+function sumOfDataAmount(data, expenseId, [budget]) {
+  console.log('data:', data)
+  console.log('expenseId:', expenseId)
+  console.log('budget:', budget)
 
-//   if (budget) {
-//     return data
-//       ?.filter((item) => {
-//         return (
-//           budget.startDate < item.dateCreated &&
-//           item.dateCreated < budget.endDate &&
-//           item.expensesId == expense.id
-//         )
-//       })
-
-//       .reduce((total, item) => {
-//         console.log('total:', total)
-//         return total + Number(item.amount)
-//       }, 0)
-//   }
-// }
-
-// function sumOfDataAmount(data, expenseId, budget) {
-//   console.log('data:', data)
-//   console.log('expenseId:', expenseId)
-//   console.log('budget:', budget)
-
-//   if (budget) {
-//     const filteredData = data?.filter((item) => {
-//       return (
-//         budget.startDate < item.dateCreated &&
-//         item.dateCreated < budget.endDate &&
-//         item.expensesId == expenseId
-//       )
-//     })
-//     console.log('filteredData:', filteredData)
-//     return filteredData.reduce((total, item) => {
-//       console.log('calculating total:', total)
-//       return total + Number(item.amount)
-//     }, 0)
-//   }
-// }
-// function sumOfDataAmount(data, expenseId, budget) {
-//   console.log('data:', data)
-//   console.log('expenseId:', expenseId)
-//   console.log('budget:', budget)
-
-//   if (budget) {
-//     const filteredData = data?.filter((item) => {
-//       console.log('processing item:', item)
-//       console.log('budget start date:', budget.startDate)
-//       console.log('budget end date:', budget.endDate)
-//       console.log('expenseId:', expenseId)
-//       return (
-//         budget.startDate < item.dateCreated &&
-//         item.dateCreated < budget.endDate &&
-//         item.expensesId === expenseId
-//       )
-//     })
-//     console.log('filteredData:', filteredData)
-//     return filteredData.reduce((total, item) => {
-//       console.log('calculating total:', total)
-//       return total + Number(item.amount)
-//     }, 0)
-//   }
-// }
-// function sumOfDataAmount(data, expenseId, budget) {
-//   console.log('data:', data)
-//   console.log('expenseId:', expenseId)
-//   console.log('budget:', budget)
-
-//   if (budget && budget.data.length > 0 && data && data.length > 0) {
-//     const startDate = budget.data[0].startDate
-//     const endDate = budget.data[0].endDate
-//     const filteredData = data.filter((item) => {
-//       console.log('processing item:', item)
-//       console.log('budget start date:', startDate)
-//       console.log('budget end date:', endDate)
-//       console.log('expenseId:', expenseId)
-//       return (
-//         startDate < item.dateCreated &&
-//         item.dateCreated < endDate &&
-//         item.expensesId == expenseId
-//       )
-//     })
-//     console.log('filteredData:', filteredData)
-//     const total = filteredData.reduce((total, item) => {
-//       console.log('calculating total:', total)
-//       return total + Number(item.amount)
-//     }, 0)
-//     console.log('total:', total)
-//     return total
-//   }
-// }
+  if (budget) {
+    const startDate = budget.startDate
+    const endDate = budget.endDate
+    const filteredData = data.filter((item) => {
+      console.log('processing item:', item)
+      console.log('budget start date:', startDate)
+      console.log('budget end date:', endDate)
+      console.log('expenseId:', expenseId)
+      return (
+        startDate < item.dateCreated &&
+        item.dateCreated < endDate &&
+        item.expensesId == expenseId
+      )
+    })
+    console.log('filteredData:', filteredData)
+    const total = filteredData.reduce((total, item) => {
+      console.log('calculating total:', total)
+      return total + Number(item.amount)
+    }, 0)
+    console.log('total:', total)
+    return total
+  }
+}
 // function sumOfDataAmount(data, expenseId, budgetData, previousTransactions) {
 //   console.log('data:', data)
 //   console.log('expenseId:', expenseId)
@@ -318,37 +258,37 @@ export default function ExpensesCard({ expense }) {
 //   return total
 // }
 
-function sumOfDataAmount(data, expenseId, budgetData, previousTransactions) {
-  let total = 0
-  const budgetIds = budgetData.map((budget) => budget.id)
-  const transactionIds = data.map((transaction) => transaction.id)
-  const previousTransactionIds = previousTransactions.map(
-    (transaction) => transaction.id
-  )
+// function sumOfDataAmount(data, expenseId, budgetData, previousTransactions) {
+//   let total = 0
+//   const budgetIds = budgetData.map((budget) => budget.id)
+//   const transactionIds = data.map((transaction) => transaction.id)
+//   const previousTransactionIds = previousTransactions.map(
+//     (transaction) => transaction.id
+//   )
 
-  const processedExpenseIds = new Set() // set to store the processed expense IDs
+//   const processedExpenseIds = new Set() // set to store the processed expense IDs
 
-  data.forEach((transaction) => {
-    if (processedExpenseIds.has(transaction.expenseId)) {
-      // if the expense ID has already been processed, skip this transaction
-      return
-    }
+//   data.forEach((transaction) => {
+//     if (processedExpenseIds.has(transaction.expenseId)) {
+//       // if the expense ID has already been processed, skip this transaction
+//       return
+//     }
 
-    // check if the transaction matches the given expense ID or if it has no expense ID and no parent transaction
-    if (
-      (transaction.expenseId === expenseId ||
-        (transaction.expenseId === undefined &&
-          transaction.parentTransaction === undefined)) &&
-      !budgetIds.includes(transaction.id) &&
-      !transactionIds.includes(transaction.parentTransaction) &&
-      !previousTransactionIds.includes(transaction.parentTransaction)
-    ) {
-      total += transaction.amount
-    }
+//     // check if the transaction matches the given expense ID or if it has no expense ID and no parent transaction
+//     if (
+//       (transaction.expenseId === expenseId ||
+//         (transaction.expenseId === undefined &&
+//           transaction.parentTransaction === undefined)) &&
+//       !budgetIds.includes(transaction.id) &&
+//       !transactionIds.includes(transaction.parentTransaction) &&
+//       !previousTransactionIds.includes(transaction.parentTransaction)
+//     ) {
+//       total += transaction.amount
+//     }
 
-    // mark the expense ID as processed
-    processedExpenseIds.add(transaction.expenseId)
-  })
+//     // mark the expense ID as processed
+//     processedExpenseIds.add(transaction.expenseId)
+//   })
 
-  return total
-}
+//   return total
+// }
